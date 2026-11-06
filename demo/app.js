@@ -205,6 +205,7 @@
     let s = `<svg class="arc" viewBox="0 0 ${W} ${H}" role="img" aria-label="Journey map: ${path.map(x => x.label + (x.status === "now" ? " (here now)" : x.status === "done" ? " (done)" : "")).join(", ")}">
       <defs><linearGradient id="trail" x1="0" x2="1"><stop offset="0" style="stop-color: var(--cy); stop-opacity: .12"/><stop offset="1" style="stop-color: var(--cy)"/></linearGradient>
       <filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g class="tunnel" aria-hidden="true">${Array.from({ length: 7 }, (_, i) => { const t = i / 6; const [x, y] = bz(t); const rx = 72 - t * 38; const ry = 34 - t * 17; return `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}"/>`; }).join("")}</g>
       <path class="arc-rest" d="M${P[0]} C${P[1]} ${P[2]} ${P[3]}"/>
       <path class="arc-trail" d="${trail}" filter="url(#glow)"/>`;
     path.forEach((st, i) => {

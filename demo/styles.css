@@ -101,6 +101,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .w-map { min-width: 0; }
 
 .arc { width: 100%; height: auto; display: block; overflow: visible; }
+.tunnel ellipse { fill: none; stroke: rgba(var(--cy-rgb), .16); stroke-width: 1.5; stroke-dasharray: 4 7; }
+.tunnel ellipse:nth-child(odd) { stroke: rgba(var(--cy-rgb), .24); }
 .arc-rest { fill: none; stroke: rgba(var(--cy-rgb), .22); stroke-width: 1.5; stroke-dasharray: 2 8; stroke-linecap: round; }
 .arc-trail { fill: none; stroke: url(#trail); stroke-width: 3; stroke-linecap: round; }
 .node .dot { fill: var(--bg); stroke: var(--line-2); stroke-width: 2; }
