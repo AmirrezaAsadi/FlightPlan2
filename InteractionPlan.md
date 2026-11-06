@@ -10,7 +10,7 @@
 
 ### 0.1 The one question
 From the brief: **"What should a clinician see, touch, hide, capture, or hand off during bedside rounds?"**
-We are rethinking one moment of care. We are **not** redesigning the whole application.
+We are rethinking one moment of care.
 
 ### 0.2 Phasing (so the whole team works toward the same target)
 
@@ -24,8 +24,6 @@ Sections of this document marked **[Phase 1]** are the hackathon core. Everythin
 
 ### 0.3 Hard constraints (from the brief)
 - The **data behind FlightPlan and how it is collected do not change.** The bedside view is a new way of showing the same information, most likely a subset, plus a way to capture what happens on rounds.
-- **Not a clinical decision support tool.** No suggested diagnoses or treatments (see §13 for the wording question).
-- **Made-up or de-identified data only.** No MRNs, names, dates of birth, real screenshots or anything identifying.
 - Spend effort on **what to show and how**, not on the data underneath.
 
 ### 0.4 Deliverables checklist (from the brief)
