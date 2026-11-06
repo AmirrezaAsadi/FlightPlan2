@@ -1,0 +1,21 @@
+stay_id,phase,team_score,score_meaning,outcome_dot,review_only
+SC01,CICU,3,good,green,yes
+SC01,Operating room,4,outstanding,green,yes
+SC01,ACCU,4,outstanding,green,yes
+SC02,CICU,2,sub-optimal,red,yes
+SC02,Operating room,3,good,green,yes
+SC02,ACCU,3,good,green,yes
+SC03,Operating room,3,good,green,yes
+SC03,CICU,3,good,green,yes
+SC03,ACCU,4,outstanding,green,yes
+SC04,Cath lab,3,good,green,yes
+SC04,ACCU,4,outstanding,green,yes
+SC05,Operating room,3,good,green,yes
+SC05,CICU,4,outstanding,yellow,yes
+SC05,ACCU,3,good,green,yes
+SC06,CICU,3,good,yellow,yes
+SC06,Cath lab,4,outstanding,green,yes
+SC06,ACCU,4,outstanding,green,yes
+SC07,Operating room,2,sub-optimal,red,yes
+SC07,CICU,4,outstanding,green,yes
+SC07,ACCU,3,good,green,yes

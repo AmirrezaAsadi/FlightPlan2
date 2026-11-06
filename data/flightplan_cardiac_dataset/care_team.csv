@@ -1,0 +1,68 @@
+stay_id,role,name
+SC01,ACCU attending,Dr. S. Varga
+SC01,Anesthesia,Dr. I. Petrov
+SC01,Bedside nurse,"L. Brooks, RN"
+SC01,CICU attending,Dr. O. Whitfield
+SC01,Cardiology fellow,Dr. T. Lindqvist
+SC01,Cardiothoracic surgeon,Dr. N. Halvorsen
+SC01,Nurse practitioner,"J. Patel, NP"
+SC01,Pharmacist,"H. Ito, PharmD"
+SC01,Primary cardiologist,Dr. D. Castellano
+SC02,ACCU attending,Dr. L. Benoit
+SC02,Anesthesia,Dr. I. Petrov
+SC02,Bedside nurse,"T. Nguyen, RN"
+SC02,CICU attending,Dr. O. Whitfield
+SC02,Cardiology fellow,Dr. T. Lindqvist
+SC02,Cardiothoracic surgeon,Dr. G. Achebe
+SC02,Nurse practitioner,"J. Patel, NP"
+SC02,Perfusion / ECMO specialist,"R. Fischer, CCP"
+SC02,Pharmacist,"H. Ito, PharmD"
+SC02,Primary cardiologist,Dr. D. Castellano
+SC03,ACCU attending,Dr. L. Benoit
+SC03,Anesthesia,Dr. C. Moss
+SC03,Bedside nurse,"L. Brooks, RN"
+SC03,CICU attending,Dr. F. Ramos
+SC03,Cardiology fellow,Dr. T. Lindqvist
+SC03,Cardiothoracic surgeon,Dr. G. Achebe
+SC03,Nurse practitioner,"J. Patel, NP"
+SC03,Pharmacist,"H. Ito, PharmD"
+SC03,Primary cardiologist,Dr. D. Castellano
+SC04,ACCU attending,Dr. L. Benoit
+SC04,Anesthesia,Dr. C. Moss
+SC04,Bedside nurse,"S. Ward, RN"
+SC04,CICU attending,Dr. F. Ramos
+SC04,Cardiology fellow,Dr. T. Lindqvist
+SC04,Interventional cardiologist,Dr. Y. Tanaka
+SC04,Nurse practitioner,"J. Patel, NP"
+SC04,Pharmacist,"H. Ito, PharmD"
+SC04,Primary cardiologist,Dr. E. Nwosu
+SC05,ACCU attending,Dr. S. Varga
+SC05,Anesthesia,Dr. C. Moss
+SC05,Bedside nurse,"S. Ward, RN"
+SC05,CICU attending,Dr. F. Ramos
+SC05,Cardiology fellow,Dr. A. Haddad
+SC05,Cardiothoracic surgeon,Dr. G. Achebe
+SC05,Nurse practitioner,"J. Patel, NP"
+SC05,Pharmacist,"H. Ito, PharmD"
+SC05,Primary cardiologist,Dr. E. Nwosu
+SC06,ACCU attending,Dr. L. Benoit
+SC06,Anesthesia,Dr. C. Moss
+SC06,Bedside nurse,"S. Ward, RN"
+SC06,CICU attending,Dr. O. Whitfield
+SC06,Cardiology fellow,Dr. T. Lindqvist
+SC06,Heart transplant coordinator,"M. Sloan, RN"
+SC06,Interventional cardiologist,Dr. Y. Tanaka
+SC06,Nurse practitioner,"K. Meyers, NP"
+SC06,Pharmacist,"H. Ito, PharmD"
+SC06,Primary cardiologist,Dr. D. Castellano
+SC06,Psychologist,Dr. V. Moreau
+SC06,Social worker,"P. Greene, MSW"
+SC07,ACCU attending,Dr. S. Varga
+SC07,Anesthesia,Dr. C. Moss
+SC07,Bedside nurse,"L. Brooks, RN"
+SC07,CICU attending,Dr. F. Ramos
+SC07,Cardiology fellow,Dr. T. Lindqvist
+SC07,Cardiothoracic surgeon,Dr. G. Achebe
+SC07,Nurse practitioner,"K. Meyers, NP"
+SC07,Pharmacist,"H. Ito, PharmD"
+SC07,Primary cardiologist,Dr. D. Castellano

@@ -1,0 +1,700 @@
+{
+ "patient": {
+  "patient_id": "C07",
+  "display_label": "Patient C07",
+  "age": "10 years",
+  "age_group": "Child",
+  "sex": "F",
+  "current_weight_kg": 29.5,
+  "crosscheck_flag": "yes",
+  "mrn": "HIDDEN-DEMO",
+  "dob": "HIDDEN-DEMO",
+  "caregiver_contact": "Parent/guardian on file (hidden at bedside)"
+ },
+ "stay": {
+  "stay_id": "SC07",
+  "patient_id": "C07",
+  "admit_datetime": "2026-10-14T06:00:00",
+  "discharge_datetime": "2026-10-26T13:00:00",
+  "status": "discharged",
+  "admit_reason": "Single ventricle - stage 3 (Fontan) surgery",
+  "current_location": "Home",
+  "current_row": "Discharged",
+  "day_of_stay": "",
+  "post_op_day": "",
+  "direct_flight": "no"
+ },
+ "snapshot": null,
+ "diagnoses": [
+  {
+   "stay_id": "SC07",
+   "rank": 1,
+   "diagnosis": "Double inlet left ventricle"
+  },
+  {
+   "stay_id": "SC07",
+   "rank": 2,
+   "diagnosis": "s/p extracardiac Fontan"
+  }
+ ],
+ "interventions": [
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-14T06:00:00",
+   "procedure": "Extracardiac Fontan with fenestration",
+   "location": "OR",
+   "weight_kg": 29.5,
+   "team": "Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. C. Moss"
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-15T02:00:00",
+   "procedure": "Re-exploration for bleeding",
+   "location": "OR",
+   "weight_kg": 29.5,
+   "team": "Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. I. Petrov"
+  }
+ ],
+ "care_team": [
+  {
+   "stay_id": "SC07",
+   "role": "ACCU attending",
+   "name": "Dr. S. Varga"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "Anesthesia",
+   "name": "Dr. C. Moss"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "Bedside nurse",
+   "name": "L. Brooks, RN"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "CICU attending",
+   "name": "Dr. F. Ramos"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "Cardiology fellow",
+   "name": "Dr. T. Lindqvist"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "Cardiothoracic surgeon",
+   "name": "Dr. G. Achebe"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "Nurse practitioner",
+   "name": "K. Meyers, NP"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "Pharmacist",
+   "name": "H. Ito, PharmD"
+  },
+  {
+   "stay_id": "SC07",
+   "role": "Primary cardiologist",
+   "name": "Dr. D. Castellano"
+  }
+ ],
+ "timeline": {
+  "segments": [
+   {
+    "stay_id": "SC07",
+    "seq": 1,
+    "start": "2026-10-14T06:00:00",
+    "end": "2026-10-14T14:00:00",
+    "location": "OR",
+    "color_hex": "#7B4FA0",
+    "color_name": "purple",
+    "row": "Procedure",
+    "row_level": 5,
+    "shading": "",
+    "day_of_stay": 1,
+    "post_op_day": 0
+   },
+   {
+    "stay_id": "SC07",
+    "seq": 2,
+    "start": "2026-10-14T14:00:00",
+    "end": "2026-10-14T20:00:00",
+    "location": "CICU",
+    "color_hex": "#E8833A",
+    "color_name": "orange",
+    "row": "Intubated",
+    "row_level": 4,
+    "shading": "",
+    "day_of_stay": 1,
+    "post_op_day": 0
+   },
+   {
+    "stay_id": "SC07",
+    "seq": 3,
+    "start": "2026-10-14T20:00:00",
+    "end": "2026-10-15T02:00:00",
+    "location": "CICU",
+    "color_hex": "#E8833A",
+    "color_name": "orange",
+    "row": "Extubated",
+    "row_level": 3,
+    "shading": "",
+    "day_of_stay": 1,
+    "post_op_day": 0
+   },
+   {
+    "stay_id": "SC07",
+    "seq": 4,
+    "start": "2026-10-15T02:00:00",
+    "end": "2026-10-15T06:00:00",
+    "location": "OR",
+    "color_hex": "#7B4FA0",
+    "color_name": "purple",
+    "row": "Procedure",
+    "row_level": 5,
+    "shading": "",
+    "day_of_stay": 2,
+    "post_op_day": 1
+   },
+   {
+    "stay_id": "SC07",
+    "seq": 5,
+    "start": "2026-10-15T06:00:00",
+    "end": "2026-10-16T10:00:00",
+    "location": "CICU",
+    "color_hex": "#E8833A",
+    "color_name": "orange",
+    "row": "Intubated",
+    "row_level": 4,
+    "shading": "",
+    "day_of_stay": 2,
+    "post_op_day": 1
+   },
+   {
+    "stay_id": "SC07",
+    "seq": 6,
+    "start": "2026-10-16T10:00:00",
+    "end": "2026-10-18T09:00:00",
+    "location": "CICU",
+    "color_hex": "#E8833A",
+    "color_name": "orange",
+    "row": "Extubated",
+    "row_level": 3,
+    "shading": "",
+    "day_of_stay": 3,
+    "post_op_day": 2
+   },
+   {
+    "stay_id": "SC07",
+    "seq": 7,
+    "start": "2026-10-18T09:00:00",
+    "end": "2026-10-26T13:00:00",
+    "location": "ACCU",
+    "color_hex": "#3B7DD8",
+    "color_name": "blue",
+    "row": "ACCU",
+    "row_level": 2,
+    "shading": "",
+    "day_of_stay": 5,
+    "post_op_day": 4
+   },
+   {
+    "stay_id": "SC07",
+    "seq": 8,
+    "start": "2026-10-26T13:00:00",
+    "end": "2026-10-26T13:00:00",
+    "location": "Home",
+    "color_hex": "#3E9B5F",
+    "color_name": "green",
+    "row": "Discharged",
+    "row_level": 1,
+    "shading": "",
+    "day_of_stay": 13,
+    "post_op_day": 12
+   }
+  ],
+  "expected_pathway": [
+   {
+    "stay_id": "SC07",
+    "day_offset": 0,
+    "expected_row": "Procedure",
+    "expected_level": 5
+   },
+   {
+    "stay_id": "SC07",
+    "day_offset": 0.5,
+    "expected_row": "Intubated",
+    "expected_level": 4
+   },
+   {
+    "stay_id": "SC07",
+    "day_offset": 0.8,
+    "expected_row": "Extubated",
+    "expected_level": 3
+   },
+   {
+    "stay_id": "SC07",
+    "day_offset": 3,
+    "expected_row": "ACCU",
+    "expected_level": 2
+   },
+   {
+    "stay_id": "SC07",
+    "day_offset": 9,
+    "expected_row": "Discharged",
+    "expected_level": 1
+   }
+  ],
+  "milestones": [
+   {
+    "stay_id": "SC07",
+    "event_id": "SC07-E01",
+    "datetime": "2026-10-14T06:00:00",
+    "milestone": "Fontan operation",
+    "symbol": "diamond"
+   },
+   {
+    "stay_id": "SC07",
+    "event_id": "SC07-E02",
+    "datetime": "2026-10-14T20:00:00",
+    "milestone": "Breathing tube removed",
+    "symbol": "circle"
+   },
+   {
+    "stay_id": "SC07",
+    "event_id": "SC07-E03",
+    "datetime": "2026-10-15T02:00:00",
+    "milestone": "Unplanned return to OR (bleeding)",
+    "symbol": "diamond"
+   },
+   {
+    "stay_id": "SC07",
+    "event_id": "SC07-E04",
+    "datetime": "2026-10-16T10:00:00",
+    "milestone": "Breathing tube removed",
+    "symbol": "circle"
+   },
+   {
+    "stay_id": "SC07",
+    "event_id": "SC07-E05",
+    "datetime": "2026-10-17T10:00:00",
+    "milestone": "Inotropes stopped",
+    "symbol": "triangle"
+   },
+   {
+    "stay_id": "SC07",
+    "event_id": "SC07-E06",
+    "datetime": "2026-10-23T09:00:00",
+    "milestone": "Chest tubes removed",
+    "symbol": "square"
+   },
+   {
+    "stay_id": "SC07",
+    "event_id": "SC07-E07",
+    "datetime": "2026-10-26T13:00:00",
+    "milestone": "Discharged home",
+    "symbol": "flag"
+   }
+  ],
+  "events": [
+   {
+    "event_id": "SC07-E01",
+    "stay_id": "SC07",
+    "datetime": "2026-10-14T06:00:00",
+    "day_of_stay": 1,
+    "post_op_day": 0,
+    "kind": "procedure",
+    "title": "Fontan operation",
+    "clinical_shorthand": "ECF 20mm, 4mm fen, CPB 142",
+    "family_text": "Third-stage heart surgery.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC07-E02",
+    "stay_id": "SC07",
+    "datetime": "2026-10-14T20:00:00",
+    "day_of_stay": 1,
+    "post_op_day": 0,
+    "kind": "milestone",
+    "title": "Breathing tube removed",
+    "clinical_shorthand": "Extubated POD0",
+    "family_text": "Breathing tube taken out.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC07-E03",
+    "stay_id": "SC07",
+    "datetime": "2026-10-15T02:00:00",
+    "day_of_stay": 2,
+    "post_op_day": 1,
+    "kind": "setback",
+    "title": "Unplanned return to OR (bleeding)",
+    "clinical_shorthand": "CT 12 mL/kg/h x2h, re-explored, suture line bleed",
+    "family_text": "Went back to surgery to stop bleeding.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC07-E04",
+    "stay_id": "SC07",
+    "datetime": "2026-10-16T10:00:00",
+    "day_of_stay": 3,
+    "post_op_day": 2,
+    "kind": "milestone",
+    "title": "Breathing tube removed",
+    "clinical_shorthand": "Extubated",
+    "family_text": "Breathing tube taken out again.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC07-E05",
+    "stay_id": "SC07",
+    "datetime": "2026-10-17T10:00:00",
+    "day_of_stay": 4,
+    "post_op_day": 3,
+    "kind": "milestone",
+    "title": "Inotropes stopped",
+    "clinical_shorthand": "Milrinone off",
+    "family_text": "Heart-support medicine stopped.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC07-E06",
+    "stay_id": "SC07",
+    "datetime": "2026-10-23T09:00:00",
+    "day_of_stay": 10,
+    "post_op_day": 9,
+    "kind": "milestone",
+    "title": "Chest tubes removed",
+    "clinical_shorthand": "Pleural drainage resolved",
+    "family_text": "Chest drainage tubes removed.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC07-E07",
+    "stay_id": "SC07",
+    "datetime": "2026-10-26T13:00:00",
+    "day_of_stay": 13,
+    "post_op_day": 12,
+    "kind": "location",
+    "title": "Discharged home",
+    "clinical_shorthand": "Sats 90%, on aspirin + enalapril",
+    "family_text": "Went home.",
+    "new_in_last_24h": "no"
+   }
+  ],
+  "compressed": [
+   {
+    "stay_id": "SC07",
+    "from_day": 6,
+    "to_day": 9,
+    "reason": "No events - compress with zigzag"
+   }
+  ],
+  "ratings_review_only": [
+   {
+    "stay_id": "SC07",
+    "phase": "Operating room",
+    "team_score": 2,
+    "score_meaning": "sub-optimal",
+    "outcome_dot": "red",
+    "review_only": "yes"
+   },
+   {
+    "stay_id": "SC07",
+    "phase": "CICU",
+    "team_score": 4,
+    "score_meaning": "outstanding",
+    "outcome_dot": "green",
+    "review_only": "yes"
+   },
+   {
+    "stay_id": "SC07",
+    "phase": "ACCU",
+    "team_score": 3,
+    "score_meaning": "good",
+    "outcome_dot": "green",
+    "review_only": "yes"
+   }
+  ],
+  "conferences": [
+   {
+    "stay_id": "SC07",
+    "date": "2026-10-15",
+    "conference": "FlightPlan conference (Performance Rounds)",
+    "grouped_as": "Discussed case"
+   },
+   {
+    "stay_id": "SC07",
+    "date": "2026-10-22",
+    "conference": "FlightPlan conference (Performance Rounds)",
+    "grouped_as": "Discussed case"
+   },
+   {
+    "stay_id": "SC07",
+    "date": "2026-10-29",
+    "conference": "FlightPlan conference (Performance Rounds)",
+    "grouped_as": "Discussed case"
+   }
+  ]
+ },
+ "what_changed": [],
+ "daily": [
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-14T06:00:00",
+   "day_of_stay": 1,
+   "post_op_day": "",
+   "respiratory_support": "Ventilator",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.1,
+   "spo2_pct": 95,
+   "hemoglobin": 10.9,
+   "creatinine": 0.49,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-15T06:00:00",
+   "day_of_stay": 2,
+   "post_op_day": 1,
+   "respiratory_support": "Ventilator",
+   "vasoactive_inotropic_score": 6,
+   "lactate": 1.5,
+   "spo2_pct": 98,
+   "hemoglobin": 12.5,
+   "creatinine": 0.58,
+   "chest_tube_output_ml_kg": 5.5,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-16T06:00:00",
+   "day_of_stay": 3,
+   "post_op_day": 2,
+   "respiratory_support": "Ventilator",
+   "vasoactive_inotropic_score": 4,
+   "lactate": 1.7,
+   "spo2_pct": 96,
+   "hemoglobin": 13.1,
+   "creatinine": 0.78,
+   "chest_tube_output_ml_kg": 3.8,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-17T06:00:00",
+   "day_of_stay": 4,
+   "post_op_day": 3,
+   "respiratory_support": "Nasal cannula / HFNC",
+   "vasoactive_inotropic_score": 2,
+   "lactate": 1.3,
+   "spo2_pct": 97,
+   "hemoglobin": 14.6,
+   "creatinine": 0.54,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-18T06:00:00",
+   "day_of_stay": 5,
+   "post_op_day": 4,
+   "respiratory_support": "Nasal cannula / HFNC",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.8,
+   "spo2_pct": 97,
+   "hemoglobin": 14.3,
+   "creatinine": 0.56,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-19T06:00:00",
+   "day_of_stay": 6,
+   "post_op_day": 5,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 0.9,
+   "spo2_pct": 100,
+   "hemoglobin": 11.9,
+   "creatinine": 0.61,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-20T06:00:00",
+   "day_of_stay": 7,
+   "post_op_day": 6,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.1,
+   "spo2_pct": 94,
+   "hemoglobin": 13.3,
+   "creatinine": 0.5,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-21T06:00:00",
+   "day_of_stay": 8,
+   "post_op_day": 7,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.3,
+   "spo2_pct": 96,
+   "hemoglobin": 12.3,
+   "creatinine": 0.5,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-22T06:00:00",
+   "day_of_stay": 9,
+   "post_op_day": 8,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.7,
+   "spo2_pct": 97,
+   "hemoglobin": 10.8,
+   "creatinine": 0.53,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-23T06:00:00",
+   "day_of_stay": 10,
+   "post_op_day": 9,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.7,
+   "spo2_pct": 98,
+   "hemoglobin": 10.7,
+   "creatinine": 0.7,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-24T06:00:00",
+   "day_of_stay": 11,
+   "post_op_day": 10,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.3,
+   "spo2_pct": 94,
+   "hemoglobin": 10.8,
+   "creatinine": 0.71,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-25T06:00:00",
+   "day_of_stay": 12,
+   "post_op_day": 11,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.6,
+   "spo2_pct": 100,
+   "hemoglobin": 10.7,
+   "creatinine": 0.45,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC07",
+   "datetime": "2026-10-26T06:00:00",
+   "day_of_stay": 13,
+   "post_op_day": 12,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.4,
+   "spo2_pct": 98,
+   "hemoglobin": 10.5,
+   "creatinine": 0.59,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  }
+ ],
+ "notes": [
+  {
+   "note_id": "N040",
+   "stay_id": "SC07",
+   "linked_event_id": "SC07-E01",
+   "datetime": "2026-10-14T07:59:00",
+   "note_type": "Operative / procedure note",
+   "author_role": "Nurse practitioner",
+   "text": "Fontan operation. ECF 20mm, 4mm fen, CPB 142. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N041",
+   "stay_id": "SC07",
+   "linked_event_id": "SC07-E02",
+   "datetime": "2026-10-14T21:34:00",
+   "note_type": "Progress note",
+   "author_role": "Nurse practitioner",
+   "text": "Breathing tube removed. Extubated POD0. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N042",
+   "stay_id": "SC07",
+   "linked_event_id": "SC07-E03",
+   "datetime": "2026-10-15T02:35:00",
+   "note_type": "Event note",
+   "author_role": "Nurse practitioner",
+   "text": "Unplanned return to OR (bleeding). CT 12 mL/kg/h x2h, re-explored, suture line bleed. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N043",
+   "stay_id": "SC07",
+   "linked_event_id": "SC07-E04",
+   "datetime": "2026-10-16T11:38:00",
+   "note_type": "Progress note",
+   "author_role": "CICU attending",
+   "text": "Breathing tube removed. Extubated. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N044",
+   "stay_id": "SC07",
+   "linked_event_id": "SC07-E05",
+   "datetime": "2026-10-17T10:49:00",
+   "note_type": "Progress note",
+   "author_role": "Nurse practitioner",
+   "text": "Inotropes stopped. Milrinone off. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N045",
+   "stay_id": "SC07",
+   "linked_event_id": "SC07-E06",
+   "datetime": "2026-10-23T09:59:00",
+   "note_type": "Progress note",
+   "author_role": "Cardiology fellow",
+   "text": "Chest tubes removed. Pleural drainage resolved. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N046",
+   "stay_id": "SC07",
+   "linked_event_id": "SC07-E07",
+   "datetime": "2026-10-26T13:35:00",
+   "note_type": "Progress note",
+   "author_role": "Nurse practitioner",
+   "text": "Discharged home. Sats 90%, on aspirin + enalapril. (Placeholder note text - made up.)"
+  }
+ ],
+ "rounds_actions": [],
+ "family_mode": null,
+ "adherence": {
+  "home_doses_90d": [],
+  "outpatient_tac_levels": []
+ }
+}

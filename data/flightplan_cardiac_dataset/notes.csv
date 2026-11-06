@@ -1,0 +1,47 @@
+note_id,stay_id,linked_event_id,datetime,note_type,author_role,text
+N001,SC01,SC01-E01,2026-10-26T09:43:00,Progress note,CICU attending,"Pre-op echo. d-TGA, IVS, restrictive PFO s/p BAS, nl coronaries. (Placeholder note text - made up.)"
+N002,SC01,SC01-E02,2026-10-28T07:30:00,Operative / procedure note,CICU attending,"Arterial switch operation. ASO + ASD closure, CPB 186/XC 112, DHCA 0. (Placeholder note text - made up.)"
+N003,SC01,SC01-E03,2026-10-28T17:01:00,Echo report,Nurse practitioner,"Post-op echo. Nl biV fxn, no neo-AI, coronaries flow nl. (Placeholder note text - made up.)"
+N004,SC01,SC01-E04,2026-10-29T11:00:00,Progress note,CICU attending,"Inotropes stopped. Milrinone off, VIS 0. (Placeholder note text - made up.)"
+N005,SC01,SC01-E05,2026-10-30T10:23:00,Progress note,CICU attending,Breathing tube removed. Extubated to 1L NC. (Placeholder note text - made up.)
+N006,SC01,SC01-E06,2026-10-31T09:36:00,Progress note,Cardiology fellow,"Chest tubes removed. CT x2 out, CXR no PTX. (Placeholder note text - made up.)"
+N007,SC01,SC01-E07,2026-11-02T13:29:00,Progress note,Cardiology fellow,To ACCU. Transfer to step-down. (Placeholder note text - made up.)
+N008,SC01,SC01-E08,2026-11-04T09:21:00,Progress note,CICU attending,"Full oral feeds. PO ad lib 150 mL/kg/d, gaining wt. (Placeholder note text - made up.)"
+N009,SC02,SC02-E01,2026-10-11T07:43:00,Operative / procedure note,Cardiology fellow,"Norwood operation. Norwood/Sano 5mm, CPB 306/XC 68, open chest. (Placeholder note text - made up.)"
+N010,SC02,SC02-E02,2026-10-11T17:22:00,Event note,Cardiology fellow,"Placed on ECMO. Low CO, lactate 9.2, unable to wean CPB. (Placeholder note text - made up.)"
+N011,SC02,SC02-E03,2026-10-14T11:54:00,Echo report,Nurse practitioner,"Echo on ECMO. Mod RV dysfn, mild TR, Sano flow nl. (Placeholder note text - made up.)"
+N012,SC02,SC02-E04,2026-10-16T11:16:00,Progress note,Cardiology fellow,"Off ECMO. Decannulated, chest closed POD5. (Placeholder note text - made up.)"
+N013,SC02,SC02-E05,2026-10-22T11:23:00,Progress note,CICU attending,Breathing tube removed. Extubated to HFNC 6L. (Placeholder note text - made up.)
+N014,SC02,SC02-E06,2026-10-24T03:54:00,Event note,Nurse practitioner,"Breathing tube put back in. Reintubated - resp failure, ?VAP, RSV neg. (Placeholder note text - made up.)"
+N015,SC02,SC02-E07,2026-10-28T11:06:00,Progress note,CICU attending,Breathing tube removed again. Extubated to 2L NC. (Placeholder note text - made up.)
+N016,SC02,SC02-E08,2026-10-30T09:59:00,Progress note,Nurse practitioner,"Inotropes stopped. Epi off, milrinone off. (Placeholder note text - made up.)"
+N017,SC02,SC02-E09,2026-11-03T12:18:00,Progress note,CICU attending,To ACCU. Transfer to step-down. (Placeholder note text - made up.)
+N018,SC03,SC03-E01,2026-11-02T09:20:00,Operative / procedure note,CICU attending,"VSD repair. Patch closure pmVSD, CPB 92/XC 54. (Placeholder note text - made up.)"
+N019,SC03,SC03-E02,2026-11-02T15:29:00,Echo report,Cardiology fellow,"Post-op echo. sm residual LV -> RA shunt (PG=39), nl fxn. (Placeholder note text - made up.)"
+N020,SC03,SC03-E03,2026-11-02T22:17:00,Progress note,Nurse practitioner,Breathing tube removed. Extubated POD0 to RA. (Placeholder note text - made up.)
+N021,SC03,SC03-E04,2026-11-03T11:48:00,Progress note,CICU attending,Inotropes stopped. Milrinone off. (Placeholder note text - made up.)
+N022,SC03,SC03-E05,2026-11-04T11:28:00,Progress note,CICU attending,"Chest tube removed. CT out, CXR clear. (Placeholder note text - made up.)"
+N023,SC03,SC03-E06,2026-11-04T12:00:00,Progress note,Nurse practitioner,To ACCU. Transfer to step-down. (Placeholder note text - made up.)
+N024,SC04,SC04-E01,2026-10-28T09:24:00,Operative / procedure note,Cardiology fellow,"Cardiac catheterization. CoA stent 10x26, gradient 32 -> 4 mmHg. (Placeholder note text - made up.)"
+N025,SC04,SC04-E02,2026-10-28T12:15:00,Progress note,Cardiology fellow,"To ACCU. Post-cath, groin site ok. (Placeholder note text - made up.)"
+N026,SC04,SC04-E03,2026-10-29T16:09:00,Progress note,Cardiology fellow,Discharged home. BP 104/62 arm/leg equal. (Placeholder note text - made up.)
+N027,SC05,SC05-E01,2026-10-29T06:56:00,Operative / procedure note,CICU attending,"Glenn operation. BDG, CPB 98, no XC. (Placeholder note text - made up.)"
+N028,SC05,SC05-E02,2026-10-30T10:29:00,Progress note,CICU attending,"Breathing tube removed. Extubated to 1L NC, sats 82%. (Placeholder note text - made up.)"
+N029,SC05,SC05-E03,2026-10-31T12:27:00,Progress note,Cardiology fellow,Inotropes stopped. Milrinone off. (Placeholder note text - made up.)
+N030,SC05,SC05-E04,2026-11-01T10:05:00,Event note,CICU attending,"Chest tube drainage high (chylothorax). CT out 25 mL/kg/d milky, TG 340. (Placeholder note text - made up.)"
+N031,SC05,SC05-E05,2026-11-01T12:49:00,Progress note,CICU attending,"Started low-fat (MCT) diet. Enfaport, octreotide if no improvement 72h. (Placeholder note text - made up.)"
+N032,SC05,SC05-E06,2026-11-02T12:21:00,Progress note,CICU attending,To ACCU. Transfer with CT in place. (Placeholder note text - made up.)
+N033,SC05,SC05-E07,2026-11-05T07:56:00,Progress note,Cardiology fellow,Chest tube output falling. CT 8 mL/kg/d. (Placeholder note text - made up.)
+N034,SC06,SC06-E01,2026-11-03T15:26:00,Progress note,Nurse practitioner,"Admitted to CICU. Tachycardia 140, BNP 1,450, tac trough 1.9 (goal 6-8). (Placeholder note text - made up.)"
+N035,SC06,SC06-E02,2026-11-03T18:44:00,Echo report,Nurse practitioner,"Echo. LVEF 42% (prior 60%), new pericardial effusion sm. (Placeholder note text - made up.)"
+N036,SC06,SC06-E03,2026-11-04T10:07:00,Operative / procedure note,CICU attending,"Heart biopsy (cath). EMBx x5, RA 9, PCWP 16, CI 2.6. (Placeholder note text - made up.)"
+N037,SC06,SC06-E04,2026-11-04T16:52:00,Progress note,Cardiology fellow,"IV steroid pulse + milrinone. Methylpred 10 mg/kg x3, milrinone 0.5. (Placeholder note text - made up.)"
+N038,SC06,SC06-E05,2026-11-05T12:03:00,Progress note,CICU attending,"Biopsy result: rejection. ACR 2R, AMR 0. (Placeholder note text - made up.)"
+N039,SC06,SC06-E06,2026-11-05T15:24:00,Consult note,Cardiology fellow,Psychology consult. Missed PM doses since school started; no one at home at 8pm. (Placeholder note text - made up.)
+N040,SC07,SC07-E01,2026-10-14T07:59:00,Operative / procedure note,Nurse practitioner,"Fontan operation. ECF 20mm, 4mm fen, CPB 142. (Placeholder note text - made up.)"
+N041,SC07,SC07-E02,2026-10-14T21:34:00,Progress note,Nurse practitioner,Breathing tube removed. Extubated POD0. (Placeholder note text - made up.)
+N042,SC07,SC07-E03,2026-10-15T02:35:00,Event note,Nurse practitioner,"Unplanned return to OR (bleeding). CT 12 mL/kg/h x2h, re-explored, suture line bleed. (Placeholder note text - made up.)"
+N043,SC07,SC07-E04,2026-10-16T11:38:00,Progress note,CICU attending,Breathing tube removed. Extubated. (Placeholder note text - made up.)
+N044,SC07,SC07-E05,2026-10-17T10:49:00,Progress note,Nurse practitioner,Inotropes stopped. Milrinone off. (Placeholder note text - made up.)
+N045,SC07,SC07-E06,2026-10-23T09:59:00,Progress note,Cardiology fellow,Chest tubes removed. Pleural drainage resolved. (Placeholder note text - made up.)
+N046,SC07,SC07-E07,2026-10-26T13:35:00,Progress note,Nurse practitioner,"Discharged home. Sats 90%, on aspirin + enalapril. (Placeholder note text - made up.)"

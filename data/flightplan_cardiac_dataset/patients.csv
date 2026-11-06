@@ -1,0 +1,8 @@
+patient_id,display_label,age,age_group,sex,current_weight_kg,crosscheck_flag,mrn,dob,caregiver_contact
+C01,Patient C01,9 days,Neonate,M,3.4,no,HIDDEN-DEMO,HIDDEN-DEMO,Parent/guardian on file (hidden at bedside)
+C02,Patient C02,5 weeks,Infant,F,3.1,yes,HIDDEN-DEMO,HIDDEN-DEMO,Parent/guardian on file (hidden at bedside)
+C03,Patient C03,4 months,Infant,F,5.6,no,HIDDEN-DEMO,HIDDEN-DEMO,Parent/guardian on file (hidden at bedside)
+C04,Patient C04,6 years,Child,M,21.0,no,HIDDEN-DEMO,HIDDEN-DEMO,Parent/guardian on file (hidden at bedside)
+C05,Patient C05,2 years,Toddler,M,11.8,yes,HIDDEN-DEMO,HIDDEN-DEMO,Parent/guardian on file (hidden at bedside)
+C06,Patient C06,16 years,Adolescent,F,54.0,yes,HIDDEN-DEMO,HIDDEN-DEMO,Parent/guardian on file (hidden at bedside)
+C07,Patient C07,10 years,Child,F,29.5,yes,HIDDEN-DEMO,HIDDEN-DEMO,Parent/guardian on file (hidden at bedside)

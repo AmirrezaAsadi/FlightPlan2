@@ -1,0 +1,2025 @@
+{
+ "patient": {
+  "patient_id": "C06",
+  "display_label": "Patient C06",
+  "age": "16 years",
+  "age_group": "Adolescent",
+  "sex": "F",
+  "current_weight_kg": 54.0,
+  "crosscheck_flag": "yes",
+  "mrn": "HIDDEN-DEMO",
+  "dob": "HIDDEN-DEMO",
+  "caregiver_contact": "Parent/guardian on file (hidden at bedside)"
+ },
+ "stay": {
+  "stay_id": "SC06",
+  "patient_id": "C06",
+  "admit_datetime": "2026-11-03T14:00:00",
+  "discharge_datetime": "",
+  "status": "inpatient",
+  "admit_reason": "Heart transplant rejection - missed doses",
+  "current_location": "ACCU",
+  "current_row": "ACCU",
+  "day_of_stay": 4,
+  "post_op_day": 2,
+  "direct_flight": "no"
+ },
+ "snapshot": {
+  "stay_id": "SC06",
+  "patient_id": "C06",
+  "as_of": "2026-11-06T07:30:00",
+  "age": "16 years",
+  "location": "ACCU",
+  "row": "ACCU",
+  "expected_row_today": "ACCU",
+  "on_track": "yes",
+  "day_of_stay": 4,
+  "post_op_day": 2,
+  "key_diagnoses": "Acute cellular rejection (ISHLT 2R) | Heart transplant 3 years ago (dilated cardiomyopathy)",
+  "active_concerns": "Missed doses since school started | Lower heart function",
+  "todays_priorities": "Switch to once-daily tacrolimus? | Pill-bottle reminders + school plan | Repeat echo before discharge",
+  "course_correction_threshold": "Escalate if EF < 35%, HR > 150, or new arrhythmia",
+  "doses_taken_30d_before_admit_pct": 40,
+  "tac_variability_MLVI": 2.6
+ },
+ "diagnoses": [
+  {
+   "stay_id": "SC06",
+   "rank": 1,
+   "diagnosis": "Acute cellular rejection (ISHLT 2R)"
+  },
+  {
+   "stay_id": "SC06",
+   "rank": 2,
+   "diagnosis": "Heart transplant 3 years ago (dilated cardiomyopathy)"
+  }
+ ],
+ "interventions": [
+  {
+   "stay_id": "SC06",
+   "datetime": "2026-11-04T08:00:00",
+   "procedure": "Right heart cath + endomyocardial biopsy",
+   "location": "Cath lab",
+   "weight_kg": 54.0,
+   "team": "Interventional cardiologist: Dr. Y. Tanaka | Anesthesia: Dr. C. Moss"
+  }
+ ],
+ "care_team": [
+  {
+   "stay_id": "SC06",
+   "role": "ACCU attending",
+   "name": "Dr. L. Benoit"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Anesthesia",
+   "name": "Dr. C. Moss"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Bedside nurse",
+   "name": "S. Ward, RN"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "CICU attending",
+   "name": "Dr. O. Whitfield"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Cardiology fellow",
+   "name": "Dr. T. Lindqvist"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Heart transplant coordinator",
+   "name": "M. Sloan, RN"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Interventional cardiologist",
+   "name": "Dr. Y. Tanaka"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Nurse practitioner",
+   "name": "K. Meyers, NP"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Pharmacist",
+   "name": "H. Ito, PharmD"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Primary cardiologist",
+   "name": "Dr. D. Castellano"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Psychologist",
+   "name": "Dr. V. Moreau"
+  },
+  {
+   "stay_id": "SC06",
+   "role": "Social worker",
+   "name": "P. Greene, MSW"
+  }
+ ],
+ "timeline": {
+  "segments": [
+   {
+    "stay_id": "SC06",
+    "seq": 1,
+    "start": "2026-11-03T14:00:00",
+    "end": "2026-11-04T08:00:00",
+    "location": "CICU",
+    "color_hex": "#E8833A",
+    "color_name": "orange",
+    "row": "Extubated",
+    "row_level": 3,
+    "shading": "",
+    "day_of_stay": 1,
+    "post_op_day": ""
+   },
+   {
+    "stay_id": "SC06",
+    "seq": 2,
+    "start": "2026-11-04T08:00:00",
+    "end": "2026-11-04T11:00:00",
+    "location": "Cath lab",
+    "color_hex": "#D9608F",
+    "color_name": "pink",
+    "row": "Procedure",
+    "row_level": 5,
+    "shading": "",
+    "day_of_stay": 2,
+    "post_op_day": 0
+   },
+   {
+    "stay_id": "SC06",
+    "seq": 3,
+    "start": "2026-11-04T11:00:00",
+    "end": "2026-11-06T15:00:00",
+    "location": "CICU",
+    "color_hex": "#E8833A",
+    "color_name": "orange",
+    "row": "Extubated",
+    "row_level": 3,
+    "shading": "",
+    "day_of_stay": 2,
+    "post_op_day": 0
+   },
+   {
+    "stay_id": "SC06",
+    "seq": 4,
+    "start": "2026-11-06T15:00:00",
+    "end": "2026-11-06T07:30:00",
+    "location": "ACCU",
+    "color_hex": "#3B7DD8",
+    "color_name": "blue",
+    "row": "ACCU",
+    "row_level": 2,
+    "shading": "",
+    "day_of_stay": 4,
+    "post_op_day": 2
+   }
+  ],
+  "expected_pathway": [
+   {
+    "stay_id": "SC06",
+    "day_offset": 0,
+    "expected_row": "Extubated",
+    "expected_level": 3
+   },
+   {
+    "stay_id": "SC06",
+    "day_offset": 1,
+    "expected_row": "Procedure",
+    "expected_level": 5
+   },
+   {
+    "stay_id": "SC06",
+    "day_offset": 1.1,
+    "expected_row": "Extubated",
+    "expected_level": 3
+   },
+   {
+    "stay_id": "SC06",
+    "day_offset": 2,
+    "expected_row": "ACCU",
+    "expected_level": 2
+   },
+   {
+    "stay_id": "SC06",
+    "day_offset": 6,
+    "expected_row": "Discharged",
+    "expected_level": 1
+   }
+  ],
+  "milestones": [
+   {
+    "stay_id": "SC06",
+    "event_id": "SC06-E03",
+    "datetime": "2026-11-04T08:00:00",
+    "milestone": "Heart biopsy (cath)",
+    "symbol": "diamond"
+   },
+   {
+    "stay_id": "SC06",
+    "event_id": "SC06-E04",
+    "datetime": "2026-11-04T16:00:00",
+    "milestone": "IV steroid pulse + milrinone",
+    "symbol": "triangle"
+   }
+  ],
+  "events": [
+   {
+    "event_id": "SC06-E01",
+    "stay_id": "SC06",
+    "datetime": "2026-11-03T14:00:00",
+    "day_of_stay": 1,
+    "post_op_day": "",
+    "kind": "admit",
+    "title": "Admitted to CICU",
+    "clinical_shorthand": "Tachycardia 140, BNP 1,450, tac trough 1.9 (goal 6-8)",
+    "family_text": "Came in with a fast heartbeat. The anti-rejection medicine level was low.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC06-E02",
+    "stay_id": "SC06",
+    "datetime": "2026-11-03T18:00:00",
+    "day_of_stay": 1,
+    "post_op_day": "",
+    "kind": "echo",
+    "title": "Echo",
+    "clinical_shorthand": "LVEF 42% (prior 60%), new pericardial effusion sm",
+    "family_text": "Heart ultrasound shows the heart is pumping weaker than usual.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC06-E03",
+    "stay_id": "SC06",
+    "datetime": "2026-11-04T08:00:00",
+    "day_of_stay": 2,
+    "post_op_day": 0,
+    "kind": "procedure",
+    "title": "Heart biopsy (cath)",
+    "clinical_shorthand": "EMBx x5, RA 9, PCWP 16, CI 2.6",
+    "family_text": "Took tiny samples of the heart through a vein.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC06-E04",
+    "stay_id": "SC06",
+    "datetime": "2026-11-04T16:00:00",
+    "day_of_stay": 2,
+    "post_op_day": 0,
+    "kind": "therapy",
+    "title": "IV steroid pulse + milrinone",
+    "clinical_shorthand": "Methylpred 10 mg/kg x3, milrinone 0.5",
+    "family_text": "Strong IV medicine to calm the immune reaction, plus heart support.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC06-E05",
+    "stay_id": "SC06",
+    "datetime": "2026-11-05T10:00:00",
+    "day_of_stay": 3,
+    "post_op_day": 1,
+    "kind": "result",
+    "title": "Biopsy result: rejection",
+    "clinical_shorthand": "ACR 2R, AMR 0",
+    "family_text": "The immune system is reacting to the heart. This is treatable.",
+    "new_in_last_24h": "yes"
+   },
+   {
+    "event_id": "SC06-E06",
+    "stay_id": "SC06",
+    "datetime": "2026-11-05T15:00:00",
+    "day_of_stay": 3,
+    "post_op_day": 1,
+    "kind": "consult",
+    "title": "Psychology consult",
+    "clinical_shorthand": "Missed PM doses since school started; no one at home at 8pm",
+    "family_text": "Met with the team psychologist about routines.",
+    "new_in_last_24h": "yes"
+   }
+  ],
+  "compressed": [],
+  "ratings_review_only": [
+   {
+    "stay_id": "SC06",
+    "phase": "CICU",
+    "team_score": 3,
+    "score_meaning": "good",
+    "outcome_dot": "yellow",
+    "review_only": "yes"
+   },
+   {
+    "stay_id": "SC06",
+    "phase": "Cath lab",
+    "team_score": 4,
+    "score_meaning": "outstanding",
+    "outcome_dot": "green",
+    "review_only": "yes"
+   },
+   {
+    "stay_id": "SC06",
+    "phase": "ACCU",
+    "team_score": 4,
+    "score_meaning": "outstanding",
+    "outcome_dot": "green",
+    "review_only": "yes"
+   }
+  ],
+  "conferences": [
+   {
+    "stay_id": "SC06",
+    "date": "2026-11-05",
+    "conference": "FlightPlan conference (Performance Rounds)",
+    "grouped_as": "Discussed case"
+   }
+  ]
+ },
+ "what_changed": [
+  {
+   "stay_id": "SC06",
+   "window": "overnight",
+   "category": "overnight",
+   "item": "Steroid dose 3 of 3 given"
+  },
+  {
+   "stay_id": "SC06",
+   "window": "overnight",
+   "category": "overnight",
+   "item": "HR 98, BP normal"
+  },
+  {
+   "stay_id": "SC06",
+   "window": "overnight",
+   "category": "overnight",
+   "item": "Slept well"
+  },
+  {
+   "stay_id": "SC06",
+   "window": "last 24h",
+   "category": "result",
+   "item": "Biopsy result: rejection - ACR 2R, AMR 0"
+  },
+  {
+   "stay_id": "SC06",
+   "window": "last 24h",
+   "category": "consult",
+   "item": "Psychology consult - Missed PM doses since school started; no one at home at 8pm"
+  }
+ ],
+ "daily": [
+  {
+   "stay_id": "SC06",
+   "datetime": "2026-11-03T06:00:00",
+   "day_of_stay": 1,
+   "post_op_day": "",
+   "respiratory_support": "Nasal cannula / HFNC",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 0.9,
+   "spo2_pct": 98,
+   "hemoglobin": 13.2,
+   "creatinine": 0.54,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": 1.9
+  },
+  {
+   "stay_id": "SC06",
+   "datetime": "2026-11-04T06:00:00",
+   "day_of_stay": 2,
+   "post_op_day": "",
+   "respiratory_support": "Nasal cannula / HFNC",
+   "vasoactive_inotropic_score": 5,
+   "lactate": 1.8,
+   "spo2_pct": 100,
+   "hemoglobin": 10.9,
+   "creatinine": 0.43,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": 3.5
+  },
+  {
+   "stay_id": "SC06",
+   "datetime": "2026-11-05T06:00:00",
+   "day_of_stay": 3,
+   "post_op_day": 0,
+   "respiratory_support": "Nasal cannula / HFNC",
+   "vasoactive_inotropic_score": 5,
+   "lactate": 0.8,
+   "spo2_pct": 98,
+   "hemoglobin": 13.1,
+   "creatinine": 0.76,
+   "chest_tube_output_ml_kg": 3.4,
+   "tacrolimus_trough": 5.6
+  },
+  {
+   "stay_id": "SC06",
+   "datetime": "2026-11-06T06:00:00",
+   "day_of_stay": 4,
+   "post_op_day": 1,
+   "respiratory_support": "Nasal cannula / HFNC",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 0.9,
+   "spo2_pct": 95,
+   "hemoglobin": 14.2,
+   "creatinine": 0.8,
+   "chest_tube_output_ml_kg": 5.6,
+   "tacrolimus_trough": 6.8
+  }
+ ],
+ "notes": [
+  {
+   "note_id": "N034",
+   "stay_id": "SC06",
+   "linked_event_id": "SC06-E01",
+   "datetime": "2026-11-03T15:26:00",
+   "note_type": "Progress note",
+   "author_role": "Nurse practitioner",
+   "text": "Admitted to CICU. Tachycardia 140, BNP 1,450, tac trough 1.9 (goal 6-8). (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N035",
+   "stay_id": "SC06",
+   "linked_event_id": "SC06-E02",
+   "datetime": "2026-11-03T18:44:00",
+   "note_type": "Echo report",
+   "author_role": "Nurse practitioner",
+   "text": "Echo. LVEF 42% (prior 60%), new pericardial effusion sm. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N036",
+   "stay_id": "SC06",
+   "linked_event_id": "SC06-E03",
+   "datetime": "2026-11-04T10:07:00",
+   "note_type": "Operative / procedure note",
+   "author_role": "CICU attending",
+   "text": "Heart biopsy (cath). EMBx x5, RA 9, PCWP 16, CI 2.6. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N037",
+   "stay_id": "SC06",
+   "linked_event_id": "SC06-E04",
+   "datetime": "2026-11-04T16:52:00",
+   "note_type": "Progress note",
+   "author_role": "Cardiology fellow",
+   "text": "IV steroid pulse + milrinone. Methylpred 10 mg/kg x3, milrinone 0.5. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N038",
+   "stay_id": "SC06",
+   "linked_event_id": "SC06-E05",
+   "datetime": "2026-11-05T12:03:00",
+   "note_type": "Progress note",
+   "author_role": "CICU attending",
+   "text": "Biopsy result: rejection. ACR 2R, AMR 0. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N039",
+   "stay_id": "SC06",
+   "linked_event_id": "SC06-E06",
+   "datetime": "2026-11-05T15:24:00",
+   "note_type": "Consult note",
+   "author_role": "Cardiology fellow",
+   "text": "Psychology consult. Missed PM doses since school started; no one at home at 8pm. (Placeholder note text - made up.)"
+  }
+ ],
+ "rounds_actions": [
+  {
+   "action_id": "A009",
+   "stay_id": "SC06",
+   "captured_at": "2026-11-06T07:30:00",
+   "type": "decision",
+   "text": "Switch to once-daily extended-release tacrolimus",
+   "owner_role": "Primary cardiologist",
+   "due": "",
+   "status": "recorded",
+   "family_visible": "no"
+  },
+  {
+   "action_id": "A010",
+   "stay_id": "SC06",
+   "captured_at": "2026-11-06T07:30:00",
+   "type": "task",
+   "text": "Set up smart pill-bottle reminders + school nurse letter",
+   "owner_role": "Heart transplant coordinator",
+   "due": "2026-11-07T13:30:00",
+   "status": "open",
+   "family_visible": "no"
+  },
+  {
+   "action_id": "A011",
+   "stay_id": "SC06",
+   "captured_at": "2026-11-06T07:30:00",
+   "type": "follow_up",
+   "text": "Repeat tacrolimus level 5 days after switch",
+   "owner_role": "Nurse practitioner",
+   "due": "2026-11-12T07:30:00",
+   "status": "open",
+   "family_visible": "yes"
+  },
+  {
+   "action_id": "A012",
+   "stay_id": "SC06",
+   "captured_at": "2026-11-06T07:30:00",
+   "type": "family_update",
+   "text": "Explained biopsy result in plain words; asked about returning to dance",
+   "owner_role": "Cardiology fellow",
+   "due": "",
+   "status": "done",
+   "family_visible": "yes"
+  }
+ ],
+ "family_mode": {
+  "stay_id": "SC06",
+  "headline": "The heart had a rejection episode. Treatment is working. Today we plan how medicines fit school days.",
+  "todays_plan": "Pill-bottle reminders + school plan | Repeat echo before discharge",
+  "hide_in_family_mode": "phase ratings | MRN/DOB/contact | weight | conference markers | clinical shorthand | adherence %"
+ },
+ "adherence": {
+  "home_doses_90d": [
+   {
+    "patient_id": "C06",
+    "date": "2026-08-05",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-05",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-06",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-06",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-07",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-07",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-08",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-08",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-09",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-09",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-10",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-10",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-11",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-11",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-12",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-12",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-13",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-13",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-14",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-14",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-15",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-15",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-16",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-16",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-17",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-17",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-18",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-18",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-19",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-19",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-20",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-20",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-21",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-21",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-22",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-22",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-23",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-23",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-24",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-24",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-25",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-25",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-26",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-26",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-27",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-27",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-28",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-28",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-29",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-29",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-30",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-30",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-31",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-31",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-01",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-01",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-02",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-02",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-03",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-03",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-04",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-04",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-05",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-05",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-06",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-06",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-07",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-07",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-08",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-08",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-09",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-09",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-10",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-10",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-11",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-11",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-12",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-12",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-13",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-13",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-14",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-14",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-15",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-15",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-16",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-16",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-17",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-17",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-18",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-18",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-19",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-19",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-20",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-20",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-21",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-21",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-22",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-22",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-23",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-23",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-24",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-24",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-25",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-25",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-26",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-26",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-27",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-27",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-28",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-28",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-29",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-29",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-30",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-30",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-01",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-01",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-02",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-02",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-03",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-03",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-04",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-04",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-05",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-05",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-06",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-06",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-07",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-07",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-08",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-08",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-09",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-09",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-10",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-10",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-11",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-11",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-12",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-12",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-13",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-13",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-14",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-14",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-15",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-15",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-16",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-16",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-17",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-17",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-18",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-18",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-19",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-19",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-20",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-20",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-21",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-21",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-22",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-22",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-23",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "late",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-23",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-24",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-24",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-25",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-25",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-26",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-26",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-27",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-27",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-28",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-28",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-29",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-29",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-30",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-30",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-31",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "on_time",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-31",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-11-01",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-11-01",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-11-02",
+    "slot": "AM",
+    "scheduled": "08:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-11-02",
+    "slot": "PM",
+    "scheduled": "20:00",
+    "status": "missed",
+    "source": "Smart pill bottle"
+   }
+  ],
+  "outpatient_tac_levels": [
+   {
+    "patient_id": "C06",
+    "date": "2026-08-10",
+    "tacrolimus_trough": 7.2,
+    "target_low": 6,
+    "target_high": 8
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-08-31",
+    "tacrolimus_trough": 6.8,
+    "target_low": 6,
+    "target_high": 8
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-09-21",
+    "tacrolimus_trough": 3.1,
+    "target_low": 6,
+    "target_high": 8
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-10-12",
+    "tacrolimus_trough": 8.4,
+    "target_low": 6,
+    "target_high": 8
+   },
+   {
+    "patient_id": "C06",
+    "date": "2026-11-02",
+    "tacrolimus_trough": 2.6,
+    "target_low": 6,
+    "target_high": 8
+   }
+  ]
+ }
+}

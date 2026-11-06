@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FlightPlan Journey</title>
+  <meta name="description" content="Demo: a calm family portal with Skye, a hologram stay guide, and a care-team view of the same hospital stay. Synthetic data only.">
+  <meta name="theme-color" content="#f3f6f9">
+  <!-- Fonts load when online; the demo falls back to system fonts offline. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav id="bar" class="bar" aria-label="Demo controls"></nav>
+  <div id="view"></div>
+  <dialog id="settings"></dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <button id="kiosk-exit" class="kiosk-exit" data-act="kiosk" aria-label="Show the menu">Menu</button>
+  <noscript>This demo needs JavaScript turned on.</noscript>
+  <!-- Plain scripts (no modules) so the demo opens straight from disk: just double-click index.html -->
+  <script src="data.js"></script>
+  <script src="icons.js"></script>
+  <script src="ai.js"></script>
+  <script src="skye-face.js"></script>
+  <script src="handoff.js"></script>
+  <script src="conference.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
