@@ -375,6 +375,44 @@ window.FP_DATA = {
       "icon": "bottle"
      }
     ],
+    "schedule": [
+     {
+      "time": "09:00",
+      "title": "Feeding",
+      "kind": "feed",
+      "about": "A bottle feed. You're welcome to give it."
+     },
+     {
+      "time": "10:00",
+      "title": "CPR class",
+      "kind": "learn",
+      "about": "A short hands-on class for parents before going home."
+     },
+     {
+      "time": "12:00",
+      "title": "Feeding",
+      "kind": "feed",
+      "about": "A bottle feed. The team keeps an eye on weight gain."
+     },
+     {
+      "time": "13:00",
+      "title": "Quiet time",
+      "kind": "rest",
+      "about": "Lights low so Leo can rest."
+     },
+     {
+      "time": "15:00",
+      "title": "Feeding",
+      "kind": "feed",
+      "about": "A bottle feed."
+     },
+     {
+      "time": "15:30",
+      "title": "Car-seat safety check",
+      "kind": "care",
+      "about": "Leo sits in his car seat while the nurse watches his breathing. Bring the car seat."
+     }
+    ],
     "hide": [
      "phase ratings",
      "MRN/DOB/contact",
@@ -768,6 +806,38 @@ window.FP_DATA = {
      {
       "text": "The team checks if the chest tube is ready to come out",
       "icon": "check"
+     }
+    ],
+    "schedule": [
+     {
+      "time": "08:30",
+      "title": "Breakfast",
+      "kind": "feed",
+      "about": "His special low-fat formula and food."
+     },
+     {
+      "time": "10:00",
+      "title": "Diet lesson",
+      "kind": "learn",
+      "about": "The dietitian shows you the low-fat diet for the next 6 weeks at home."
+     },
+     {
+      "time": "11:30",
+      "title": "Chest tube check",
+      "kind": "care",
+      "about": "The team looks at how much the chest tube drained."
+     },
+     {
+      "time": "13:00",
+      "title": "Nap time",
+      "kind": "rest",
+      "about": "Lights low so Sam can rest."
+     },
+     {
+      "time": "17:00",
+      "title": "Dinner",
+      "kind": "feed",
+      "about": "Low-fat meal."
      }
     ],
     "hide": [
@@ -1200,6 +1270,32 @@ window.FP_DATA = {
      {
       "text": "Heart ultrasound before going home",
       "icon": "heart"
+     }
+    ],
+    "schedule": [
+     {
+      "time": "09:30",
+      "title": "Medicine plan",
+      "kind": "learn",
+      "about": "Meet the transplant coordinator to fit medicines around school days."
+     },
+     {
+      "time": "11:00",
+      "title": "Heart ultrasound",
+      "kind": "care",
+      "about": "A painless picture of the heart before going home."
+     },
+     {
+      "time": "14:00",
+      "title": "Pill-bottle reminders",
+      "kind": "learn",
+      "about": "Set up the smart pill bottle and phone reminders together."
+     },
+     {
+      "time": "16:00",
+      "title": "Rest time",
+      "kind": "rest",
+      "about": "Quiet time. Lights low."
      }
     ],
     "hide": [

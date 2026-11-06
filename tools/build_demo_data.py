@@ -148,7 +148,7 @@ def main():
                         for a in actions.get(sid, [])],
             "ratings": [{"phase": r["phase"], "score": int(r["team_score"]), "dot": r["outcome_dot"]} for r in ratings.get(sid, [])],
             "family": {"datasetHeadline": fam.get(sid, {}).get("headline"), "roomHeadline": ov["roomHeadline"],
-                       "today": ov["todayFamily"], "hide": split(fam.get(sid, {}).get("hide_in_family_mode"))},
+                       "today": ov["todayFamily"], "schedule": ov.get("schedule", []), "hide": split(fam.get(sid, {}).get("hide_in_family_mode"))},
             "discharge": {
                 # System suggestion from the expected pathway (rule-based, explainable).
                 "pathwayDate": iso(day1 + timedelta(days=home_offset)) if home_offset is not None else None,

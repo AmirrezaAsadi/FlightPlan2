@@ -5,45 +5,155 @@
     "C01": {
       "room": "Room 4",
       "firstName": "Leo",
-      "pronouns": { "subj": "he", "obj": "him", "poss": "his" },
+      "pronouns": {
+        "subj": "he",
+        "obj": "him",
+        "poss": "his"
+      },
       "childWord": "your baby",
       "roomHeadline": "Surgery went well and he is feeding by bottle. We're getting ready for home.",
       "todayFamily": [
-        { "text": "Car-seat safety check", "icon": "check" },
-        { "text": "CPR class for parents", "icon": "book" },
-        { "text": "Keep feeding and growing", "icon": "bottle" }
+        {
+          "text": "Car-seat safety check",
+          "icon": "check"
+        },
+        {
+          "text": "CPR class for parents",
+          "icon": "book"
+        },
+        {
+          "text": "Keep feeding and growing",
+          "icon": "bottle"
+        }
       ],
       "discharge": {
-        "teamStated": { "day": 13, "source": "Today's priorities, rounds 07:30: \"Discharge on day 13 if weight gain continues\"" },
+        "teamStated": {
+          "day": 13,
+          "source": "Today's priorities, rounds 07:30: \"Discharge on day 13 if weight gain continues\""
+        },
         "changes": [],
         "criteria": [
-          { "text": "Breathing on his own", "done": true, "eventId": "SC01-E05" },
-          { "text": "Heart-support medicine stopped", "done": true, "eventId": "SC01-E04" },
-          { "text": "Chest tubes out", "done": true, "eventId": "SC01-E06" },
-          { "text": "Full feeds by bottle", "done": true, "eventId": "SC01-E08" },
-          { "text": "Keeps gaining weight", "done": false },
-          { "text": "Car-seat safety check", "done": false },
-          { "text": "Parent CPR class", "done": false }
+          {
+            "text": "Breathing on his own",
+            "done": true,
+            "eventId": "SC01-E05"
+          },
+          {
+            "text": "Heart-support medicine stopped",
+            "done": true,
+            "eventId": "SC01-E04"
+          },
+          {
+            "text": "Chest tubes out",
+            "done": true,
+            "eventId": "SC01-E06"
+          },
+          {
+            "text": "Full feeds by bottle",
+            "done": true,
+            "eventId": "SC01-E08"
+          },
+          {
+            "text": "Keeps gaining weight",
+            "done": false
+          },
+          {
+            "text": "Car-seat safety check",
+            "done": false
+          },
+          {
+            "text": "Parent CPR class",
+            "done": false
+          }
         ]
       },
       "overnightDrafts": [
-        { "match": "Fed every 3h", "text": "Leo took all of his bottle feeds overnight.", "icon": "bottle", "rule": "review" },
-        { "match": "Weight up", "text": "Leo gained a little weight overnight.", "icon": "star", "rule": "review" },
-        { "match": "No arrhythmia", "text": "Leo's heartbeat stayed steady through the night.", "icon": "heart", "rule": "review" }
+        {
+          "match": "Fed every 3h",
+          "text": "Leo took all of his bottle feeds overnight.",
+          "icon": "bottle",
+          "rule": "review"
+        },
+        {
+          "match": "Weight up",
+          "text": "Leo gained a little weight overnight.",
+          "icon": "star",
+          "rule": "review"
+        },
+        {
+          "match": "No arrhythmia",
+          "text": "Leo's heartbeat stayed steady through the night.",
+          "icon": "heart",
+          "rule": "review"
+        }
+      ],
+      "schedule": [
+        {
+          "time": "09:00",
+          "title": "Feeding",
+          "kind": "feed",
+          "about": "A bottle feed. You're welcome to give it."
+        },
+        {
+          "time": "10:00",
+          "title": "CPR class",
+          "kind": "learn",
+          "about": "A short hands-on class for parents before going home."
+        },
+        {
+          "time": "12:00",
+          "title": "Feeding",
+          "kind": "feed",
+          "about": "A bottle feed. The team keeps an eye on weight gain."
+        },
+        {
+          "time": "13:00",
+          "title": "Quiet time",
+          "kind": "rest",
+          "about": "Lights low so Leo can rest."
+        },
+        {
+          "time": "15:00",
+          "title": "Feeding",
+          "kind": "feed",
+          "about": "A bottle feed."
+        },
+        {
+          "time": "15:30",
+          "title": "Car-seat safety check",
+          "kind": "care",
+          "about": "Leo sits in his car seat while the nurse watches his breathing. Bring the car seat."
+        }
       ]
     },
     "C05": {
       "room": "Room 7",
       "firstName": "Sam",
-      "pronouns": { "subj": "he", "obj": "him", "poss": "his" },
+      "pronouns": {
+        "subj": "he",
+        "obj": "him",
+        "poss": "his"
+      },
       "childWord": "your child",
       "roomHeadline": "Surgery went well. A chest tube is still draining a special fluid, so he is on a low-fat formula.",
       "todayFamily": [
-        { "text": "Learn the low-fat diet for the next 6 weeks at home", "icon": "book" },
-        { "text": "The team checks if the chest tube is ready to come out", "icon": "check" }
+        {
+          "text": "Learn the low-fat diet for the next 6 weeks at home",
+          "icon": "book"
+        },
+        {
+          "text": "The team checks if the chest tube is ready to come out",
+          "icon": "check"
+        }
       ],
       "discharge": {
-        "teamStated": { "dayRange": [10, 11], "source": "Today's priorities, rounds 07:30: \"Updated discharge date (day 10-11)\"" },
+        "teamStated": {
+          "dayRange": [
+            10,
+            11
+          ],
+          "source": "Today's priorities, rounds 07:30: \"Updated discharge date (day 10-11)\""
+        },
         "changes": [
           {
             "fromSource": "pathway",
@@ -56,50 +166,205 @@
           }
         ],
         "criteria": [
-          { "text": "Breathing on his own", "done": true, "eventId": "SC05-E02" },
-          { "text": "Heart-support medicine stopped", "done": true, "eventId": "SC05-E03" },
-          { "text": "Chest tube out", "done": false },
-          { "text": "Family learns the low-fat diet for home", "done": false }
+          {
+            "text": "Breathing on his own",
+            "done": true,
+            "eventId": "SC05-E02"
+          },
+          {
+            "text": "Heart-support medicine stopped",
+            "done": true,
+            "eventId": "SC05-E03"
+          },
+          {
+            "text": "Chest tube out",
+            "done": false
+          },
+          {
+            "text": "Family learns the low-fat diet for home",
+            "done": false
+          }
         ]
       },
       "overnightDrafts": [
-        { "match": "Chest tube output", "text": "The chest tube drained less overnight.", "icon": "drop", "rule": "review" },
-        { "match": "Sats", "text": null, "icon": null, "rule": "numbers", "why": "Raw oxygen numbers stay with the care team. Explain in person if asked." },
-        { "match": "Tolerating low-fat", "text": "Sam is drinking his special low-fat formula well.", "icon": "bottle", "rule": "review" }
+        {
+          "match": "Chest tube output",
+          "text": "The chest tube drained less overnight.",
+          "icon": "drop",
+          "rule": "review"
+        },
+        {
+          "match": "Sats",
+          "text": null,
+          "icon": null,
+          "rule": "numbers",
+          "why": "Raw oxygen numbers stay with the care team. Explain in person if asked."
+        },
+        {
+          "match": "Tolerating low-fat",
+          "text": "Sam is drinking his special low-fat formula well.",
+          "icon": "bottle",
+          "rule": "review"
+        }
+      ],
+      "schedule": [
+        {
+          "time": "08:30",
+          "title": "Breakfast",
+          "kind": "feed",
+          "about": "His special low-fat formula and food."
+        },
+        {
+          "time": "10:00",
+          "title": "Diet lesson",
+          "kind": "learn",
+          "about": "The dietitian shows you the low-fat diet for the next 6 weeks at home."
+        },
+        {
+          "time": "11:30",
+          "title": "Chest tube check",
+          "kind": "care",
+          "about": "The team looks at how much the chest tube drained."
+        },
+        {
+          "time": "13:00",
+          "title": "Nap time",
+          "kind": "rest",
+          "about": "Lights low so Sam can rest."
+        },
+        {
+          "time": "17:00",
+          "title": "Dinner",
+          "kind": "feed",
+          "about": "Low-fat meal."
+        }
       ]
     },
     "C06": {
       "room": "Room 12",
       "firstName": "Ava",
-      "pronouns": { "subj": "she", "obj": "her", "poss": "her" },
+      "pronouns": {
+        "subj": "she",
+        "obj": "her",
+        "poss": "her"
+      },
       "childWord": "your teen",
       "roomHeadline": "Treatment is working. Today we plan how medicines fit school days.",
       "todayFamily": [
-        { "text": "Make a medicine plan that fits school days", "icon": "calendar" },
-        { "text": "Set up pill-bottle reminders", "icon": "check" },
-        { "text": "Heart ultrasound before going home", "icon": "heart" }
+        {
+          "text": "Make a medicine plan that fits school days",
+          "icon": "calendar"
+        },
+        {
+          "text": "Set up pill-bottle reminders",
+          "icon": "check"
+        },
+        {
+          "text": "Heart ultrasound before going home",
+          "icon": "heart"
+        }
       ],
       "discharge": {
         "teamStated": null,
         "changes": [],
         "criteria": [
-          { "text": "Finished the strong IV medicine", "done": true },
-          { "text": "Heart ultrasound before going home", "done": false },
-          { "text": "Medicine plan that fits school days", "done": false },
-          { "text": "Pill-bottle reminders set up", "done": false }
+          {
+            "text": "Finished the strong IV medicine",
+            "done": true
+          },
+          {
+            "text": "Heart ultrasound before going home",
+            "done": false
+          },
+          {
+            "text": "Medicine plan that fits school days",
+            "done": false
+          },
+          {
+            "text": "Pill-bottle reminders set up",
+            "done": false
+          }
         ]
       },
       "overnightDrafts": [
-        { "match": "Steroid dose", "text": "Ava finished her last dose of the strong IV medicine.", "icon": "drop", "rule": "review" },
-        { "match": "HR 98", "text": "Ava's heartbeat and blood pressure were normal overnight.", "icon": "heart", "rule": "review" },
-        { "match": "Slept well", "text": "Ava slept well last night.", "icon": "moon", "rule": "review" },
-        { "match": "Biopsy result", "text": null, "icon": null, "rule": "talk-first", "why": "Results are explained in person by a clinician first. Never sent to the room screen." },
-        { "match": "Psychology consult", "text": null, "icon": null, "rule": "private", "why": "Sensitive and teen-confidential. Never sent to the room screen." }
+        {
+          "match": "Steroid dose",
+          "text": "Ava finished her last dose of the strong IV medicine.",
+          "icon": "drop",
+          "rule": "review"
+        },
+        {
+          "match": "HR 98",
+          "text": "Ava's heartbeat and blood pressure were normal overnight.",
+          "icon": "heart",
+          "rule": "review"
+        },
+        {
+          "match": "Slept well",
+          "text": "Ava slept well last night.",
+          "icon": "moon",
+          "rule": "review"
+        },
+        {
+          "match": "Biopsy result",
+          "text": null,
+          "icon": null,
+          "rule": "talk-first",
+          "why": "Results are explained in person by a clinician first. Never sent to the room screen."
+        },
+        {
+          "match": "Psychology consult",
+          "text": null,
+          "icon": null,
+          "rule": "private",
+          "why": "Sensitive and teen-confidential. Never sent to the room screen."
+        }
+      ],
+      "schedule": [
+        {
+          "time": "09:30",
+          "title": "Medicine plan",
+          "kind": "learn",
+          "about": "Meet the transplant coordinator to fit medicines around school days."
+        },
+        {
+          "time": "11:00",
+          "title": "Heart ultrasound",
+          "kind": "care",
+          "about": "A painless picture of the heart before going home."
+        },
+        {
+          "time": "14:00",
+          "title": "Pill-bottle reminders",
+          "kind": "learn",
+          "about": "Set up the smart pill bottle and phone reminders together."
+        },
+        {
+          "time": "16:00",
+          "title": "Rest time",
+          "kind": "rest",
+          "about": "Quiet time. Lights low."
+        }
       ]
     }
   },
   "dataFixes": [
-    { "stay": "SC06", "seq": 3, "field": "end", "from": "2026-11-06T15:00:00", "to": "2026-11-05T15:00:00", "why": "Segment ended after rounds time; likely a typo for the day before." },
-    { "stay": "SC06", "seq": 4, "field": "start", "from": "2026-11-06T15:00:00", "to": "2026-11-05T15:00:00", "why": "ACCU segment started after its own end (rounds time)." }
-  ]
+    {
+      "stay": "SC06",
+      "seq": 3,
+      "field": "end",
+      "from": "2026-11-06T15:00:00",
+      "to": "2026-11-05T15:00:00",
+      "why": "Segment ended after rounds time; likely a typo for the day before."
+    },
+    {
+      "stay": "SC06",
+      "seq": 4,
+      "field": "start",
+      "from": "2026-11-06T15:00:00",
+      "to": "2026-11-05T15:00:00",
+      "why": "ACCU segment started after its own end (rounds time)."
+    }
+  ],
+  "_schedule_note": "patients.*.schedule is a made-up demo schedule (the dataset has no times for the day)."
 }

@@ -108,6 +108,36 @@
     return items.sort((a, b) => new Date(b.at) - new Date(a.at)).slice(0, 4);
   }
 
+  /* ---------- today's schedule (demo times) ---------- */
+  const SCHED_ICON = { feed: "bottle", care: "people", learn: "book", rest: "moon" };
+  function schedule(p) {
+    const day = D.now.slice(0, 10);
+    return (p.family.schedule || []).map((s, i) => Object.assign({}, s, { i, at: `${day}T${s.time}:00` })).filter(s => new Date(s.at) > NOW);
+  }
+  function inText(iso) {
+    const m = Math.round((new Date(iso) - NOW) / 60000);
+    if (m < 60) return `in ${m} min`;
+    const h = Math.floor(m / 60), r = m % 60;
+    return r ? `in ${h} h ${r} min` : `in ${h} hour${h > 1 ? "s" : ""}`;
+  }
+  const lcFirst = t => /^[A-Z]{2}/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1);
+  function todayWidget(p) {
+    const items = schedule(p);
+    if (!items.length) return `<p class="mono">TODAY</p><p class="p-sub">Nothing else planned today.</p>`;
+    const [next, ...later] = items;
+    const more = s => `<div class="s-more"><p>${esc(personalize(p, s.about))}</p><button class="s-ask" data-act="sched-ask" data-i="${s.i}">${icon("plane")} Ask Skye</button></div>`;
+    return `<p class="mono">TODAY</p>
+      <div class="s-item up-next" data-sched>
+        <button class="s-row" data-act="sched" aria-expanded="false">
+          <span class="un-head">${icon(SCHED_ICON[next.kind] || "star")} Up next \u00b7 ${esc(inText(next.at))}</span>
+          <span class="un-title">${esc(next.title)}</span>
+          <span class="un-time">${esc(fmtTime(next.at))}</span>
+        </button>${more(next)}
+      </div>
+      ${later.length ? `<p class="mono s-later">LATER TODAY</p><ul class="sched">${later.map(s => `<li class="s-item" data-sched>
+        <button class="s-row" data-act="sched" aria-expanded="false"><span class="tile ${s.kind}">${icon(SCHED_ICON[s.kind] || "star")}</span><span class="s-txt"><b>${esc(s.title)}</b><small>${esc(fmtTime(s.at))}</small></span>${icon("chev", "s-chev")}</button>${more(s)}</li>`).join("")}</ul>` : ""}`;
+  }
+
   function careTeamMember(p, role) { return (p.careTeam.find(c => c.role === role) || {}).name; }
 
   function familyFacts(p) {
@@ -123,6 +153,7 @@
       expectedHome: est ? { estimate: "Around " + dateRangeText(est.dates), note: "This is the team's best estimate, not a promise. It can change.", lastChange: ch ? ch.reasonFamily : null } : "The care team has not shared an expected date yet. They will when it is clearer.",
       beforeGoingHome: p.discharge.criteria.map(c => `${c.text}: ${c.done ? "done" : "still to do"}`),
       todaysPlan: p.family.today.map(t => t.text),
+      todaysSchedule: schedule(p).map(s => `${fmtTime(s.at)} ${s.title}: ${s.about}`),
       recentUpdates: familyUpdates(p).map(u => personalize(p, u.text)),
       whoToAsk: [{ role: "Bedside nurse today", name: careTeamMember(p, "Bedside nurse") }, { role: "Nurse practitioner", name: careTeamMember(p, "Nurse practitioner") }],
       glossary: GLOSSARY
@@ -239,10 +270,7 @@
             </div>
           </section>
 
-          <section class="w w-today" aria-label="Today">
-            <p class="mono">TODAY</p>
-            <ul class="p-list">${p.family.today.map(t => `<li><span class="mk"></span>${esc(personalize(p, t.text))}</li>`).join("")}</ul>
-          </section>
+          <section class="w w-today" aria-label="Today">${todayWidget(p)}</section>
 
           <section class="w w-team" aria-label="Your care team">
             <p class="mono">YOUR CARE TEAM</p>
@@ -475,7 +503,11 @@
         return est
           ? `The team's best estimate right now is around ${dateRangeText(est.dates)}. It's an estimate, not a promise, and it can move.${f.expectedHome.lastChange ? " It changed because: " + f.expectedHome.lastChange.charAt(0).toLowerCase() + f.expectedHome.lastChange.slice(1) : ""} Still to do before home: ${left.join(", ")}.`
           : `The team hasn't shared an expected date yet. They will once they have a good sense of it. What needs to happen first: ${left.join(", ")}.`;
-      case "today": return `Here's the plan for today: ${f.todaysPlan.map(t => t.toLowerCase()).join("; ")}. Your nurse can tell you more about timing.`;
+      case "today": {
+        const it = schedule(p);
+        return it.length ? `Up next is ${lcFirst(it[0].title)} at ${fmtTime(it[0].at)}, ${inText(it[0].at)}.${it.length > 1 ? " Later today: " + it.slice(1).map(s => `${lcFirst(s.title)} at ${fmtTime(s.at)}`).join(", ") + "." : ""} Tap any of them on the screen and I'll tell you more.`
+          : "Nothing else is planned for today. Your nurse can tell you more.";
+      }
       case "who": return `Your nurse today is ${f.whoToAsk[0].name}. ${f.whoToAsk[1].name} is the nurse practitioner on the team. You can ask either of them anything, anytime. No question is too small.`;
       case "where": {
         const now = familyPath(p).find(s => s.status === "now");
@@ -542,14 +574,15 @@
     });
   }
 
-  async function ask(p, text, chipKey) {
+  async function ask(p, text, chipKey, preset) {
     text = (text || "").trim(); if (!text) return;
     window.FP_VOICE.stop();
     const msgs = chat(p);
     Object.assign(skye, { q: text, a: "", qSaved: !!chipKey, chip: !!chipKey, urgent: false, interim: "" });
     msgs.push({ role: "user", text });
     let answer, kind;
-    if (chipKey) answer = scripted(p, chipKey);
+    if (preset) answer = preset;
+    else if (chipKey) answer = scripted(p, chipKey);
     else if (window.FP_AI.EMERGENCY.test(text)) { answer = "Please press the nurse call button or tell a nurse right now. They can help you right away."; kind = "urgent"; }
     else if (window.FP_AI.mode() === "off") answer = "That’s a good one for your nurse. Right now I can only answer the questions below, but I can save yours for the team to see on rounds.";
     else {
@@ -681,6 +714,19 @@
           onError: msg => { toast("Voice: " + msg + ". You can type instead."); skye.typing = true; },
           onEnd: () => { rec = null; if (skye.phase === "listening") setPhase("idle"); }
         });
+        return;
+      }
+      case "sched": {
+        const it = el.closest("[data-sched]"); const open = !it.classList.contains("open");
+        document.querySelectorAll("[data-sched].open").forEach(x => { x.classList.remove("open"); x.querySelector(".s-row").setAttribute("aria-expanded", "false"); });
+        if (open) { it.classList.add("open"); el.setAttribute("aria-expanded", "true"); }
+        return;
+      }
+      case "sched-ask": {
+        const s = (p.family.schedule || [])[+el.dataset.i]; if (!s) return;
+        const at = `${D.now.slice(0, 10)}T${s.time}:00`;
+        ask(p, `What is ${lcFirst(s.title)}?`, "sched", `${s.title} is at ${fmtTime(at)}, ${inText(at)}. ${personalize(p, s.about)}`);
+        const sk = document.querySelector(".p-skye"); if (sk && sk.getBoundingClientRect().top < 0) sk.scrollIntoView({ behavior: "smooth", block: "start" });
         return;
       }
       case "type": skye.typing = !skye.typing; updateControls(); if (skye.typing) focusAsk(); return;
