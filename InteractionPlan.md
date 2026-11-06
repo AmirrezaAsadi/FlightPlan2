@@ -40,6 +40,22 @@ Sections of this document marked **[Phase 1]** are the hackathon core. Everythin
 4. What should be **captured** during rounds: decisions, questions, tasks, contingencies, consult needs, family updates, follow-up?
 5. What would make you **trust** this view during live care?
 
+### 0.6 What this product is, and how people use it (decided v0.8)
+
+**FlightPlan is a dashboard, not an EHR and not MyChart.** It does not store or replace the medical record and has no patient portal. It reads existing data and gives clinics visibility into **patient information, practitioner activity, incidents and near misses, and open action items**, as defined in this document.
+
+| Surface | Who | Interaction | Detail |
+|---|---|---|---|
+| **Patient-room large display** | Patient and family | **None. Display-only.** No touch, no buttons, no sign-in, nothing to operate | Brief and plain-language: days here, expected date to go home, path home, what's new, today (§19) |
+| **Bedside tablet (patient side)** | Patient and family | **None. Display-only**, same content as the large display in a portrait layout | Brief and plain-language |
+| **Clinician dashboards** (workstation, tablet, mobile) | Doctors, nurses, APPs, unit managers | **Interactive.** Clickable rows and cards expand to detail; drill-down, filters, capture, override | Detailed: pathway, change log, incidents, action items, handoff, practitioner activity (by role) |
+
+Rules that follow:
+- Families never have to tap, scroll or log in. Updates arrive on their own, gently.
+- Anything a patient-room screen shows is the brief version of what the clinician sees. Detail is not sent to the room screen (§19.8).
+- Practitioner data shows **activity and workload by role**, not performance ratings or rankings of named staff. Incident review is **blameless but accountable**, as in the brief.
+- Parked for now: interactive family features (child story mode, parent phone app, question forms). Revisit only if the team asks.
+
 ## 1. Vision
 
 A **flight plan for a child's hospital stay**. A pilot, a crew and a passenger can all see where the flight is, what comes next, and what could change it. This product gives families the same view of their child's stay, from admission to going home.
