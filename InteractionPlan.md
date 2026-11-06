@@ -1,6 +1,6 @@
 # Care Journey Plan: Product & Design Guidelines
 
-> **Status:** Draft v0.7 (team answers on the widget folded in, §19.7–19.8; v0.6 added the widget build spec §19; v0.5 was validated against the Hackathon Brief, the One-Pager and the clinician kickoff meeting; see §16)
+> **Status:** Draft v0.8 (product positioning and interaction model §0.6; Figma mockups §19.9; v0.7 folded in team answers on the widget, §19.7–19.8; v0.6 added the widget build spec §19; v0.5 was validated against the Hackathon Brief, the One-Pager and the clinician kickoff meeting; see §16)
 > **Data scope:** one hospital stay, **from admission to discharge**. We do not go through years of patient history. Prior FlightPlans may be linked for staged or repeat patients (§5.1).
 > **Element reference:** states of care, locations, milestones and the expected-course pathway follow the FlightPlan Hackathon Brief (Cincinnati Children's).
 > **Sources:** FlightPlan Hackathon Brief (5 pp.), FlightPlan Hackathon One-Pager (2026), clinician kickoff meeting (AI-generated notes + auto-transcript).
@@ -17,7 +17,7 @@ We are rethinking one moment of care.
 | Phase | Audience and setting | What it is | Status |
 |---|---|---|---|
 | **1. Hackathon (the deliverable)** | Rounding team at the bedside, family often present. Tablet or small screen, 1–2 minutes per patient. | A **bedside rounds view** of FlightPlan, with a **family-present mode** and a way to **capture actions** | **In scope now** |
-| **2. Family-facing bedside** | Patient and family. Phone, tablet, in-room monitor (replacing handwritten whiteboards). | Plain-language journey, today's goals, what must happen before discharge, projected discharge with visible changes | Vision; design for it, do not build it first |
+| **2. Family-facing bedside** | Patient and family. **In-room large display or bedside tablet, display-only** (replacing handwritten whiteboards). Patients do not interact with it. | Plain-language journey, today's goals, what must happen before discharge, projected discharge with visible changes | Vision; design for it, do not build it first |
 | **3. Beyond cardiac** | Neonatology, neurosurgery, adult care; minutes-to-days time scales | One configurable platform; each specialty defines its own targets and milestones | Vision |
 
 Sections of this document marked **[Phase 1]** are the hackathon core. Everything else is the longer-term direction, kept so Phase 1 does not paint us into a corner.
@@ -39,6 +39,22 @@ Sections of this document marked **[Phase 1]** are the hackathon core. Everythin
 3. What is **safe to show when a family is present**?
 4. What should be **captured** during rounds: decisions, questions, tasks, contingencies, consult needs, family updates, follow-up?
 5. What would make you **trust** this view during live care?
+
+### 0.6 What this product is, and how people use it (decided v0.8)
+
+**FlightPlan is a dashboard, not an EHR and not MyChart.** It does not store or replace the medical record and has no patient portal. It reads existing data and gives clinics visibility into **patient information, practitioner activity, incidents and near misses, and open action items**, as defined in this document.
+
+| Surface | Who | Interaction | Detail |
+|---|---|---|---|
+| **Patient-room large display** | Patient and family | **None. Display-only.** No touch, no buttons, no sign-in, nothing to operate | Brief and plain-language: days here, expected date to go home, path home, what's new, today (§19) |
+| **Bedside tablet (patient side)** | Patient and family | **None. Display-only**, same content as the large display in a portrait layout | Brief and plain-language |
+| **Clinician dashboards** (workstation, tablet, mobile) | Doctors, nurses, APPs, unit managers | **Interactive.** Clickable rows and cards expand to detail; drill-down, filters, capture, override | Detailed: pathway, change log, incidents, action items, handoff, practitioner activity (by role) |
+
+Rules that follow:
+- Families never have to tap, scroll or log in. Updates arrive on their own, gently.
+- Anything a patient-room screen shows is the brief version of what the clinician sees. Detail is not sent to the room screen (§19.8).
+- Practitioner data shows **activity and workload by role**, not performance ratings or rankings of named staff. Incident review is **blameless but accountable**, as in the brief.
+- Parked for now: interactive family features (child story mode, parent phone app, question forms). Revisit only if the team asks.
 
 ## 1. Vision
 
@@ -127,7 +143,7 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 
 | Stakeholder | Needs | Visual style | Primary device |
 |---|---|---|---|
-| **Parent / guardian** | What's happening, what to do next, who to call, how worried to be | Warm, illustrated journey map; large type; progress and "what's next" cards; friendly icons; generous whitespace | Phone, tablet, large display |
+| **Parent / guardian** | What's happening, what to do next, who to call, how worried to be | Warm, illustrated journey map; large type; progress and "what's next" cards; friendly icons; generous whitespace | In-room large display or bedside tablet (display-only, §0.6) |
 | **Young child (approx. 4–10)** | Know what will happen, feel safe, have some control | Story-style path with a character or companion, stickers or rewards, minimal text, read-aloud | Tablet |
 | **Teen / future adult** | Privacy, autonomy, real information, no talking down | Cleaner, more adult layout; timeline view; own-your-data controls; transition checklist | Phone |
 | **Bedside rounding team** (attending, fellow, resident, nurse, APP, consultant) **[Phase 1]** | The first-30-seconds view, what changed, today's priorities, and a fast way to capture decisions and tasks. Different roles need different depth. | Bedside snapshot, compressed stay, "what changed", action capture, family-present mode (§9.0) | Tablet, small screen |
@@ -270,6 +286,8 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 - Unexplained empty states, spinners or dead ends
 - Anything that makes a parent hunt for the next step
 - Information hidden in tooltips or hover states (touch-first)
+- Any button, link, form or touch target on a patient-room screen. Families do not interact with it.
+- Named-staff performance rankings, or incident views that read as blame, on any dashboard
 - A projected discharge date that moves with no visible reason, or that is shown as a promise
 - Anything on a room display that visitors or people walking past the door can read (hallway visibility)
 - Extra data entry for clinicians, or forcing them to search the EHR to build the view
@@ -348,10 +366,12 @@ The rounding team has a minute or two per patient, probably on a tablet, with th
 - Trust: every item shows its source and when it was last updated
 
 ### 9.1 Tablet (bedside / clinic / waiting room)
-- Touch-first, large targets, glanceable; usable one-handed and by a child
+- **Two kinds of tablet (§0.6):**
+  - *Patient-side tablet:* **display-only.** Glanceable, no controls, no input. Shows the brief family view.
+  - *Clinician tablet:* **interactive**, touch-first with large targets, usable one-handed at the bedside. Tap to expand rows and cards for more detail.
 - Shared-device safe: quick lock, no PHI lingering on screen, role-aware
 - Offline-tolerant for poor hospital connectivity
-- Modes: parent mode, child mode (story/activity), clinician mode
+- Modes: family display (passive) and clinician (interactive). Child story mode is parked (§0.6).
 
 ### 9.2 Large-screen parent dashboard (room display / family lounge / ambient)
 - Built for reading from across a room: big type, high contrast, few elements
@@ -694,7 +714,7 @@ AI may draft the sentence and pick an icon. It must stay inside the rules of §5
 
 ### 19.6 Build plan (proposed)
 1. Confirm this spec and the remaining §19.7 items
-2. Platform: one responsive **web application** that runs in a browser on large display (kiosk), tablet and phone. Same data model and components; layout changes by screen size (§19.8). Large display is the primary target for the widget.
+2. Platform: one responsive **web application**. The **patient-room large display and patient-side tablet run it in kiosk mode, display-only**. **Clinician dashboards run on workstation, tablet and mobile, interactive.** Same data model and components; layout changes by screen size (§19.8). Large display is the primary target for the widget.
 3. Build with **made-up JSON only** (example above), fixed templates first, AI wording second
 4. Pieces: data adapter (reads the contract), discharge-estimate rule, glossary + icon map, render zones A–D, review-status gate, privacy/idle mode, care-team detail view
 5. Test: hallway test, reading-level check, stale and empty states, a reviewer rejects an AI sentence and it never appears, the family view never contains care-team fields
@@ -714,7 +734,7 @@ AI may draft the sentence and pick an icon. It must stay inside the rules of §5
 7. Who sets and approves `displayConsent` for a room?
 8. **Estimate rule [DECISION]:** what exactly feeds the system estimate (Pathway steps, milestones, discharge criteria)? Who validates it with clinicians? (§19.8)
 9. Does a clinician see and confirm the estimate before the family first sees it? Proposed: yes (§19.8).
-10. How does the care team reach the detailed view from the room (sign-in on a tablet/phone, not the family screen)?
+10. ~~How does the care team reach the detailed view from the room?~~ **Resolved (v0.8):** the room screens are display-only. Clinicians use their own interactive dashboards (workstation, tablet, mobile) with sign-in; they do not operate the room screen (§0.6).
 
 ### 19.8 One system, two views; how the discharge estimate works
 
@@ -740,3 +760,57 @@ AI may draft the sentence and pick an icon. It must stay inside the rules of §5
 7. It is an estimate, not a promise. The family display says so.
 
 **Safeguards.** This is the one projection the product makes, so keep it narrow: dates only, no outcomes, no advice. It uses a transparent rule, not an unexplained model. It needs clinician validation and a regulatory check on the "not decision support" position (§13, §15 Q17) before any real use. Until then, build and demo it only on made-up data.
+
+### 19.9 Figma mockups (v0.8)
+
+File: https://www.figma.com/design/lh4im8DQXbfsy7szWCsHBf/Untitled (Page 1). Made-up data only.
+
+| # | Frame | Audience | Interaction |
+|---|---|---|---|
+| 1 | Family room display v2 (1920×1080): days here, expected date with discharge checklist, **full path from arrival to going home**, what's new, today | Patient and family | **Display-only** |
+| 2 | Doctor detail view (tablet 1280×800): snapshot, milestones, discharge estimate with calculation and change log, updates with clinical vs. family wording and review status | Clinicians | Interactive |
+| 3 | Doctor bedside rounds view (tablet), family-present mode on: snapshot, what changed, compressed stay, action capture | Rounding team | Interactive |
+| 4 | Passive bedside tablet (portrait) | Patient and family | **Display-only** |
+| 6 | **Clinician patient overview (desktop 1440×980): the 15-second view (§20)** | Clinicians | Interactive, drill-down |
+| 5 | Clinic dashboard (desktop 1440×900): KPIs, patient census with expandable rows, incidents and near misses, practitioner activity by role | Clinicians, unit managers | Interactive, drill-down |
+
+Notes: the mockups are a first pass for review, not final design. Fonts are Nunito (family frames) and Inter (clinician frames). Colors are Figma variables in the `FlightPlan/Color` collection. Location is always shown with a label and icon as well as color.
+
+## 20. The 15-Second Test: What the Dashboard Must Show
+
+**Requirement (from the Hackathon Brief and One-Pager):** FlightPlan is an *informative* dashboard. In about 15 seconds a clinician must understand the patient's whole stay, from admission to today to the projected discharge, plus what changed and what is open. A snapshot of today alone fails this test. The v1 mockups failed it; v2 (§19.9 frames 1 and 6) is built to pass it.
+
+### 20.1 Brief elements the clinician timeline must carry
+| Brief element | How the clinician overview (frame 6) shows it |
+|---|---|
+| Rows = levels of risk: Procedure, Intubated, Extubated, ACCU, Discharged | Five labelled rows with icons, top to bottom |
+| One line moves between rows; its color = location (OR purple, cath lab pink, CICU orange, ACCU blue) | Stepped line, colored by location **and** labelled by row, so color is never the only cue |
+| Ideal stay = stepwise drop; a climb = setback | Visible at a glance in the line's shape |
+| Pathway (dashed) | Dashed line for the expected course, with "Behind Pathway by ~2 days" called out |
+| Course Correction (dotted) | Dotted escalation-threshold line, labelled directly |
+| Milestone symbols (inotropes off, chest tubes out) | Numbered markers on the line, with a key-events strip below (semantic zoom: tap a number for detail) |
+| Callouts in clinical shorthand collide and hide data | Replaced by numbered markers and a list. No overlapping boxes. |
+| Ratings (1–4) and outcome dots | Clinician-only strip under the chart; never in family views |
+| Conference markers | Thin vertical marker, labelled |
+| Date row and POD row; compressed uneventful stretches | Date and post-op-day rows under the chart; compressed pre-op days marked with a zigzag |
+| "Now" is missing in the conference version | **Today** line and tag, plus the projected remainder to discharge drawn dotted, so history and future sit on one axis |
+| Patient information, diagnoses and interventions, care team | Patient line, interventions table, care-team card by role |
+| Identifiers must not lead the page | Identifiers hidden behind a control; the page leads with bed, status and course |
+
+### 20.2 The 15-second summary strip (top of the clinician overview)
+1. **Where now** (level of care and location, since when)
+2. **Day / POD**
+3. **Vs. Pathway** (ahead / on track / behind, and why)
+4. **Projected discharge** (date, previous date, system estimate)
+5. **Flags** (Course Correction active, CrossCheck status)
+6. **Open loops** (count and overdue)
+
+Then the full-stay trajectory, **What changed (last 24 h)**, **Open loops and actions**, and **Care team**. Every row is clickable for detail.
+
+### 20.3 Family display equivalent (display-only)
+The room display shows the same journey in plain language: a stepped path from **Arrived** through **Heart procedure**, **Intensive care** and **Step-down unit** to **Going home**, with a **You are here** marker, the day axis, the **expected date** and a **"before we go home" checklist**. It never shows the risk-level axis, ratings, flags, results or organism names (§7, §19.8).
+
+### 20.4 Still to do
+- Update the passive bedside tablet (frame 4) and the rounds view (frame 3) to match the richer v2 path and trajectory.
+- Validate row order, labels and the escalation-threshold logic with the clinicians.
+- Confirm which brief elements are essential, optional or distracting on rounds (§0.5).
