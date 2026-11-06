@@ -411,6 +411,7 @@
         <section class="card stay timeline-card" aria-label="Compressed stay">
           <p class="eyebrow">The stay so far <span class="src">solid = actual · dashed = pathway · tap a dot</span></p>
           <div class="timeline-stage">${timelineSVG(p, fp)}</div>
+          <div class="timeline-labels" aria-label="Recent timeline events">${p.events.slice(-4).map(e => `<button class="timeline-label" data-act="event" data-id="${e.id}"><span>${icon(e.icon || "star")}</span><b>${esc(e.title)}</b><small>${esc(fmtShort(e.at))} · D${e.day}</small></button>`).join("")}</div>
           ${eventDetail(p, fp)}
         </section>
 
