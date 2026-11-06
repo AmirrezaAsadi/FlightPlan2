@@ -86,7 +86,11 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 .p-main { display: grid; gap: clamp(14px, 1.4vw, 22px); min-width: 0; }
 .p-head { padding: 4px 4px 0; }
-.p-headline { font-weight: 300; font-size: clamp(1.2rem, 1.5vw, 1.7rem); line-height: 1.3; margin: 8px 0 0; max-width: 46ch; text-wrap: balance; }
+.p-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
+.p-greeting { color: var(--cy); font-size: .9rem; font-weight: 500; letter-spacing: .01em; }
+.p-date-time { display: inline-flex; align-items: center; gap: 7px; color: var(--muted); font-size: .78rem; font-variant-numeric: tabular-nums; }
+.p-date-time span { color: var(--faint); }
+.p-headline { font-weight: 300; font-size: clamp(1.2rem, 1.5vw, 1.7rem); line-height: 1.3; margin: 6px 0 0; max-width: 46ch; text-wrap: balance; }
 
 /* widget shell: glass with a thin luminous edge */
 .w { position: relative; background: var(--glass); border: 1px solid var(--line); box-shadow: 0 1px 2px rgba(var(--ink-rgb), .04), 0 10px 30px rgba(var(--ink-rgb), .05); border-radius: 22px; padding: clamp(16px, 1.4vw, 24px); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); min-width: 0; }
@@ -166,8 +170,8 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .skye { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .holo { display: block; flex: none; border: 0; padding: 0; background: none; cursor: pointer; border-radius: 50%; width: min(300px, 100%); aspect-ratio: 1; }
 .holo canvas { width: 100%; height: auto; aspect-ratio: 1; display: block; }
-.skye-id { color: var(--cy); margin-top: -10px; }
-.skye-id span { display: block; color: var(--faint); letter-spacing: .08em; margin-top: 2px; font-size: .62rem; }
+.skye-id { color: var(--cy); margin: -10px 0 0; font-size: .92rem; font-weight: 500; letter-spacing: .14em; }
+.skye-id span { display: block; color: var(--muted); letter-spacing: .01em; margin-top: 3px; font-size: .76rem; font-weight: 400; }
 .caption { min-height: 4.5em; margin-top: 16px; }
 .cap-q { margin-bottom: 8px; }
 .cap-q span { color: var(--ink); letter-spacing: .02em; text-transform: none; font-family: var(--font); font-size: .88rem; margin-left: 6px; }
@@ -365,7 +369,9 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
    Everything sizes to the window height; nothing scrolls the page.
    ========================================================= */
 .p-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
-.p-urgent { text-align: right; color: var(--warm); line-height: 1.6; flex: none; max-width: 16ch; }
+.p-urgent { display: grid; gap: 1px; text-align: left; color: var(--warm); line-height: 1.45; flex: none; max-width: 19ch; padding: 9px 12px; border: 1px solid rgba(var(--warm-rgb), .24); border-radius: 12px; background: var(--warm-soft); }
+.p-urgent-title { font-size: .78rem; font-weight: 600; }
+.p-urgent-detail { color: var(--muted); font-size: .74rem; }
 .dock-label, .dock-close { display: none; }
 .upd-tabs { display: flex; gap: 4px; padding: 3px; border-radius: 999px; background: rgba(var(--ink-rgb), .05); margin-bottom: 10px; align-self: flex-start; }
 .upd-tabs button { border: 0; background: transparent; color: var(--muted); border-radius: 999px; padding: 6px 12px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; font-size: .86rem; }
@@ -441,14 +447,21 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
   .p-side > .w-tm { order: 0; }
   .p-side > .p-skye { order: 1; min-height: 0; }
   .p-side > .w-qq { order: 2; }
-  .p-skye { padding: clamp(10px, 1.4vw, 16px); }
-  .p-skye .skye { height: auto; gap: 0; }
-  .p-skye .holo { width: clamp(150px, 22vw, 220px); }
-  .p-skye .skye-id { margin-top: -4px; }
-  .p-skye .caption { min-height: 3em; margin-top: 8px; }
-  .p-skye .ctl { margin-top: 8px; }
-  .p-skye .orbs { margin-top: 8px; }
-  .p-skye .orb { padding: 5px 10px; }
+  .p-skye { flex: 0 0 auto; overflow: visible; padding: clamp(10px, 1.4vw, 16px); }
+  .p-skye .skye {
+    height: auto; min-width: 0; display: grid; align-items: center; gap: 10px 16px; text-align: left;
+    grid-template-columns: clamp(104px, 17vw, 144px) minmax(0, 1fr);
+    grid-template-areas: "holo identity" "holo controls" "question question" "suggestions suggestions" "caption caption";
+  }
+  .p-skye .holo { grid-area: holo; width: 100%; }
+  .p-skye .skye-id { grid-area: identity; margin: 0; text-align: left; }
+  .p-skye #skye-controls { display: contents; }
+  .p-skye .ctl { grid-area: controls; justify-content: flex-start; flex-wrap: wrap; gap: 8px; margin: 0; }
+  .p-skye .ask-line { grid-area: question; margin: 0; min-width: 0; }
+  .p-skye .orbs { grid-area: suggestions; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; width: 100%; min-width: 0; margin: 0; }
+  .p-skye .orb { min-width: 0; min-height: 42px; padding: 7px 10px; white-space: normal; line-height: 1.3; }
+  .p-skye .caption { grid-area: caption; min-width: 0; min-height: 0; margin: 0; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, .58); overflow: visible; overflow-wrap: anywhere; }
+  .p-skye .cap-a { font-size: 1rem; line-height: 1.5; }
   .p-skye .dock-close, .p-skye .dock-label { display: none; }
 }
 /* phones: normal scrolling, stacked */
@@ -456,12 +469,25 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
   .portal { grid-template-columns: 1fr; padding: 16px; }
   .p-main { display: contents; }
   .p-head { order: 0; } .w-journey { order: 1; } .w-row { order: 2; } .p-side { order: 3; }
-  .p-urgent { display: none; }
+  .p-head { flex-direction: column; align-items: stretch; gap: 10px; }
+  .p-urgent { max-width: none; padding: 8px 11px; }
   .w-journey { grid-template-columns: 1fr; }
   .w-days { display: flex; align-items: baseline; gap: 6px 18px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
   .w-days .mono { width: 100%; }
   .p-day { font-size: 4.5rem; }
   .w-row { grid-template-columns: 1fr; }
+  .p-skye { flex: none; overflow: visible; padding: 16px; }
+  .p-skye .skye { gap: 0; }
+  .p-skye .holo { width: clamp(112px, 30vw, 144px); }
+  .p-skye .skye-id { margin-top: -4px; }
+  .p-skye #skye-controls { width: 100%; }
+  .p-skye .ctl { gap: 8px; margin-top: 12px; }
+  .p-skye .mic { padding: 10px 16px 10px 13px; }
+  .p-skye .ghost-ic { width: 42px; height: 42px; }
+  .p-skye .orbs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+  .p-skye .orb { min-height: 42px; padding: 7px 9px; font-size: .78rem; line-height: 1.25; }
+  .p-skye .caption { min-height: 0; margin-top: 14px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 14px; background: rgba(255, 255, 255, .58); }
+  .p-skye .cap-a { font-size: 1rem; line-height: 1.5; }
   .arc { display: none; }
   .path-list { display: grid; gap: 0; margin-top: 8px; position: relative; }
   .path-list small { display: block; font-family: var(--mono); font-size: .62rem; letter-spacing: .12em; color: var(--faint); text-transform: uppercase; }
@@ -720,11 +746,9 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
   .w-side > .w { flex: 1; }
   .w-side .w-qq .q-list { max-height: 120px; }
 }
-/* dock the Skye pill in the header row so it never covers a widget */
+/* Keep the family header clear of the support column on smaller screens. */
 @media (min-width: 600px) and (max-width: 1279px), (min-width: 600px) and (orientation: portrait) {
-  .p-skye { top: calc(var(--bar-h, 60px) + 10px); bottom: auto; right: clamp(12px, 1.4vw, 28px); width: 210px; }
-  .p-head { padding-right: 230px; }
-  .p-skye.open { top: calc(var(--bar-h, 60px) + 10px); }
+  .p-urgent { max-width: 19ch; }
 }
 @media (min-width: 600px) and (orientation: portrait) {
   .w-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; grid-template-areas: "home today" "upd side"; }
@@ -764,4 +788,18 @@ body.kiosk .kiosk-exit:hover, body.kiosk .kiosk-exit:focus-visible { opacity: 1;
   .w-days .p-day { font-size: clamp(1.8rem, 3.6vh, 3rem); margin: 0; }
   .w-days .p-sub { margin: 0; }
   .p-main { grid-template-rows: auto minmax(0, .75fr) minmax(0, 2fr); }
+}
+@media (min-width: 1280px) and (max-height: 960px) {
+  .p-skye { padding: 10px 14px; }
+  .p-side > .p-skye { flex: 3 1 0; }
+  .p-skye .holo { width: clamp(78px, 10vh, 96px); }
+  .p-skye .skye-id { margin-top: -4px; font-size: .82rem; }
+  .p-skye .skye-id span { font-size: .68rem; }
+  .p-skye .ctl { margin-top: 6px; }
+  .p-skye .mic { padding: 7px 12px 7px 10px; font-size: .8rem; }
+  .p-skye .ghost-ic { width: 34px; height: 34px; }
+  .p-skye .orbs { display: grid; width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; margin-top: 6px; }
+  .p-skye .orb { min-height: 32px; padding: 4px 5px; font-size: .68rem; line-height: 1.2; }
+  .p-skye .caption { flex: 1 1 0; min-height: 0; overflow: visible; margin-top: 8px; }
+  .p-skye .cap-a { font-size: .82rem; line-height: 1.35; }
 }

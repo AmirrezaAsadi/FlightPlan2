@@ -254,16 +254,20 @@
     const greet = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
     const C = 2 * Math.PI * 18;
     const name = childName(p);
+    const familyGreeting = settings.showName ? `${greet}, ${name}’s family` : greet;
     return `
     <main class="portal" aria-label="Family room screen">
       <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="p-main">
         <header class="p-head">
-          <div>
-            <p class="mono">${esc(greet.toUpperCase())}${settings.showName ? " · " + esc(name.toUpperCase()) + "’S FAMILY" : ""} <span class="sep">/</span> ${esc(fmtDate(D.now, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())} · ${esc(fmtTime(D.now))}</p>
+          <div class="p-intro">
+            <div class="p-meta">
+              <p class="p-greeting">${esc(familyGreeting)}</p>
+              <time class="p-date-time" datetime="${esc(D.now)}">${esc(fmtDate(D.now))} <span aria-hidden="true">·</span> ${esc(fmtTime(D.now))}</time>
+            </div>
             <h1 class="p-headline">${esc(personalize(p, p.family.roomHeadline))}</h1>
           </div>
-          <p class="p-urgent mono">URGENT? PRESS THE CALL BUTTON</p>
+          <p class="p-urgent"><span class="p-urgent-title">Need help right now?</span><span class="p-urgent-detail">Press the bedside call button.</span></p>
         </header>
 
         <section class="w w-journey" aria-label="Journey map">
@@ -564,7 +568,7 @@
     return `<div class="skye">
       <button class="holo" data-act="talk" aria-label="Talk to Skye"><canvas id="holo"></canvas></button>
       <button class="dock-label" data-act="dock"><b>Ask Skye</b><small>your stay guide</small></button>
-      <p class="skye-id mono">SKYE <span>your stay guide · not a doctor or nurse</span></p>
+      <p class="skye-id">SKYE <span>Your stay guide · not a doctor or nurse</span></p>
       <div id="skye-controls">${controlsHTML()}</div>
       <div id="skye-live" class="caption" aria-live="polite">${captionHTML(p)}</div>
     </div>`;
@@ -578,7 +582,7 @@
     const k = skye;
     if (k.phase === "listening") return `<p class="cap-q mono">LISTENING</p><p class="cap-a interim">${esc(k.interim || "Go ahead, I’m listening…")}</p>`;
     if (k.phase === "thinking") return `<p class="cap-q mono">YOU ASKED</p><p class="cap-a dim">${esc(k.q)}</p>`;
-    if (!k.a) return `<p class="cap-a">Hi, I’m Skye. I can walk you through ${esc(childName(p))}’s stay. Tap me and ask, or pick a question below.</p>`;
+    if (!k.a) return `<p class="cap-a">Hi, I’m Skye, your guide to ${esc(childName(p))}’s stay. Ask me a question or choose a topic below.</p>`;
     return `${k.q ? `<p class="cap-q mono">YOU ASKED <span>${esc(k.q)}</span></p>` : ""}
       <p class="cap-a ${k.urgent ? "urgent" : ""} ${k.fresh ? "reveal" : ""}">${words(k.a, k.fresh)}</p>
       ${k.q && !k.qSaved && !k.urgent ? `<button class="save" data-act="save-q">${icon("check")} Save this question for the team</button>` : ""}
