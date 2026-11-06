@@ -19,6 +19,14 @@ One app, four views of the same data, in a calm, light "sci-fi" style:
 
 Three patients from the dataset: **Room 4 · Leo** (smooth stay), **Room 7 · Sam** (behind pathway, the date moved), **Room 12 · Ava** (teen, no date stated yet). First names are made up for the demo.
 
+### One screen, no scrolling
+
+On desktops, TVs and tablets the family screen always fits the window; nothing scrolls the page.
+- Skye is a slim right-hand column on wide screens. On smaller laptops and tablets she docks as an **Ask Skye** pill in the header and opens over the screen when tapped.
+- Lists that don't fit their card fold their last items into **+N more** (tap to see them), and finished items fold into a **✓ N done** chip.
+- **Room display mode** (the ⤢ button in the top bar) hides the demo bar and goes full screen, as on a wall TV or bedside tablet. The small **Menu** tab at the top brings the bar back.
+- Phones scroll normally.
+
 ### Talking to Skye
 
 - **Tap her face or "Tap to talk"** and ask out loud. Voice input works in Chrome and Edge and needs internet; elsewhere, tap ⌨ and type.

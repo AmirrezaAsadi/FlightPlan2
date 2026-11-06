@@ -144,8 +144,8 @@
           <span class="un-time">${esc(fmtTime(next.at))}</span>
         </button>${more(next)}
       </div>
-      ${later.length ? `<p class="mono s-later">LATER TODAY</p><ul class="sched">${later.map(s => `<li class="s-item" data-sched>
-        <button class="s-row" data-act="sched" aria-expanded="false"><span class="tile ${s.kind}">${icon(SCHED_ICON[s.kind] || "star")}</span><span class="s-txt"><b>${esc(s.title)}</b><small>${esc(fmtTime(s.at))}</small></span>${icon("chev", "s-chev")}</button>${more(s)}</li>`).join("")}</ul>` : ""}`;
+      ${later.length ? `<p class="mono s-later">LATER TODAY</p><ul class="sched" data-fit>${later.map(s => `<li class="s-item" data-sched>
+        <button class="s-row" data-act="sched" aria-expanded="false"><span class="tile ${s.kind}">${icon(SCHED_ICON[s.kind] || "star")}</span><b class="s-title">${esc(s.title)}</b><time>${esc(fmtTime(s.at).replace(":00", "").replace(" ", "\u00a0"))}</time></button>${more(s)}</li>`).join("")}</ul>` : ""}`;
   }
 
   function careTeamMember(p, role) { return (p.careTeam.find(c => c.role === role) || {}).name; }
@@ -219,11 +219,14 @@
     return s + `</svg>`;
   }
 
-  function overnightCard(p) {
-    const items = p.whatChanged.filter(w => w.window === "overnight" && state.approved[w.id]).map(w => state.approved[w.id]);
-    return `<p class="w-title ov">${icon("moon")} Overnight</p>
-      ${items.length ? `<ul class="ov-list">${items.map(a => `<li><span class="ov-ic">${icon(a.icon)}</span><span>${esc(personalize(p, a.text))}</span></li>`).join("")}</ul>`
-        : `<p class="p-sub">Your nurse will share how the night went soon.</p>`}`;
+  let updTab = "ov";
+  function updatesCard(p) {
+    const ov = p.whatChanged.filter(w => w.window === "overnight" && state.approved[w.id]).map(w => state.approved[w.id]);
+    const rec = familyUpdates(p).slice(0, 4);
+    const tab = (t, ic, label) => `<button role="tab" data-act="upd-tab" data-t="${t}" aria-selected="${updTab === t}">${icon(ic)} ${label}</button>`;
+    return `<div class="upd-tabs" role="tablist" aria-label="Updates">${tab("ov", "moon", "Overnight")}${tab("rec", "sparkle", "Recent")}</div>
+      <ul class="ov-list" data-fit data-pane="ov" ${updTab === "ov" ? "" : "hidden"}>${ov.length ? ov.map(a => `<li><span class="ov-ic">${icon(a.icon)}</span><span>${esc(personalize(p, a.text))}</span></li>`).join("") : `<li class="p-sub">Your nurse will share how the night went soon.</li>`}</ul>
+      <ul class="ov-list rec" data-fit data-pane="rec" ${updTab === "rec" ? "" : "hidden"}>${rec.map(u => `<li class="${u.fresh ? "fresh" : ""}"><span class="ov-ic">${icon(u.icon)}</span><span>${esc(personalize(p, u.text))}<time>${esc(relTime(u.at))}</time></span></li>`).join("")}</ul>`;
   }
   function teamRow(p) {
     const people = [["Nurse", careTeamMember(p, "Bedside nurse"), "a"], ["Doctor", careTeamMember(p, "ACCU attending"), "b"], ["Nurse practitioner", careTeamMember(p, "Nurse practitioner"), "c"]].filter(x => x[1]);
@@ -235,15 +238,14 @@
   function questionsCard(p) {
     const qs = state.questions[p.id] || [];
     return `<p class="w-title qq">${icon("chat")} Questions for the team</p>
-      ${qs.length ? `<ul class="q-list">${qs.map((q, i) => `<li class="${q.answered ? "answered" : ""}"><span>${esc(q.text)}</span>${q.answered ? `<small>${icon("check")} Answered</small>` : `<button class="q-x" data-act="q-del" data-i="${i}" aria-label="Remove question">${icon("x")}</button>`}</li>`).join("")}</ul>`
-        : `<p class="p-sub small">Write questions down when you think of them. The team sees them on rounds.</p>`}
-      <form class="q-add" data-act="q-add"><input id="q-new" placeholder="Add a question\u2026" autocomplete="off" aria-label="Add a question for the care team"><button aria-label="Add">${icon("send")}</button></form>`;
+      ${qs.length ? `<ul class="q-list" data-fit>${qs.map((q, i) => `<li class="${q.answered ? "answered" : ""}"><span>${esc(q.text)}</span>${q.answered ? `<small>${icon("check")} Answered</small>` : `<button class="q-x" data-act="q-del" data-i="${i}" aria-label="Remove question">${icon("x")}</button>`}</li>`).join("")}</ul>`
+        : ""}
+      <form class="q-add" data-act="q-add"><input id="q-new" placeholder="${qs.length ? "Add a question\u2026" : "Add a question for rounds\u2026"}" autocomplete="off" aria-label="Add a question for the care team"><button aria-label="Add">${icon("send")}</button></form>`;
   }
 
   function renderFamily(p) {
     const est = homeEstimate(p);
     const path = familyPath(p);
-    const updates = familyUpdates(p).slice(0, 3);
     const crit = p.discharge.criteria;
     const done = crit.filter(c => c.done).length;
     const ch = est && est.changes[0];
@@ -256,8 +258,11 @@
       <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="p-main">
         <header class="p-head">
-          <p class="mono">${esc(greet.toUpperCase())}${settings.showName ? " · " + esc(name.toUpperCase()) + "’S FAMILY" : ""} <span class="sep">/</span> ${esc(fmtDate(D.now, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())} · ${esc(fmtTime(D.now))}</p>
-          <h1 class="p-headline">${esc(personalize(p, p.family.roomHeadline))}</h1>
+          <div>
+            <p class="mono">${esc(greet.toUpperCase())}${settings.showName ? " · " + esc(name.toUpperCase()) + "’S FAMILY" : ""} <span class="sep">/</span> ${esc(fmtDate(D.now, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())} · ${esc(fmtTime(D.now))}</p>
+            <h1 class="p-headline">${esc(personalize(p, p.family.roomHeadline))}</h1>
+          </div>
+          <p class="p-urgent mono">URGENT? PRESS THE CALL BUTTON</p>
         </header>
 
         <section class="w w-journey" aria-label="Journey map">
@@ -276,39 +281,32 @@
         <div class="w-row">
           <section class="w w-home" aria-label="Going home">
             <p class="mono">GOING HOME · ESTIMATE</p>
-            <div class="home-grid">
-              <div>
-                ${est ? `<p class="p-date">${bigDate(est.dates)}</p><p class="p-sub">Our best estimate, not a promise.</p>`
-                      : `<p class="p-date soft">Soon</p><p class="p-sub">Your team will share an expected date when it’s clearer.</p>`}
-                ${ch ? `<p class="p-change"><span class="mono">MOVED FROM ${esc(fmtDate(p.discharge.pathwayDate, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())}</span>${esc(personalize(p, ch.reasonFamily))}</p>` : ""}
-                ${est && est.by === "confirmed" ? `<p class="p-sub">Shared by your care team today.</p>` : ""}
-              </div>
-              <div>
-                <div class="ring-row"><svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="r-bg" cx="22" cy="22" r="18"/><circle class="r-fg" cx="22" cy="22" r="18" stroke-dasharray="${(C * done / crit.length).toFixed(1)} ${C.toFixed(1)}"/></svg>
-                  <p class="mono">BEFORE HOME <b>${done}/${crit.length}</b></p></div>
-                <ul class="p-list steps">${crit.map(c => `<li class="${c.done ? "done" : ""}"><span class="mk ${c.done ? "ok" : "todo"}"></span>${esc(personalize(p, c.text))}<span class="sr">${c.done ? " (done)" : " (to do)"}</span></li>`).join("")}</ul>
-              </div>
-            </div>
+            ${est ? `<p class="p-date">${bigDate(est.dates)}</p><p class="p-sub small">Best estimate, not a promise.</p>`
+                  : `<p class="p-date soft">Soon</p><p class="p-sub small">Your team will share a date when it’s clearer.</p>`}
+            ${ch ? `<p class="p-change" data-act="why" title="Tap to read all"><span class="mono">MOVED FROM ${esc(fmtDate(p.discharge.pathwayDate, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())}</span>${esc(personalize(p, ch.reasonFamily))}</p>` : ""}
+            ${est && est.by === "confirmed" ? `<p class="p-sub small">Shared by your care team today.</p>` : ""}
+            <div class="ring-row"><svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="r-bg" cx="22" cy="22" r="18"/><circle class="r-fg" cx="22" cy="22" r="18" stroke-dasharray="${(C * done / crit.length).toFixed(1)} ${C.toFixed(1)}"/></svg>
+              <p class="mono">BEFORE HOME <b>${done}/${crit.length}</b></p></div>
+            <ul class="p-list steps" data-steps="todo" data-fit>${crit.filter(c => !c.done).map(c => `<li><span class="mk todo"></span>${esc(personalize(p, c.text))}<span class="sr"> (to do)</span></li>`).join("") || `<li><span class="mk ok"></span>All set for home</li>`}</ul>
+            <ul class="p-list steps" data-steps="done" hidden>${crit.filter(c => c.done).map(c => `<li class="done"><span class="mk ok"></span>${esc(personalize(p, c.text))}<span class="sr"> (done)</span></li>`).join("")}</ul>
+            ${done ? `<button class="done-chip" data-act="steps-toggle" aria-pressed="false">${icon("check")} <span>${done} done</span></button>` : ""}
           </section>
 
           <section class="w w-today" aria-label="Today">${todayWidget(p)}</section>
 
+          <section class="w w-upd" aria-label="Updates">${updatesCard(p)}</section>
+
           <div class="w-side">
-            <section class="w w-ov" aria-label="Overnight">${overnightCard(p)}</section>
             <section class="w w-tm" aria-label="Care team today">${teamRow(p)}</section>
             <section class="w w-qq" aria-label="Questions for the care team">${questionsCard(p)}</section>
           </div>
         </div>
-
-        <section class="w w-feed" aria-label="Recent updates">
-          <p class="mono">RECENT UPDATES</p>
-          ${updates.length ? `<ul>${updates.map(u => `<li class="${u.fresh ? "fresh" : ""}">${icon(u.icon)}<span>${esc(personalize(p, u.text))}</span><time>${esc(relTime(u.at))}</time></li>`).join("")}</ul>` : `<p class="p-sub">Nothing new since this morning.</p>`}
-        </section>
-
-        <footer class="p-foot mono">URGENT? PRESS THE CALL BUTTON <span class="sep">/</span> UPDATED ${esc(fmtTime(D.now))}</footer>
       </div>
 
-      <aside class="p-skye" aria-label="Skye, your stay guide">${skyeHTML(p)}</aside>
+      <aside class="p-skye ${dockOpen ? "open" : ""}" aria-label="Skye, your stay guide">
+        <button class="dock-close icon-btn" data-act="dock" aria-label="Close Skye">${icon("x")}</button>
+        ${skyeHTML(p)}
+      </aside>
     </main>`;
   }
 
@@ -543,10 +541,15 @@
   // Transient conversation state (not saved): what Skye is doing right now.
   const skye = { phase: "idle", q: "", a: "", interim: "", qSaved: false, chip: false, urgent: false, typing: false, fresh: false };
   let rec = null;
+  let dockOpen = false;
+  const DOCK_MQ = "(min-width: 600px) and (max-width: 1279px), (min-width: 600px) and (orientation: portrait)";
+  const isDock = () => window.matchMedia && window.matchMedia(DOCK_MQ).matches;
+  function setDock(open) { dockOpen = open; const el = $(".p-skye"); if (el) el.classList.toggle("open", open); }
 
   function skyeHTML(p) {
     return `<div class="skye">
       <button class="holo" data-act="talk" aria-label="Talk to Skye"><canvas id="holo"></canvas></button>
+      <button class="dock-label" data-act="dock"><b>Ask Skye</b><small>your stay guide</small></button>
       <p class="skye-id mono">SKYE <span>your stay guide · not a doctor or nurse</span></p>
       <div id="skye-controls">${controlsHTML()}</div>
       <div id="skye-live" class="caption" aria-live="polite">${captionHTML(p)}</div>
@@ -598,6 +601,7 @@
 
   async function ask(p, text, chipKey, preset) {
     text = (text || "").trim(); if (!text) return;
+    if (isDock() && !dockOpen) setDock(true);
     window.FP_VOICE.stop();
     const msgs = chat(p);
     Object.assign(skye, { q: text, a: "", qSaved: !!chipKey, chip: !!chipKey, urgent: false, interim: "" });
@@ -636,6 +640,7 @@
         <button role="tab" aria-selected="${state.view === "handoff"}" data-act="view" data-v="handoff">${icon("people")} Handoff</button>
         <button role="tab" aria-selected="${state.view === "conference"}" data-act="view" data-v="conference">${icon("calendar")} Conference</button>
       </div>
+      <button class="icon-btn" data-act="kiosk" aria-label="Room display mode (hide this bar, full screen)" title="Room display mode">${icon("expand")}</button>
       <button class="icon-btn" data-act="settings" aria-label="Settings">${icon("gear")}</button>`;
   }
 
@@ -643,10 +648,34 @@
     const p = D.patients[state.patientId];
     document.body.dataset.view = state.view;
     renderBar();
+    syncBarHeight();
     const extra = (window.FP_VIEWS || {})[state.view];
     $("#view").innerHTML = state.view === "family" ? renderFamily(p) : state.view === "team" ? renderTeam(p) : extra ? extra(p) : renderFamily(p);
-    if (state.view === "family") { skye.fresh = false; window.SkyeFace.attach($("#holo")); window.SkyeFace.setState(skye.phase); }
+    if (state.view === "family") { skye.fresh = false; window.SkyeFace.attach($("#holo")); window.SkyeFace.setState(skye.phase); requestAnimationFrame(fitLists); setTimeout(fitLists, 450); }
   }
+
+  // Keep every list inside its card: if items don't fit, fold the last ones into "+N more" (no scrolling needed).
+  function fitLists() {
+    if (!window.matchMedia("(min-width: 600px)").matches) return;
+    document.querySelectorAll("[data-fit]").forEach(ul => {
+      ul.querySelectorAll(".fit-hidden").forEach(li => li.classList.remove("fit-hidden"));
+      const old = ul.querySelector(".fit-more"); if (old) old.remove();
+      if (ul.hidden || ul.classList.contains("show-all") || ul.scrollHeight <= ul.clientHeight + 1) return;
+      const items = [...ul.children];
+      const more = document.createElement("li"); more.className = "fit-more";
+      more.innerHTML = '<button data-act="fit-more"></button>'; ul.appendChild(more);
+      let n = 0;
+      for (let i = items.length - 1; i >= 0 && ul.scrollHeight > ul.clientHeight + 1; i--) { items[i].classList.add("fit-hidden"); n++; more.firstChild.textContent = n === items.length ? `Show ${n}` : `+${n} more`; }
+      if (!n) more.remove();
+    });
+  }
+  let fitT = 0;
+  window.addEventListener("resize", () => { clearTimeout(fitT); fitT = setTimeout(fitLists, 120); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => fitLists());
+  if (document.fonts && document.fonts.addEventListener) document.fonts.addEventListener("loadingdone", () => fitLists());
+
+  function syncBarHeight() { const b = $("#bar"); if (b) document.documentElement.style.setProperty("--bar-h", b.offsetHeight + "px"); }
+  window.addEventListener("resize", syncBarHeight);
 
   function toast(msg) {
     const t = $("#toast"); t.textContent = msg; t.hidden = false;
@@ -691,8 +720,8 @@
     const act = el.dataset.act;
     const p = D.patients[state.patientId];
     switch (act) {
-      case "patient": resetSkye(); state.patientId = el.dataset.id; state.selectedEvent = null; return commit();
-      case "view": resetSkye(); state.view = el.dataset.v; return commit();
+      case "patient": resetSkye(); dockOpen = false; state.patientId = el.dataset.id; state.selectedEvent = null; return commit();
+      case "view": resetSkye(); dockOpen = false; state.view = el.dataset.v; return commit();
       case "toggle-ids": state.showIds = !state.showIds; return commit();
       case "confirm": state.confirmed[p.id] = true; toast("Shared with the family room screen."); return commit();
       case "unconfirm": delete state.confirmed[p.id]; return commit();
@@ -723,7 +752,30 @@
         return commit();
       }
       case "answer-q": { const q = (state.questions[p.id] || [])[+el.dataset.i]; if (q) q.answered = !q.answered; return commit(); }
+      case "dock": setDock(!dockOpen); if (!dockOpen) { window.FP_VOICE.stop(); if (skye.phase === "speaking") setPhase("idle", false); } return;
+      case "why": el.classList.toggle("full"); fitLists(); return;
+      case "fit-more": { const ul = el.closest("[data-fit]"); ul.classList.add("show-all"); fitLists(); return; }
+      case "kiosk": {
+        const on = !document.body.classList.contains("kiosk");
+        document.body.classList.toggle("kiosk", on); syncBarHeight();
+        try { if (on && document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(() => {}); else if (!on && document.fullscreenElement) document.exitFullscreen(); } catch (err) { /* fullscreen not allowed: the bar is still hidden */ }
+        requestAnimationFrame(fitLists); return;
+      }
+      case "steps-toggle": {
+        const card = el.closest(".w-home"); const showDone = el.getAttribute("aria-pressed") !== "true";
+        card.querySelector("[data-steps=todo]").hidden = showDone; card.querySelector("[data-steps=done]").hidden = !showDone;
+        el.setAttribute("aria-pressed", String(showDone)); fitLists();
+        el.querySelector("span").textContent = showDone ? "Show what\u2019s left" : `${card.querySelectorAll("[data-steps=done] li").length} done`;
+        return;
+      }
+      case "upd-tab": {
+        updTab = el.dataset.t;
+        document.querySelectorAll(".upd-tabs [data-act=upd-tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.t === updTab)));
+        document.querySelectorAll(".w-upd [data-pane]").forEach(x => { x.hidden = x.dataset.pane !== updTab; });
+        fitLists(); return;
+      }
       case "talk": {
+        if (isDock() && !dockOpen) { setDock(true); return; }
         if (skye.phase === "listening") { if (rec) rec.stop(); return; }
         if (skye.phase === "speaking") { window.FP_VOICE.stop(); setPhase("idle", false); return; }
         if (skye.phase === "thinking") return;
