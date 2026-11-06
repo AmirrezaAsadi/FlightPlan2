@@ -767,11 +767,11 @@ File: https://www.figma.com/design/lh4im8DQXbfsy7szWCsHBf/Untitled (Page 1). Mad
 
 | # | Frame | Audience | Interaction |
 |---|---|---|---|
-| 1 | Family room display v2 (1920×1080): days here, expected date with discharge checklist, **full path from arrival to going home**, what's new, today | Patient and family | **Display-only** |
+| 1 | **Family room display, Apple HIG dark (1920×1080):** Day, Monday/March 9, journey track from arrival to going home, what's new, today (design language §21) | Patient and family | **Display-only** |
 | 2 | Doctor detail view (tablet 1280×800): snapshot, milestones, discharge estimate with calculation and change log, updates with clinical vs. family wording and review status | Clinicians | Interactive |
 | 3 | Doctor bedside rounds view (tablet), family-present mode on: snapshot, what changed, compressed stay, action capture | Rounding team | Interactive |
 | 4 | Passive bedside tablet (portrait) | Patient and family | **Display-only** |
-| 6 | **Clinician patient overview (desktop 1440×980): the 15-second view (§20)** | Clinicians | Interactive, drill-down |
+| 7 | **Clinician overview, Apple HIG (iPad 1366×1024): the 15-second view (§20, §21)**; frame 6 is archived | Clinicians | Interactive, drill-down |
 | 5 | Clinic dashboard (desktop 1440×900): KPIs, patient census with expandable rows, incidents and near misses, practitioner activity by role | Clinicians, unit managers | Interactive, drill-down |
 
 Notes: the mockups are a first pass for review, not final design. Fonts are Nunito (family frames) and Inter (clinician frames). Colors are Figma variables in the `FlightPlan/Color` collection. Location is always shown with a label and icon as well as color.
@@ -814,3 +814,48 @@ The room display shows the same journey in plain language: a stepped path from *
 - Update the passive bedside tablet (frame 4) and the rounds view (frame 3) to match the richer v2 path and trajectory.
 - Validate row order, labels and the escalation-threshold logic with the clinicians.
 - Confirm which brief elements are essential, optional or distracting on rounds (§0.5).
+
+## 21. Design Language: Apple Human Interface Guidelines (v0.9)
+
+**Why:** the first mockups copied the structure and look of the conference tool (colored line chart, legends, dense panels). The target is a product that feels calm, clear and obvious in 15 seconds, like an Apple system app. We apply Apple's three design themes and the HIG principles below. Figma frames: **1 (family display, dark)** and **7 (clinician overview, iPad)**. Earlier versions are kept in an "Archive" row in the Figma file.
+
+### 21.1 Principles and how we apply them
+| Apple principle | What it means here |
+|---|---|
+| **Clarity** | One focus per screen. A plain-language headline ("Recovering in step-down") and a one-paragraph summary come before any chart. Large type, no legend to learn. |
+| **Deference** | Content leads, chrome recedes. No borders or heavy panels: soft grouped surfaces on a quiet background. Labels sit directly on the data. |
+| **Depth** | Layers and light motion, not decoration: grouped cards, a translucent navigation bar, a floating "Today" bubble over the chart, a soft glow on the room display. |
+| **Hierarchy** | Big numerals for the three things people ask first: *Day*, *Home expected*, *Compared with plan*. Everything else is smaller and secondary. |
+| **Progressive disclosure** | Summary first, then the course, then lists. Rows, chips and chart points open detail on tap (clinician view). The room display shows no controls at all (§0.6). |
+| **Consistency** | One accent (system blue). Green = progress, orange = needs attention, red = overdue only. Same symbols and spacing everywhere. |
+| **Accessibility** | Never color alone: location is a label **and** a color; status has text. Large type on the room display (readable from 3 m). Light and dark modes. Respect Dynamic Type in the real build. |
+
+### 21.2 What changed versus the conference-style screens
+| Before (looks like today's tool) | After (Apple style) |
+|---|---|
+| Multi-colored stepped line carrying location and risk together | **Location ribbon** (labelled segments) above a **smooth single-color level-of-care curve**, so the two meanings are separated |
+| Legend and toggles | Segmented control and a direct "Today" bubble; no legend |
+| Dense table of panels | Large title, summary, three glance tiles, then grouped lists |
+| Numbered boxes and shorthand callouts | Numbered dots on the curve plus a row of milestone chips |
+| Flat white panels with borders | Grouped cards (no borders), soft radii (about 22 pt), translucent bar |
+| Family screen as a chart with many labels | Dark ambient screen: two huge numerals, one **journey track** with stations, then two quiet cards |
+
+### 21.3 Foundations
+- **Type:** SF Pro in production (SF Pro Rounded for numerals optional). The Figma file uses **Inter** as a stand-in because SF is a licensed local font that does not render for every viewer. Scale: Large Title 34, Title 22, Headline 17, Body 15–17, Footnote 13, Caption 11–12. On the room display: numerals 180, titles 30–36, body 30. Tight tracking on large sizes.
+- **Color:** semantic variables in the `Apple/Color` collection with **Light and Dark** modes (backgrounds, labels, separators, fills, system tints). Clinician iPad uses Light; the room display uses Dark (less glare at night, calmer in a hospital room).
+- **Shape and space:** continuous rounded corners (cards 22, glass cards 40 on the room display), 16–20 pt gutters, generous padding.
+- **Symbols:** simple line glyphs in the style of SF Symbols (replace with SF Symbols in the native build).
+- **Motion (for the build):** gentle cross-fades when a new update arrives, no sound, no flashing. Chart scrubbing follows the finger on clinician tablets.
+
+### 21.4 Screen anatomy (clinician overview, iPad)
+1. **Navigation bar:** back to the unit, bed title, *Family present* switch, more menu
+2. **Large title:** status in plain words, with day count, post-op day, admission date; care-team avatars; identifiers hidden by default
+3. **Summary:** two sentences drafted from the record, clearly labelled as drafted, with a link to sources (clinician confirms)
+4. **Glance tiles:** *Stay progress* (ring, Day 6 of about 8), *Home expected* (Monday, 2 days later), *Compared with plan* (Plan vs Actual bars)
+5. **Course:** segmented control (Level of care, Location, Events); location ribbon; smooth curve with ghosted plan, dotted projection, Today scrubber, numbered milestones; milestone chips; going-home checklist
+6. **Lists (inset grouped):** What changed, Needs attention
+
+### 21.5 Still to do in this style
+- Passive bedside tablet, doctor bedside rounds view, clinic dashboard and detail view (the older frames in the Archive row)
+- Test the room display from 3 m and in a dark room
+- Replace Inter with SF Pro and glyphs with SF Symbols in the native build
