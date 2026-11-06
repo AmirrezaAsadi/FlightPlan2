@@ -8,14 +8,21 @@ A guiding journey for one hospital stay, admission to home. This is **not an EHR
 
 ## The demo
 
-One app, two views of the same stay:
+One app, two views of the same stay, in a calm dark "sci-fi" style:
 
 | View | Who | What it shows |
 |---|---|---|
-| **Family room screen** | Family, in the room | Day of the stay, expected day to go home (and why it moved), the path home, 3–4 recent updates in plain words, today's plan. **Skye**, a calm "flight attendant" guide, answers questions from what's on the screen only. |
+| **Family room screen** | Family, in the room | **The journey map is the main view**: a glowing path from surgery to home with "you are here", plus the day of the stay. Around it are widgets for going home (estimate, why it moved, checklist), today's plan, your care team (nurse and doctor by name) and recent updates. On the right is **Skye**, a smiling hologram guide you can talk to. |
 | **Care team** | Rounding team, on a tablet | Bedside snapshot, what changed, the stay timeline vs. pathway, the discharge estimate with its inputs, a review queue for family updates, items captured on rounds, and questions the family saved. A **Family present** switch hides sensitive details. |
 
 Three patients from the dataset: **Room 4 · Leo** (smooth stay), **Room 7 · Sam** (behind pathway, the date moved), **Room 12 · Ava** (teen, no date stated yet). First names are made up for the demo.
+
+### Talking to Skye
+
+- **Tap her face or "Tap to talk"** and ask out loud. Voice input works in Chrome and Edge and needs internet; elsewhere, tap ⌨ and type.
+- **Or tap a question** ("When can we go home?", "Who can I ask?", "I'm feeling worried", …). These work offline.
+- She **answers out loud** with captions. With AI on she uses a calm OpenAI voice; otherwise the browser's voice. 🔈 mutes her.
+- Free-form questions need AI. She answers only from what's on the family screen. Anything she doesn't know, she says so and offers **"Save this question for the team"**; saved questions appear in the care-team view.
 
 ### Option 1: run from disk (no hosting, no install)
 
@@ -30,7 +37,8 @@ To turn on AI, open ⚙ settings and paste your OpenAI key. The key stays in tha
    - `OPENAI_API_KEY`: your key (server only, never sent to the browser)
    - `DEMO_PASSCODE`: optional but recommended, so strangers can't use your credits. Enter it once in the app's ⚙ settings.
    - `OPENAI_MODEL`: optional, defaults to `gpt-4o-mini`
-3. Open the site. `/` redirects to `/demo/`. Leave the key field in settings empty; the app uses `/api/ai`.
+   - `OPENAI_TTS_MODEL` / `OPENAI_TTS_VOICE`: optional, Skye's voice (defaults `gpt-4o-mini-tts` / `shimmer`)
+3. Open the site. `/` redirects to `/demo/`. Leave the key field in settings empty; the app uses `/api/ai` and `/api/tts`.
 
 ### What the AI is (and isn't) allowed to do
 

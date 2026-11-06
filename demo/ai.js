@@ -108,3 +108,101 @@
 
   window.FP_AI = { mode, call, translateUpdate, companionReply, checkFamilySentence, EMERGENCY };
 })();
+
+// Voice for Skye: speak answers (OpenAI voice when available, browser voice otherwise) and listen (browser speech recognition).
+(function () {
+  const S = () => window.FP_SETTINGS.get();
+  let audio = null, actx = null, levelRaf = 0, utter = null, simTimer = 0;
+
+  function stop() {
+    if (audio) { audio.pause(); audio.onended = null; audio = null; }
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+    cancelAnimationFrame(levelRaf); clearInterval(simTimer);
+  }
+
+  async function fetchSpeech(text) {
+    const s = S(), m = window.FP_AI.mode();
+    const instructions = "Speak slowly, softly and warmly, like a calm, kind flight attendant reassuring a family. Gentle pauses.";
+    let res;
+    if (m === "direct") {
+      res = await fetch("https://api.openai.com/v1/audio/speech", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + s.apiKey },
+        body: JSON.stringify({ model: s.ttsModel || "gpt-4o-mini-tts", voice: s.ttsVoice || "shimmer", input: text, instructions, response_format: "mp3" })
+      });
+    } else if (m === "proxy") {
+      res = await fetch("/api/tts", { method: "POST", headers: { "Content-Type": "application/json", "x-demo-passcode": s.passcode || "" }, body: JSON.stringify({ text }) });
+    } else throw new Error("AI off");
+    if (!res.ok) throw new Error("voice " + res.status);
+    return URL.createObjectURL(await res.blob());
+  }
+
+  function pickVoice() {
+    const vs = (window.speechSynthesis && window.speechSynthesis.getVoices()) || [];
+    const en = vs.filter(v => /^en/i.test(v.lang));
+    return en.find(v => /samantha|google uk english female|serena|karen|moira|aria|jenny|libby|sonia/i.test(v.name)) || en.find(v => /female/i.test(v.name)) || en[0] || null;
+  }
+
+  // onLevel(0..1) drives the hologram mouth; onEnd when finished (always called).
+  async function speak(text, { onStart, onLevel, onEnd } = {}) {
+    stop();
+    const s = S();
+    const done = () => { cancelAnimationFrame(levelRaf); clearInterval(simTimer); onLevel && onLevel(0); onEnd && onEnd(); };
+    if (!s.voice) { done(); return; }
+    if (s.naturalVoice && window.FP_AI.mode() !== "off") {
+      try {
+        const url = await fetchSpeech(text);
+        audio = new Audio(url);
+        try {
+          actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+          if (actx.state === "suspended") await actx.resume();
+          const src = actx.createMediaElementSource(audio), an = actx.createAnalyser();
+          an.fftSize = 512; src.connect(an); an.connect(actx.destination);
+          const buf = new Uint8Array(an.fftSize);
+          const tick = () => { an.getByteTimeDomainData(buf); let sum = 0; for (const v of buf) sum += ((v - 128) / 128) ** 2; onLevel && onLevel(Math.min(1, Math.sqrt(sum / buf.length) * 4)); levelRaf = requestAnimationFrame(tick); };
+          tick();
+        } catch (e) { simulate(onLevel); }
+        audio.onended = () => { URL.revokeObjectURL(url); done(); };
+        audio.onerror = done;
+        onStart && onStart();
+        await audio.play();
+        return;
+      } catch (e) { /* fall back to the browser voice */ }
+    }
+    if (!window.speechSynthesis) { done(); return; }
+    utter = new SpeechSynthesisUtterance(text);
+    utter.rate = 0.92; utter.pitch = 1.05;
+    const v = pickVoice(); if (v) utter.voice = v;
+    utter.onstart = () => { onStart && onStart(); simulate(onLevel); };
+    utter.onend = done; utter.onerror = done;
+    window.speechSynthesis.speak(utter);
+  }
+  function simulate(onLevel) {
+    clearInterval(simTimer);
+    simTimer = setInterval(() => onLevel && onLevel(0.25 + Math.random() * 0.55), 110);
+  }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  function canListen() { return !!SR; }
+  function listen({ onStart, onInterim, onFinal, onError, onEnd } = {}) {
+    if (!SR) return null;
+    stop();
+    const r = new SR();
+    r.lang = "en-US"; r.interimResults = true; r.maxAlternatives = 1; r.continuous = false;
+    let final = "";
+    r.onstart = () => onStart && onStart();
+    r.onresult = e => {
+      let interim = "";
+      for (let i = e.resultIndex; i < e.results.length; i++) {
+        if (e.results[i].isFinal) final += e.results[i][0].transcript; else interim += e.results[i][0].transcript;
+      }
+      onInterim && onInterim(final + interim);
+    };
+    r.onerror = e => onError && onError(e.error === "not-allowed" ? "microphone permission was blocked" : e.error === "network" ? "voice input needs internet" : e.error);
+    r.onend = () => { if (final.trim()) onFinal && onFinal(final.trim()); onEnd && onEnd(); };
+    try { r.start(); } catch (e) { onError && onError(e.message); return null; }
+    return r;
+  }
+  if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = () => {};
+  window.FP_VOICE = { speak, stop, listen, canListen };
+})();

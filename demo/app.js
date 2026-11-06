@@ -12,7 +12,7 @@
   }
   function save(key, v) { try { localStorage.setItem(key, JSON.stringify(v)); } catch (e) { /* private mode: fine */ } }
 
-  const SETTINGS_DEFAULT = { aiEnabled: true, apiKey: "", model: "gpt-4o-mini", passcode: "", showName: true };
+  const SETTINGS_DEFAULT = { aiEnabled: true, apiKey: "", model: "gpt-4o-mini", passcode: "", showName: true, voice: true, naturalVoice: true };
   let settings = load("fp-settings", SETTINGS_DEFAULT);
   window.FP_SETTINGS = { get: () => settings };
 
@@ -130,91 +130,135 @@
   }
 
   /* ================================================================
-     FAMILY ROOM SCREEN
+     FAMILY ROOM SCREEN — journey map first, widgets around it, Skye on the right
      ================================================================ */
+  function bigDate(dates) {
+    const a = new Date(dates[0]), b = new Date(dates[dates.length - 1]);
+    const wd = d => d.toLocaleDateString("en-US", { weekday: "short" }).toUpperCase();
+    const mo = a.toLocaleDateString("en-US", { month: "short" }).toUpperCase();
+    return `<span class="wd">${dates.length > 1 ? wd(a) + " – " + wd(b) : wd(a)}</span>${mo} ${a.getDate()}${dates.length > 1 ? "–" + b.getDate() : ""}`;
+  }
+
+  // When each step of the path home was reached (for the journey map captions).
+  function stepWhen(p, step, est) {
+    const day1 = midnight(p.admit).getTime();
+    const dayOf = iso => Math.floor((new Date(iso).getTime() - day1) / DAY) + 1;
+    const procAt = (p.interventions[0] || {}).at || p.admit;
+    if (step.row === "Discharged") return est ? "Around " + fmtDate(est.dates[0], { weekday: "short", month: "short", day: "numeric" }) : "Date coming soon";
+    if (step.status === "next") return "Coming up";
+    if (step.row === "Procedure") return "Day " + dayOf(procAt);
+    const seg = p.segments.find(s => s.row === step.row && new Date(s.start) >= new Date(procAt));
+    return seg ? "Day " + dayOf(seg.start) : "";
+  }
+
+  // The journey map: a descending flight arc toward Home. Label + shape, never color alone.
+  function pathArc(p, path, est) {
+    const W = 1200, H = 300;
+    const P = [[90, 60], [420, 22], [790, 220], [1110, 200]];
+    const bz = t => { const u = 1 - t; return [0, 1].map(k => u * u * u * P[0][k] + 3 * u * u * t * P[1][k] + 3 * u * t * t * P[2][k] + t * t * t * P[3][k]); };
+    const n = path.length;
+    const cur = Math.max(0, path.findIndex(s => s.status === "now"));
+    const tEnd = cur / (n - 1);
+    let trail = "";
+    for (let i = 0; i <= 64; i++) { const [x, y] = bz(tEnd * i / 64); trail += (i ? "L" : "M") + x.toFixed(1) + "," + y.toFixed(1); }
+    let s = `<svg class="arc" viewBox="0 0 ${W} ${H}" role="img" aria-label="Journey map: ${path.map(x => x.label + (x.status === "now" ? " (here now)" : x.status === "done" ? " (done)" : "")).join(", ")}">
+      <defs><linearGradient id="trail" x1="0" x2="1"><stop offset="0" stop-color="#8be9f5" stop-opacity=".12"/><stop offset="1" stop-color="#8be9f5"/></linearGradient>
+      <filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <path class="arc-rest" d="M${P[0]} C${P[1]} ${P[2]} ${P[3]}"/>
+      <path class="arc-trail" d="${trail}" filter="url(#glow)"/>`;
+    path.forEach((st, i) => {
+      const [x, y] = bz(i / (n - 1));
+      s += `<g class="node ${st.status} ${st.row === "Discharged" ? "home" : ""}" transform="translate(${x.toFixed(1)},${y.toFixed(1)})">`;
+      if (st.status === "now") s += `<circle class="pulse" r="16"/><circle class="halo" r="16"/><circle class="core" r="9"/><text class="here" y="-32" text-anchor="middle">YOU ARE HERE</text>`;
+      else if (st.row === "Discharged") s += `<circle class="home-ring" r="18"/><g class="home-ic" transform="translate(-10,-10) scale(.84)">${window.FP_ICONS.home}</g>`;
+      else s += `<circle class="dot" r="${st.status === "done" ? 6 : 5}"/>`;
+      s += `<text class="nl" y="${st.status === "now" ? 50 : 44}" text-anchor="middle">${esc(st.label)}</text>`;
+      s += `<text class="nw" y="${st.status === "now" ? 74 : 67}" text-anchor="middle">${esc(stepWhen(p, st, est).toUpperCase())}</text></g>`;
+    });
+    return s + `</svg>`;
+  }
+
+  function teamCard(p) {
+    const people = [
+      ["Your nurse today", careTeamMember(p, "Bedside nurse")],
+      ["Your doctor", careTeamMember(p, "ACCU attending")],
+      ["Nurse practitioner", careTeamMember(p, "Nurse practitioner")]
+    ].filter(x => x[1]);
+    const initials = n => n.replace(/^Dr\.\s*/, "").replace(/,.*$/, "").split(/[\s.]+/).filter(Boolean).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+    return people.map(([role, name]) => `<li><span class="av">${esc(initials(name))}</span><span><b>${esc(name.replace(/,.*$/, ""))}</b><small>${esc(role)}</small></span></li>`).join("");
+  }
+
   function renderFamily(p) {
-    const name = childName(p);
     const est = homeEstimate(p);
     const path = familyPath(p);
-    const updates = familyUpdates(p);
+    const updates = familyUpdates(p).slice(0, 3);
     const crit = p.discharge.criteria;
-    const doneCount = crit.filter(c => c.done).length;
+    const done = crit.filter(c => c.done).length;
+    const ch = est && est.changes[0];
     const hour = NOW.getHours();
     const greet = hour < 12 ? "Good morning" : hour < 17 ? "Good afternoon" : "Good evening";
-    const ch = est && est.changes[0];
-    const nurse = careTeamMember(p, "Bedside nurse");
-
-    const homeCard = est ? `
-        <p class="eyebrow">${icon("home")} Expected to go home</p>
-        <p class="home-date">Around ${esc(dateRangeText(est.dates))}</p>
-        <p class="hint">${icon("info")} This is the team’s best estimate, not a promise. It can change.</p>
-        ${ch ? `<div class="change">
-            <p class="change-head">${icon("calendar")} Changed ${esc(relTime(ch.changedAt).toLowerCase())}, from ${esc(fmtDate(p.discharge.pathwayDate, { weekday: "long", month: "long", day: "numeric" }))}</p>
-            <p>${esc(personalize(p, ch.reasonFamily))}</p></div>` : ""}
-        ${est.by === "confirmed" ? `<p class="hint">${icon("check")} Shared by your care team today.</p>` : ""}`
-      : `
-        <p class="eyebrow">${icon("home")} Expected to go home</p>
-        <p class="home-date soft">Your team will share an expected date soon.</p>
-        <p class="hint">${icon("info")} They share it once they have a good sense of it. You can ask them anytime.</p>`;
-
+    const C = 2 * Math.PI * 18;
+    const name = childName(p);
     return `
-    <main class="fam" aria-label="Family room screen">
-      <header class="fam-head">
-        <div>
-          <p class="greet">${greet}${settings.showName ? ", " + esc(name) + "’s family" : ""}</p>
-          <h1 class="headline">${esc(personalize(p, p.family.roomHeadline))}</h1>
-        </div>
-        <div class="fam-clock"><span>${esc(fmtDate(D.now, { weekday: "long", month: "long", day: "numeric" }))}</span><span class="muted">${esc(fmtTime(D.now))}</span></div>
-      </header>
+    <main class="portal" aria-label="Family room screen">
+      <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="p-main">
+        <header class="p-head">
+          <p class="mono">${esc(greet.toUpperCase())}${settings.showName ? " · " + esc(name.toUpperCase()) + "’S FAMILY" : ""} <span class="sep">/</span> ${esc(fmtDate(D.now, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())} · ${esc(fmtTime(D.now))}</p>
+          <h1 class="p-headline">${esc(personalize(p, p.family.roomHeadline))}</h1>
+        </header>
 
-      <div class="fam-grid">
-        <section class="card days" aria-label="Days here">
-          <p class="eyebrow">${icon("calendar")} Days here</p>
-          <p class="day-big">Day ${p.dayOfStay}</p>
-          ${p.pod != null ? `<p class="day-sub">Day ${p.pod} after ${esc(path[0].label.toLowerCase())}</p>` : ""}
-        </section>
-
-        <section class="card home" aria-label="Expected to go home">
-          <div class="home-main">${homeCard}</div>
-          <div class="home-list">
-            <p class="eyebrow">Before going home <span class="count">${doneCount} of ${crit.length} done</span></p>
-            <ul class="checklist">
-              ${crit.map(c => `<li class="${c.done ? "done" : ""}">${c.done ? icon("check") : '<span class="todo-dot" aria-hidden="true"></span>'}<span>${esc(personalize(p, c.text))}</span><span class="sr">${c.done ? "done" : "to do"}</span></li>`).join("")}
-            </ul>
+        <section class="w w-journey" aria-label="Journey map">
+          <div class="w-days">
+            <p class="mono">DAY OF STAY</p>
+            <p class="p-day">${p.dayOfStay}</p>
+            ${p.pod != null ? `<p class="p-sub">${p.pod} days after ${esc(path[0].label.toLowerCase())}</p>` : ""}
+          </div>
+          <div class="w-map">
+            <p class="mono">${settings.showName ? esc(name.toUpperCase()) + "’S JOURNEY HOME" : "THE JOURNEY HOME"}</p>
+            ${pathArc(p, path, est)}
+            <ol class="path-list">${path.map(s => `<li class="${s.status}"><span class="pd"></span><span>${esc(s.label)}<small>${esc(stepWhen(p, s, est))}</small></span>${s.status === "now" ? " <em>you are here</em>" : ""}</li>`).join("")}</ol>
           </div>
         </section>
 
-        <section class="card path" aria-label="The path home">
-          <p class="eyebrow">${icon("plane")} The path home</p>
-          <ol class="stones">
-            ${path.map(s => `<li class="stone ${s.status}">
-                <span class="stone-dot">${s.status === "done" ? icon("check") : icon(s.icon)}</span>
-                <span class="stone-label">${esc(s.label)}</span>
-                ${s.status === "now" ? `<span class="here">Here now</span>` : s.sub ? `<span class="stone-sub">${esc(s.sub)}</span>` : ""}
-              </li>`).join("")}
-          </ol>
+        <div class="w-row">
+          <section class="w w-home" aria-label="Going home">
+            <p class="mono">GOING HOME · ESTIMATE</p>
+            <div class="home-grid">
+              <div>
+                ${est ? `<p class="p-date">${bigDate(est.dates)}</p><p class="p-sub">Our best estimate, not a promise.</p>`
+                      : `<p class="p-date soft">Soon</p><p class="p-sub">Your team will share an expected date when it’s clearer.</p>`}
+                ${ch ? `<p class="p-change"><span class="mono">MOVED FROM ${esc(fmtDate(p.discharge.pathwayDate, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())}</span>${esc(personalize(p, ch.reasonFamily))}</p>` : ""}
+                ${est && est.by === "confirmed" ? `<p class="p-sub">Shared by your care team today.</p>` : ""}
+              </div>
+              <div>
+                <div class="ring-row"><svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="r-bg" cx="22" cy="22" r="18"/><circle class="r-fg" cx="22" cy="22" r="18" stroke-dasharray="${(C * done / crit.length).toFixed(1)} ${C.toFixed(1)}"/></svg>
+                  <p class="mono">BEFORE HOME <b>${done}/${crit.length}</b></p></div>
+                <ul class="p-list steps">${crit.map(c => `<li class="${c.done ? "done" : ""}"><span class="mk ${c.done ? "ok" : "todo"}"></span>${esc(personalize(p, c.text))}<span class="sr">${c.done ? " (done)" : " (to do)"}</span></li>`).join("")}</ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="w w-today" aria-label="Today">
+            <p class="mono">TODAY</p>
+            <ul class="p-list">${p.family.today.map(t => `<li><span class="mk"></span>${esc(personalize(p, t.text))}</li>`).join("")}</ul>
+          </section>
+
+          <section class="w w-team" aria-label="Your care team">
+            <p class="mono">YOUR CARE TEAM</p>
+            <ul class="team-list">${teamCard(p)}</ul>
+          </section>
+        </div>
+
+        <section class="w w-feed" aria-label="Recent updates">
+          <p class="mono">RECENT UPDATES</p>
+          ${updates.length ? `<ul>${updates.map(u => `<li class="${u.fresh ? "fresh" : ""}">${icon(u.icon)}<span>${esc(personalize(p, u.text))}</span><time>${esc(relTime(u.at))}</time></li>`).join("")}</ul>` : `<p class="p-sub">Nothing new since this morning.</p>`}
         </section>
 
-        <section class="card updates" aria-label="Recent updates">
-          <p class="eyebrow">${icon("sparkle")} Recent updates</p>
-          ${updates.length ? `<ul class="feed">${updates.map(u => `
-              <li class="${u.fresh ? "fresh" : ""}"><span class="feed-ic">${icon(u.icon)}</span>
-                <span class="feed-text">${esc(personalize(p, u.text))}</span>
-                <span class="feed-time">${esc(relTime(u.at))}</span></li>`).join("")}</ul>`
-            : `<p class="soft">Nothing new since this morning.</p>`}
-        </section>
-
-        <section class="card today" aria-label="Today">
-          <p class="eyebrow">${icon("sun")} Today</p>
-          <ul class="today-list">${p.family.today.map(t => `<li>${icon(t.icon)}<span>${esc(personalize(p, t.text))}</span></li>`).join("")}</ul>
-        </section>
+        <footer class="p-foot mono">URGENT? PRESS THE CALL BUTTON <span class="sep">/</span> UPDATED ${esc(fmtTime(D.now))}</footer>
       </div>
 
-      <footer class="fam-foot">
-        <span>${icon("clock")} Updated ${esc(fmtTime(D.now))}</span>
-        <span>${icon("people")} Questions? Ask your nurse${nurse ? ", " + esc(nurse.replace(/,.*$/, "")) : ""}.</span>
-        <button class="skye-btn" data-act="open-skye">${icon("plane")}<span><b>Ask Skye</b><small>your stay guide</small></span></button>
-      </footer>
+      <aside class="p-skye" aria-label="Skye, your stay guide">${skyeHTML(p)}</aside>
     </main>`;
   }
 
@@ -442,52 +486,83 @@
   }
   const CHIPS = [["home", "When can we go home?"], ["today", "What's happening today?"], ["who", "Who can I ask?"], ["where", "Where are we now?"], ["worried", "I'm feeling worried"]];
 
-  function renderSkye(p) {
-    const box = $("#skye");
-    if (!state.skyeOpen || state.view !== "family") { box.hidden = true; return; }
-    box.hidden = false;
-    const msgs = chat(p);
-    const aiOn = window.FP_AI.mode() !== "off";
-    box.innerHTML = `
-      <div class="skye-head">${icon("plane")}<div><b>Skye</b><span>Your guide for ${esc(childName(p))}’s stay. Not a doctor or nurse.</span></div>
-        <button class="icon-btn" data-act="close-skye" aria-label="Close">${icon("x")}</button></div>
-      <div class="skye-msgs" id="skye-msgs">
-        <div class="msg bot">Hi, I'm Skye. I can tell you what's on the plan, explain words, and save questions for the care team. For anything urgent, press the nurse call button.</div>
-        ${msgs.map((m, i) => `<div class="msg ${m.role === "user" ? "me" : "bot"} ${m.kind || ""}">${esc(m.text)}
-          ${m.role === "user" && !m.saved ? `<button class="link" data-act="save-q" data-i="${i}">Save for the team</button>` : ""}
-          ${m.role === "user" && m.saved ? `<span class="saved">${icon("check")} Saved for the team</span>` : ""}</div>`).join("")}
-        ${state.skyeBusy ? `<div class="msg bot typing"><span></span><span></span><span></span></div>` : ""}
+  // Transient conversation state (not saved): what Skye is doing right now.
+  const skye = { phase: "idle", q: "", a: "", interim: "", qSaved: false, chip: false, urgent: false, typing: false, fresh: false };
+  let rec = null;
+
+  function skyeHTML(p) {
+    return `<div class="skye">
+      <button class="holo" data-act="talk" aria-label="Talk to Skye"><canvas id="holo"></canvas></button>
+      <p class="skye-id mono">SKYE <span>your stay guide · not a doctor or nurse</span></p>
+      <div id="skye-controls">${controlsHTML()}</div>
+      <div id="skye-live" class="caption" aria-live="polite">${captionHTML(p)}</div>
+    </div>`;
+  }
+  function words(text, fresh) {
+    if (!fresh) return esc(text);
+    let n = 0;
+    return text.split(/(\s+)/).map(w => w.trim() ? `<span style="animation-delay:${(n++ * 0.07).toFixed(2)}s">${esc(w)}</span>` : w).join("");
+  }
+  function captionHTML(p) {
+    const k = skye;
+    if (k.phase === "listening") return `<p class="cap-q mono">LISTENING</p><p class="cap-a interim">${esc(k.interim || "Go ahead, I’m listening…")}</p>`;
+    if (k.phase === "thinking") return `<p class="cap-q mono">YOU ASKED</p><p class="cap-a dim">${esc(k.q)}</p>`;
+    if (!k.a) return `<p class="cap-a">Hi, I’m Skye. I can walk you through ${esc(childName(p))}’s stay. Tap me and ask, or pick a question below.</p>`;
+    return `${k.q ? `<p class="cap-q mono">YOU ASKED <span>${esc(k.q)}</span></p>` : ""}
+      <p class="cap-a ${k.urgent ? "urgent" : ""} ${k.fresh ? "reveal" : ""}">${words(k.a, k.fresh)}</p>
+      ${k.q && !k.qSaved && !k.urgent ? `<button class="save" data-act="save-q">${icon("check")} Save this question for the team</button>` : ""}
+      ${k.qSaved && !k.chip ? `<p class="saved mono">✓ SAVED FOR THE TEAM</p>` : ""}`;
+  }
+  function controlsHTML() {
+    const k = skye, aiOn = window.FP_AI.mode() !== "off";
+    const label = k.phase === "listening" ? "Listening · tap to stop" : k.phase === "speaking" ? "Speaking · tap to stop" : k.phase === "thinking" ? "Thinking…" : "Tap to talk";
+    return `<div class="ctl">
+        <button class="mic ${k.phase}" data-act="talk">${icon(k.phase === "speaking" ? "x" : "mic")}<span>${label}</span></button>
+        <button class="ghost-ic ${k.typing ? "on" : ""}" data-act="type" aria-label="Type a question">${icon("keyboard")}</button>
+        <button class="ghost-ic" data-act="mute" aria-label="${settings.voice ? "Mute Skye" : "Let Skye speak"}">${icon(settings.voice ? "speaker" : "speakerOff")}</button>
       </div>
-      <div class="chips">${CHIPS.map(([k, t]) => `<button class="chip-q" data-act="chip" data-k="${k}">${esc(t)}</button>`).join("")}</div>
-      <form class="skye-input" data-act="ask">
-        <input id="skye-text" autocomplete="off" placeholder="${aiOn ? "Type a question…" : "Type a question to save for the team…"}" aria-label="Your question">
-        <button class="icon-btn send" aria-label="Send">${icon("send")}</button>
-      </form>
-      <p class="skye-foot">${aiOn ? icon("sparkle") + " Answers come only from what's on this screen." : "AI is off: Skye answers the questions above and saves others for the team."}</p>`;
-    const m = $("#skye-msgs"); m.scrollTop = m.scrollHeight;
+      ${k.typing ? `<form class="ask-line" data-act="ask"><input id="skye-text" autocomplete="off" placeholder="${aiOn ? "Ask anything about the stay…" : "Type a question to save for the team…"}" aria-label="Your question"><button aria-label="Send">${icon("send")}</button></form>` : ""}
+      <div class="orbs">${CHIPS.map(([key, t]) => `<button class="orb" data-act="chip" data-k="${key}">${esc(t)}</button>`).join("")}</div>`;
+  }
+  function updateCaption() { const el = $("#skye-live"); if (el) { el.innerHTML = captionHTML(D.patients[state.patientId]); skye.fresh = false; } }
+  function updateControls() { const el = $("#skye-controls"); if (el) el.innerHTML = controlsHTML(); }
+  function setPhase(ph, caption = true) { skye.phase = ph; window.SkyeFace.setState(ph); if (caption) updateCaption(); updateControls(); }
+  function focusAsk() { setTimeout(() => { const i = $("#skye-text"); if (i) i.focus(); }, 30); }
+  function resetSkye() {
+    window.FP_VOICE.stop();
+    if (rec) { try { rec.abort(); } catch (e) { /* already stopped */ } rec = null; }
+    Object.assign(skye, { phase: "idle", q: "", a: "", interim: "", qSaved: false, chip: false, urgent: false, typing: false, fresh: false });
+    window.SkyeFace.setState("idle");
+  }
+  function say(text) {
+    window.FP_VOICE.speak(text, {
+      onStart: () => setPhase("speaking", false),
+      onLevel: v => window.SkyeFace.setLevel(v),
+      onEnd: () => { if (skye.phase === "speaking") setPhase("idle", false); }
+    });
   }
 
-  async function ask(p, text) {
-    text = text.trim(); if (!text) return;
+  async function ask(p, text, chipKey) {
+    text = (text || "").trim(); if (!text) return;
+    window.FP_VOICE.stop();
     const msgs = chat(p);
+    Object.assign(skye, { q: text, a: "", qSaved: !!chipKey, chip: !!chipKey, urgent: false, interim: "" });
     msgs.push({ role: "user", text });
-    if (window.FP_AI.EMERGENCY.test(text)) {
-      msgs.push({ role: "assistant", text: "Please press the nurse call button or tell a nurse right now. They can help you right away.", kind: "urgent" });
-      commit(false); renderSkye(p); return;
+    let answer, kind;
+    if (chipKey) answer = scripted(p, chipKey);
+    else if (window.FP_AI.EMERGENCY.test(text)) { answer = "Please press the nurse call button or tell a nurse right now. They can help you right away."; kind = "urgent"; }
+    else if (window.FP_AI.mode() === "off") answer = "That’s a good one for your nurse. Right now I can only answer the questions below, but I can save yours for the team to see on rounds.";
+    else {
+      setPhase("thinking");
+      try { answer = (await window.FP_AI.companionReply(familyFacts(p), msgs.filter(m => !m.kind))) || "I’m not sure about that one. Your nurse can help, or I can save the question for the team."; }
+      catch (err) { answer = "I couldn’t reach my notes just now. Your nurse can help, or I can save your question for the team."; kind = "err"; toast("AI: " + err.message); }
     }
-    if (window.FP_AI.mode() === "off") {
-      msgs.push({ role: "assistant", text: "I can answer the questions below. For anything else, your nurse is the best person to ask. Tap “Save for the team” and they will see your question on rounds." });
-      commit(false); renderSkye(p); return;
-    }
-    state.skyeBusy = true; renderSkye(p);
-    try {
-      const reply = await window.FP_AI.companionReply(familyFacts(p), msgs.filter(m => !m.kind));
-      msgs.push({ role: "assistant", text: reply || "I'm not sure about that one. Your nurse can help, or I can save the question for the team." });
-    } catch (err) {
-      msgs.push({ role: "assistant", text: "I couldn't reach my notes just now. Your nurse can help, or tap “Save for the team”.", kind: "err" });
-      toast("AI: " + err.message);
-    }
-    state.skyeBusy = false; commit(false); renderSkye(p);
+    if (state.patientId !== p.id || state.view !== "family") return;
+    msgs.push({ role: "assistant", text: answer, kind });
+    Object.assign(skye, { a: answer, urgent: kind === "urgent", fresh: true });
+    commit(false);
+    setPhase("idle");
+    say(answer);
   }
 
   /* ================================================================
@@ -512,7 +587,7 @@
     document.body.dataset.view = state.view;
     renderBar();
     $("#view").innerHTML = state.view === "family" ? renderFamily(p) : renderTeam(p);
-    renderSkye(p);
+    if (state.view === "family") { skye.fresh = false; window.SkyeFace.attach($("#holo")); window.SkyeFace.setState(skye.phase); }
   }
 
   function toast(msg) {
@@ -532,6 +607,8 @@
       <label>Model <input name="model" value="${esc(settings.model)}"></label>
       <label>Vercel demo passcode <small>Only if DEMO_PASSCODE is set on the server.</small><input name="passcode" type="password" value="${esc(settings.passcode)}"></label>
       <p class="muted small">AI mode now: <b>${m === "direct" ? "direct from this browser" : m === "proxy" ? "via /api/ai (server key)" : "off — templates and scripted answers"}</b></p>
+      <label class="row"><input type="checkbox" name="voice" ${settings.voice ? "checked" : ""}> Skye speaks her answers</label>
+      <label class="row"><input type="checkbox" name="naturalVoice" ${settings.naturalVoice ? "checked" : ""}> Natural OpenAI voice <small>(when AI is on; otherwise the browser voice)</small></label>
       <label class="row"><input type="checkbox" name="showName" ${settings.showName ? "checked" : ""}> Show first name on the room screen <small>(off = “your baby”, for the hallway test)</small></label>
       <div class="set-btns">
         <button class="btn ghost" value="test" data-act="test-ai">Test AI</button>
@@ -546,7 +623,7 @@
   }
   function readSettingsForm() {
     const f = $("#settings form");
-    settings = { aiEnabled: f.aiEnabled.checked, apiKey: f.apiKey.value.trim(), model: f.model.value.trim() || "gpt-4o-mini", passcode: f.passcode.value, showName: f.showName.checked };
+    settings = { aiEnabled: f.aiEnabled.checked, apiKey: f.apiKey.value.trim(), model: f.model.value.trim() || "gpt-4o-mini", passcode: f.passcode.value, showName: f.showName.checked, voice: f.voice.checked, naturalVoice: f.naturalVoice.checked };
     save("fp-settings", settings);
   }
 
@@ -556,8 +633,8 @@
     const act = el.dataset.act;
     const p = D.patients[state.patientId];
     switch (act) {
-      case "patient": state.patientId = el.dataset.id; state.selectedEvent = null; return commit();
-      case "view": state.view = el.dataset.v; return commit();
+      case "patient": resetSkye(); state.patientId = el.dataset.id; state.selectedEvent = null; return commit();
+      case "view": resetSkye(); state.view = el.dataset.v; return commit();
       case "toggle-ids": state.showIds = !state.showIds; return commit();
       case "confirm": state.confirmed[p.id] = true; toast("Shared with the family room screen."); return commit();
       case "unconfirm": delete state.confirmed[p.id]; return commit();
@@ -588,20 +665,33 @@
         return commit();
       }
       case "answer-q": { const q = (state.questions[p.id] || [])[+el.dataset.i]; if (q) q.answered = !q.answered; return commit(); }
-      case "open-skye": state.skyeOpen = true; commit(false); renderSkye(p); setTimeout(() => { const i = $("#skye-text"); if (i) i.focus(); }, 50); return;
-      case "close-skye": state.skyeOpen = false; commit(false); renderSkye(p); return;
-      case "chip": {
-        const label = CHIPS.find(c => c[0] === el.dataset.k)[1];
-        chat(p).push({ role: "user", text: label, saved: true, chip: true });
-        chat(p).push({ role: "assistant", text: scripted(p, el.dataset.k) });
-        commit(false); renderSkye(p); return;
+      case "talk": {
+        if (skye.phase === "listening") { if (rec) rec.stop(); return; }
+        if (skye.phase === "speaking") { window.FP_VOICE.stop(); setPhase("idle", false); return; }
+        if (skye.phase === "thinking") return;
+        if (!window.FP_VOICE.canListen()) { skye.typing = true; updateControls(); focusAsk(); toast("Voice input works in Chrome or Edge. You can type your question instead."); return; }
+        skye.interim = "";
+        rec = window.FP_VOICE.listen({
+          onStart: () => setPhase("listening"),
+          onInterim: t => { skye.interim = t; updateCaption(); },
+          onFinal: t => ask(p, t),
+          onError: msg => { toast("Voice: " + msg + ". You can type instead."); skye.typing = true; },
+          onEnd: () => { rec = null; if (skye.phase === "listening") setPhase("idle"); }
+        });
+        return;
       }
+      case "type": skye.typing = !skye.typing; updateControls(); if (skye.typing) focusAsk(); return;
+      case "mute": {
+        settings.voice = !settings.voice; save("fp-settings", settings);
+        if (!settings.voice) { window.FP_VOICE.stop(); if (skye.phase === "speaking") skye.phase = "idle"; window.SkyeFace.setState(skye.phase); }
+        updateControls(); return;
+      }
+      case "chip": { const c = CHIPS.find(x => x[0] === el.dataset.k); ask(p, c[1], c[0]); return; }
       case "save-q": {
-        const m = chat(p)[+el.dataset.i]; if (!m) return;
-        m.saved = true;
-        (state.questions[p.id] = state.questions[p.id] || []).push({ text: m.text, at: new Date().toISOString() });
-        chat(p).push({ role: "assistant", text: "Saved. Your care team will see this question on rounds." });
-        commit(false); renderSkye(p); return;
+        if (!skye.q) return;
+        (state.questions[p.id] = state.questions[p.id] || []).push({ text: skye.q, at: new Date().toISOString() });
+        Object.assign(skye, { qSaved: true, a: "Saved. Your care team will see your question on rounds.", fresh: true });
+        commit(false); setPhase("idle"); say(skye.a); return;
       }
       case "settings": openSettings(); return;
       case "test-ai": {
@@ -641,6 +731,5 @@
     if ($("#settings").returnValue === "save") { readSettingsForm(); render(); }
   });
 
-  state.skyeOpen = false; state.skyeBusy = false;
   render();
 })();
