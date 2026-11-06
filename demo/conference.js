@@ -43,7 +43,7 @@
     const xo = d => L + warp(d) / total * (W - L - R);
     const y = lvl => T + (5 - lvl) * (H - T - B) / 4;
     let g = `<svg class="vplot" viewBox="0 0 ${W} ${H}" role="img" aria-label="Pathway variance plot: actual course (solid) against expected pathway (dashed)">
-      <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="rgba(139,233,245,.35)" stroke-width="2"/></pattern></defs>`;
+      <defs><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" style="stroke: rgba(var(--cy-rgb), .3)" stroke-width="2"/></pattern></defs>`;
     ROWS.forEach(([lab, l]) => { g += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(l)}" y2="${y(l)}"/><text class="rowlab" x="${L - 12}" y="${y(l) + 4}" text-anchor="end">${lab}</text>`; });
     const nDays = Math.ceil(endOff);
     for (let d = 1; d <= nDays; d++) {

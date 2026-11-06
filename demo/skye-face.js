@@ -11,7 +11,7 @@
 
   function attach(c) {
     if (!c) return;
-    canvas = c; ctx = c.getContext("2d");
+    canvas = c; ctx = c.getContext("2d"); readTheme();
     if (!raf) raf = requestAnimationFrame(frame);
   }
   function setState(s) { mode = s; if (s !== "speaking") target = 0; }
@@ -27,8 +27,13 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
-  const CY = "139, 233, 245";
-  const rgba = a => `rgba(${CY}, ${a})`;
+  let CY = "11, 122, 140", HALO = "196, 150, 60", WARM = "176, 104, 18", GAIN = 1;
+  function readTheme() {
+    const cs = getComputedStyle(document.documentElement);
+    CY = cs.getPropertyValue("--cy-rgb").trim() || CY; HALO = cs.getPropertyValue("--halo-rgb").trim() || HALO; WARM = cs.getPropertyValue("--warm-rgb").trim() || WARM;
+    GAIN = parseFloat(cs.getPropertyValue("--holo-gain")) || 1;
+  }
+  const rgba = a => `rgba(${CY}, ${Math.min(1, a * GAIN).toFixed(3)})`;
 
   function frame(now) {
     raf = 0;
@@ -142,7 +147,7 @@
     [-1, 1].forEach(s => {
       const gx = s * R * 0.46, gy = R * 0.16;
       const cg = ctx.createRadialGradient(gx, gy, 0, gx, gy, R * 0.2);
-      cg.addColorStop(0, "rgba(243, 201, 143, 0.16)"); cg.addColorStop(1, "rgba(243, 201, 143, 0)");
+      cg.addColorStop(0, `rgba(${WARM}, 0.13)`); cg.addColorStop(1, `rgba(${WARM}, 0)`);
       ctx.fillStyle = cg; ctx.beginPath(); ctx.arc(gx, gy, R * 0.2, 0, Math.PI * 2); ctx.fill();
     });
     // smiling eyes: soft ovals with a lifted lower lid
@@ -178,7 +183,7 @@
 
     // a soft halo above (calm, angel-like)
     const hy = -R * 1.2 + (reduce ? 0 : Math.sin(t * 1.2) * R * 0.02);
-    ctx.strokeStyle = "rgba(243, 222, 170, 0.7)"; ctx.lineWidth = 2; ctx.shadowColor = "rgba(243, 222, 170, 0.9)"; ctx.shadowBlur = 14;
+    ctx.strokeStyle = `rgba(${HALO}, 0.75)`; ctx.lineWidth = 2; ctx.shadowColor = `rgba(${HALO}, 0.7)`; ctx.shadowBlur = 14;
     ctx.beginPath(); ctx.ellipse(0, hy, R * 0.46, R * 0.08, 0, 0, Math.PI * 2); ctx.stroke(); ctx.shadowBlur = 0;
 
     // thinking: three lights circling above
@@ -193,7 +198,7 @@
 
     // scanlines + a slow moving scan band
     ctx.globalCompositeOperation = "destination-out";
-    ctx.fillStyle = "rgba(0, 0, 0, 0.28)";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.16)";
     for (let y = 0; y < w; y += 3) ctx.fillRect(0, y, w, 1);
     ctx.globalCompositeOperation = "source-over";
     if (!reduce) {

@@ -8,7 +8,7 @@ A guiding journey for one hospital stay, admission to home. This is **not an EHR
 
 ## The demo
 
-One app, four views of the same data, in a calm dark "sci-fi" style:
+One app, four views of the same data, in a calm, light "sci-fi" style:
 
 | View | Who | What it shows |
 |---|---|---|

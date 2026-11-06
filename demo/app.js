@@ -162,7 +162,7 @@
     let trail = "";
     for (let i = 0; i <= 64; i++) { const [x, y] = bz(tEnd * i / 64); trail += (i ? "L" : "M") + x.toFixed(1) + "," + y.toFixed(1); }
     let s = `<svg class="arc" viewBox="0 0 ${W} ${H}" role="img" aria-label="Journey map: ${path.map(x => x.label + (x.status === "now" ? " (here now)" : x.status === "done" ? " (done)" : "")).join(", ")}">
-      <defs><linearGradient id="trail" x1="0" x2="1"><stop offset="0" stop-color="#8be9f5" stop-opacity=".12"/><stop offset="1" stop-color="#8be9f5"/></linearGradient>
+      <defs><linearGradient id="trail" x1="0" x2="1"><stop offset="0" style="stop-color: var(--cy); stop-opacity: .12"/><stop offset="1" style="stop-color: var(--cy)"/></linearGradient>
       <filter id="glow" x="-20%" y="-50%" width="140%" height="200%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
       <path class="arc-rest" d="M${P[0]} C${P[1]} ${P[2]} ${P[3]}"/>
       <path class="arc-trail" d="${trail}" filter="url(#glow)"/>`;
