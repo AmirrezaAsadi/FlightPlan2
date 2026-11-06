@@ -1255,5 +1255,1716 @@ window.FP_DATA = {
    "to": "2026-11-05T15:00:00",
    "why": "ACCU segment started after its own end (rounds time)."
   }
+ ],
+ "stays": [
+  {
+   "id": "C01",
+   "stayId": "SC01",
+   "label": "Patient C01",
+   "age": "9 days",
+   "status": "inpatient",
+   "admit": "2026-10-26T06:00:00",
+   "discharge": null,
+   "admitReason": "Transposition of the great arteries - planned repair",
+   "directFlight": true,
+   "dayOfStay": 12,
+   "pod": 9,
+   "threshold": "Escalate if lactate > 3 or new ST changes",
+   "onTrack": "yes",
+   "diagnoses": [
+    "d-Transposition of the great arteries (d-TGA)",
+    "Atrial septal defect"
+   ],
+   "procedures": [
+    {
+     "at": "2026-10-28T07:00:00",
+     "procedure": "Arterial switch operation + ASD closure",
+     "location": "OR"
+    }
+   ],
+   "segments": [
+    {
+     "start": "2026-10-26T06:00:00",
+     "end": "2026-10-28T07:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-10-28T07:00:00",
+     "end": "2026-10-28T14:00:00",
+     "location": "OR",
+     "color": "#7B4FA0",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-10-28T14:00:00",
+     "end": "2026-10-30T10:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": null
+    },
+    {
+     "start": "2026-10-30T10:00:00",
+     "end": "2026-11-02T13:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-11-02T13:00:00",
+     "end": "2026-11-06T07:30:00",
+     "location": "ACCU",
+     "color": "#3B7DD8",
+     "row": "ACCU",
+     "level": 2,
+     "shading": null
+    }
+   ],
+   "pathway": [
+    {
+     "dayOffset": 0.0,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 2.0,
+     "row": "Procedure",
+     "level": 5
+    },
+    {
+     "dayOffset": 2.3,
+     "row": "Intubated",
+     "level": 4
+    },
+    {
+     "dayOffset": 4.0,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 7.0,
+     "row": "ACCU",
+     "level": 2
+    },
+    {
+     "dayOffset": 13.0,
+     "row": "Discharged",
+     "level": 1
+    }
+   ],
+   "events": [
+    {
+     "id": "SC01-E01",
+     "at": "2026-10-26T09:00:00",
+     "day": 1,
+     "pod": null,
+     "kind": "result",
+     "title": "Pre-op echo",
+     "shorthand": "d-TGA, IVS, restrictive PFO s/p BAS, nl coronaries",
+     "familyText": "Heart ultrasound before surgery confirmed the plan."
+    },
+    {
+     "id": "SC01-E02",
+     "at": "2026-10-28T07:00:00",
+     "day": 3,
+     "pod": 0,
+     "kind": "procedure",
+     "title": "Arterial switch operation",
+     "shorthand": "ASO + ASD closure, CPB 186/XC 112, DHCA 0",
+     "familyText": "Heart surgery to switch the two main arteries."
+    },
+    {
+     "id": "SC01-E03",
+     "at": "2026-10-28T15:00:00",
+     "day": 3,
+     "pod": 0,
+     "kind": "echo",
+     "title": "Post-op echo",
+     "shorthand": "Nl biV fxn, no neo-AI, coronaries flow nl",
+     "familyText": "Heart ultrasound after surgery looks good."
+    },
+    {
+     "id": "SC01-E04",
+     "at": "2026-10-29T10:00:00",
+     "day": 4,
+     "pod": 1,
+     "kind": "milestone",
+     "title": "Inotropes stopped",
+     "shorthand": "Milrinone off, VIS 0",
+     "familyText": "Heart-support medicine stopped."
+    },
+    {
+     "id": "SC01-E05",
+     "at": "2026-10-30T10:00:00",
+     "day": 5,
+     "pod": 2,
+     "kind": "milestone",
+     "title": "Breathing tube removed",
+     "shorthand": "Extubated to 1L NC",
+     "familyText": "Breathing tube taken out."
+    },
+    {
+     "id": "SC01-E06",
+     "at": "2026-10-31T09:00:00",
+     "day": 6,
+     "pod": 3,
+     "kind": "milestone",
+     "title": "Chest tubes removed",
+     "shorthand": "CT x2 out, CXR no PTX",
+     "familyText": "Chest drainage tubes removed."
+    },
+    {
+     "id": "SC01-E07",
+     "at": "2026-11-02T13:00:00",
+     "day": 8,
+     "pod": 5,
+     "kind": "location",
+     "title": "To ACCU",
+     "shorthand": "Transfer to step-down",
+     "familyText": "Moved to the step-down heart unit."
+    },
+    {
+     "id": "SC01-E08",
+     "at": "2026-11-04T08:00:00",
+     "day": 10,
+     "pod": 7,
+     "kind": "milestone",
+     "title": "Full oral feeds",
+     "shorthand": "PO ad lib 150 mL/kg/d, gaining wt",
+     "familyText": "Taking full feeds by bottle."
+    }
+   ],
+   "ratings": [
+    {
+     "phase": "CICU",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    },
+    {
+     "phase": "Operating room",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "green"
+    },
+    {
+     "phase": "ACCU",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "green"
+    }
+   ],
+   "conferences": [
+    {
+     "date": "2026-10-29",
+     "groupedAs": "Direct Flight"
+    },
+    {
+     "date": "2026-11-05",
+     "groupedAs": "Direct Flight"
+    }
+   ],
+   "compressed": [],
+   "careTeam": [
+    {
+     "role": "ACCU attending",
+     "name": "Dr. S. Varga"
+    },
+    {
+     "role": "Anesthesia",
+     "name": "Dr. I. Petrov"
+    },
+    {
+     "role": "Bedside nurse",
+     "name": "L. Brooks, RN"
+    },
+    {
+     "role": "CICU attending",
+     "name": "Dr. O. Whitfield"
+    },
+    {
+     "role": "Cardiology fellow",
+     "name": "Dr. T. Lindqvist"
+    },
+    {
+     "role": "Cardiothoracic surgeon",
+     "name": "Dr. N. Halvorsen"
+    },
+    {
+     "role": "Nurse practitioner",
+     "name": "J. Patel, NP"
+    },
+    {
+     "role": "Pharmacist",
+     "name": "H. Ito, PharmD"
+    },
+    {
+     "role": "Primary cardiologist",
+     "name": "Dr. D. Castellano"
+    }
+   ]
+  },
+  {
+   "id": "C02",
+   "stayId": "SC02",
+   "label": "Patient C02",
+   "age": "5 weeks",
+   "status": "inpatient",
+   "admit": "2026-10-08T08:00:00",
+   "discharge": null,
+   "admitReason": "Hypoplastic left heart - stage 1 surgery",
+   "directFlight": false,
+   "dayOfStay": 30,
+   "pod": 26,
+   "threshold": "Escalate if sats < 70% or > 90%, or lactate > 2.5",
+   "onTrack": "behind",
+   "diagnoses": [
+    "Hypoplastic left heart syndrome (HLHS)",
+    "s/p Norwood with Sano shunt"
+   ],
+   "procedures": [
+    {
+     "at": "2026-10-11T07:00:00",
+     "procedure": "Norwood procedure with RV-PA (Sano) shunt",
+     "location": "OR"
+    },
+    {
+     "at": "2026-10-11T16:00:00",
+     "procedure": "ECMO cannulation (chest)",
+     "location": "CICU"
+    },
+    {
+     "at": "2026-10-16T09:00:00",
+     "procedure": "ECMO decannulation, chest closure",
+     "location": "OR"
+    }
+   ],
+   "segments": [
+    {
+     "start": "2026-10-08T08:00:00",
+     "end": "2026-10-11T07:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-10-11T07:00:00",
+     "end": "2026-10-11T16:00:00",
+     "location": "OR",
+     "color": "#7B4FA0",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-10-11T16:00:00",
+     "end": "2026-10-16T10:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": "ECMO"
+    },
+    {
+     "start": "2026-10-16T10:00:00",
+     "end": "2026-10-22T09:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": null
+    },
+    {
+     "start": "2026-10-22T09:00:00",
+     "end": "2026-10-24T03:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-10-24T03:00:00",
+     "end": "2026-10-28T10:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": null
+    },
+    {
+     "start": "2026-10-28T10:00:00",
+     "end": "2026-11-03T11:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-11-03T11:00:00",
+     "end": "2026-11-06T07:30:00",
+     "location": "ACCU",
+     "color": "#3B7DD8",
+     "row": "ACCU",
+     "level": 2,
+     "shading": null
+    }
+   ],
+   "pathway": [
+    {
+     "dayOffset": 0.0,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 3.0,
+     "row": "Procedure",
+     "level": 5
+    },
+    {
+     "dayOffset": 3.3,
+     "row": "Intubated",
+     "level": 4
+    },
+    {
+     "dayOffset": 6.0,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 12.0,
+     "row": "ACCU",
+     "level": 2
+    },
+    {
+     "dayOffset": 24.0,
+     "row": "Discharged",
+     "level": 1
+    }
+   ],
+   "events": [
+    {
+     "id": "SC02-E01",
+     "at": "2026-10-11T07:00:00",
+     "day": 4,
+     "pod": 0,
+     "kind": "procedure",
+     "title": "Norwood operation",
+     "shorthand": "Norwood/Sano 5mm, CPB 306/XC 68, open chest",
+     "familyText": "Major heart surgery, first of three stages."
+    },
+    {
+     "id": "SC02-E02",
+     "at": "2026-10-11T16:00:00",
+     "day": 4,
+     "pod": 0,
+     "kind": "setback",
+     "title": "Placed on ECMO",
+     "shorthand": "Low CO, lactate 9.2, unable to wean CPB",
+     "familyText": "Put on a heart-lung machine to let the heart rest."
+    },
+    {
+     "id": "SC02-E03",
+     "at": "2026-10-14T10:00:00",
+     "day": 7,
+     "pod": 3,
+     "kind": "echo",
+     "title": "Echo on ECMO",
+     "shorthand": "Mod RV dysfn, mild TR, Sano flow nl",
+     "familyText": "Heart ultrasound shows the heart is recovering."
+    },
+    {
+     "id": "SC02-E04",
+     "at": "2026-10-16T09:00:00",
+     "day": 9,
+     "pod": 5,
+     "kind": "milestone",
+     "title": "Off ECMO",
+     "shorthand": "Decannulated, chest closed POD5",
+     "familyText": "Off the heart-lung machine."
+    },
+    {
+     "id": "SC02-E05",
+     "at": "2026-10-22T09:00:00",
+     "day": 15,
+     "pod": 11,
+     "kind": "milestone",
+     "title": "Breathing tube removed",
+     "shorthand": "Extubated to HFNC 6L",
+     "familyText": "Breathing tube taken out."
+    },
+    {
+     "id": "SC02-E06",
+     "at": "2026-10-24T03:00:00",
+     "day": 17,
+     "pod": 13,
+     "kind": "setback",
+     "title": "Breathing tube put back in",
+     "shorthand": "Reintubated - resp failure, ?VAP, RSV neg",
+     "familyText": "Needed the breathing tube again for extra support."
+    },
+    {
+     "id": "SC02-E07",
+     "at": "2026-10-28T10:00:00",
+     "day": 21,
+     "pod": 17,
+     "kind": "milestone",
+     "title": "Breathing tube removed again",
+     "shorthand": "Extubated to 2L NC",
+     "familyText": "Breathing tube out again."
+    },
+    {
+     "id": "SC02-E08",
+     "at": "2026-10-30T09:00:00",
+     "day": 23,
+     "pod": 19,
+     "kind": "milestone",
+     "title": "Inotropes stopped",
+     "shorthand": "Epi off, milrinone off",
+     "familyText": "Heart-support medicines stopped."
+    },
+    {
+     "id": "SC02-E09",
+     "at": "2026-11-03T11:00:00",
+     "day": 27,
+     "pod": 23,
+     "kind": "location",
+     "title": "To ACCU",
+     "shorthand": "Transfer to step-down",
+     "familyText": "Moved to the step-down heart unit."
+    }
+   ],
+   "ratings": [
+    {
+     "phase": "CICU",
+     "score": 2,
+     "meaning": "sub-optimal",
+     "dot": "red"
+    },
+    {
+     "phase": "Operating room",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    },
+    {
+     "phase": "ACCU",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    }
+   ],
+   "conferences": [
+    {
+     "date": "2026-10-15",
+     "groupedAs": "Discussed case"
+    },
+    {
+     "date": "2026-10-22",
+     "groupedAs": "Discussed case"
+    },
+    {
+     "date": "2026-10-29",
+     "groupedAs": "Discussed case"
+    },
+    {
+     "date": "2026-11-05",
+     "groupedAs": "Discussed case"
+    }
+   ],
+   "compressed": [
+    {
+     "from": 10,
+     "to": 14
+    },
+    {
+     "from": 18,
+     "to": 20
+    },
+    {
+     "from": 24,
+     "to": 26
+    }
+   ],
+   "careTeam": [
+    {
+     "role": "ACCU attending",
+     "name": "Dr. L. Benoit"
+    },
+    {
+     "role": "Anesthesia",
+     "name": "Dr. I. Petrov"
+    },
+    {
+     "role": "Bedside nurse",
+     "name": "T. Nguyen, RN"
+    },
+    {
+     "role": "CICU attending",
+     "name": "Dr. O. Whitfield"
+    },
+    {
+     "role": "Cardiology fellow",
+     "name": "Dr. T. Lindqvist"
+    },
+    {
+     "role": "Cardiothoracic surgeon",
+     "name": "Dr. G. Achebe"
+    },
+    {
+     "role": "Nurse practitioner",
+     "name": "J. Patel, NP"
+    },
+    {
+     "role": "Perfusion / ECMO specialist",
+     "name": "R. Fischer, CCP"
+    },
+    {
+     "role": "Pharmacist",
+     "name": "H. Ito, PharmD"
+    },
+    {
+     "role": "Primary cardiologist",
+     "name": "Dr. D. Castellano"
+    }
+   ]
+  },
+  {
+   "id": "C03",
+   "stayId": "SC03",
+   "label": "Patient C03",
+   "age": "4 months",
+   "status": "inpatient",
+   "admit": "2026-11-02T06:00:00",
+   "discharge": null,
+   "admitReason": "Ventricular septal defect repair",
+   "directFlight": true,
+   "dayOfStay": 5,
+   "pod": 4,
+   "threshold": "Escalate if junctional rhythm or HR < 90",
+   "onTrack": "yes",
+   "diagnoses": [
+    "Large perimembranous VSD",
+    "Failure to thrive"
+   ],
+   "procedures": [
+    {
+     "at": "2026-11-02T06:00:00",
+     "procedure": "VSD patch closure",
+     "location": "OR"
+    }
+   ],
+   "segments": [
+    {
+     "start": "2026-11-02T06:00:00",
+     "end": "2026-11-02T13:00:00",
+     "location": "OR",
+     "color": "#7B4FA0",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-11-02T13:00:00",
+     "end": "2026-11-02T21:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": null
+    },
+    {
+     "start": "2026-11-02T21:00:00",
+     "end": "2026-11-04T11:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-11-04T11:00:00",
+     "end": "2026-11-06T07:30:00",
+     "location": "ACCU",
+     "color": "#3B7DD8",
+     "row": "ACCU",
+     "level": 2,
+     "shading": null
+    }
+   ],
+   "pathway": [
+    {
+     "dayOffset": 0.0,
+     "row": "Procedure",
+     "level": 5
+    },
+    {
+     "dayOffset": 0.5,
+     "row": "Intubated",
+     "level": 4
+    },
+    {
+     "dayOffset": 0.9,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 2.0,
+     "row": "ACCU",
+     "level": 2
+    },
+    {
+     "dayOffset": 5.0,
+     "row": "Discharged",
+     "level": 1
+    }
+   ],
+   "events": [
+    {
+     "id": "SC03-E01",
+     "at": "2026-11-02T07:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "procedure",
+     "title": "VSD repair",
+     "shorthand": "Patch closure pmVSD, CPB 92/XC 54",
+     "familyText": "Heart surgery to close the hole between pumping chambers."
+    },
+    {
+     "id": "SC03-E02",
+     "at": "2026-11-02T15:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "echo",
+     "title": "Post-op echo",
+     "shorthand": "sm residual LV -> RA shunt (PG=39), nl fxn",
+     "familyText": "Heart ultrasound: the patch is working, tiny leak is expected."
+    },
+    {
+     "id": "SC03-E03",
+     "at": "2026-11-02T21:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "milestone",
+     "title": "Breathing tube removed",
+     "shorthand": "Extubated POD0 to RA",
+     "familyText": "Breathing tube taken out the same day."
+    },
+    {
+     "id": "SC03-E04",
+     "at": "2026-11-03T10:00:00",
+     "day": 2,
+     "pod": 1,
+     "kind": "milestone",
+     "title": "Inotropes stopped",
+     "shorthand": "Milrinone off",
+     "familyText": "Heart-support medicine stopped."
+    },
+    {
+     "id": "SC03-E05",
+     "at": "2026-11-04T09:00:00",
+     "day": 3,
+     "pod": 2,
+     "kind": "milestone",
+     "title": "Chest tube removed",
+     "shorthand": "CT out, CXR clear",
+     "familyText": "Chest drainage tube removed."
+    },
+    {
+     "id": "SC03-E06",
+     "at": "2026-11-04T11:00:00",
+     "day": 3,
+     "pod": 2,
+     "kind": "location",
+     "title": "To ACCU",
+     "shorthand": "Transfer to step-down",
+     "familyText": "Moved to the step-down heart unit."
+    }
+   ],
+   "ratings": [
+    {
+     "phase": "Operating room",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    },
+    {
+     "phase": "CICU",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    },
+    {
+     "phase": "ACCU",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "green"
+    }
+   ],
+   "conferences": [
+    {
+     "date": "2026-11-05",
+     "groupedAs": "Direct Flight"
+    }
+   ],
+   "compressed": [],
+   "careTeam": [
+    {
+     "role": "ACCU attending",
+     "name": "Dr. L. Benoit"
+    },
+    {
+     "role": "Anesthesia",
+     "name": "Dr. C. Moss"
+    },
+    {
+     "role": "Bedside nurse",
+     "name": "L. Brooks, RN"
+    },
+    {
+     "role": "CICU attending",
+     "name": "Dr. F. Ramos"
+    },
+    {
+     "role": "Cardiology fellow",
+     "name": "Dr. T. Lindqvist"
+    },
+    {
+     "role": "Cardiothoracic surgeon",
+     "name": "Dr. G. Achebe"
+    },
+    {
+     "role": "Nurse practitioner",
+     "name": "J. Patel, NP"
+    },
+    {
+     "role": "Pharmacist",
+     "name": "H. Ito, PharmD"
+    },
+    {
+     "role": "Primary cardiologist",
+     "name": "Dr. D. Castellano"
+    }
+   ]
+  },
+  {
+   "id": "C04",
+   "stayId": "SC04",
+   "label": "Patient C04",
+   "age": "6 years",
+   "status": "discharged",
+   "admit": "2026-10-28T07:00:00",
+   "discharge": "2026-10-29T14:00:00",
+   "admitReason": "Coarctation of the aorta - catheter treatment",
+   "directFlight": true,
+   "dayOfStay": null,
+   "pod": null,
+   "threshold": null,
+   "onTrack": null,
+   "diagnoses": [
+    "Recurrent coarctation of the aorta"
+   ],
+   "procedures": [
+    {
+     "at": "2026-10-28T07:00:00",
+     "procedure": "Balloon angioplasty + stent of aortic arch",
+     "location": "Cath lab"
+    }
+   ],
+   "segments": [
+    {
+     "start": "2026-10-28T07:00:00",
+     "end": "2026-10-28T11:00:00",
+     "location": "Cath lab",
+     "color": "#D9608F",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-10-28T11:00:00",
+     "end": "2026-10-29T14:00:00",
+     "location": "ACCU",
+     "color": "#3B7DD8",
+     "row": "ACCU",
+     "level": 2,
+     "shading": null
+    },
+    {
+     "start": "2026-10-29T14:00:00",
+     "end": "2026-10-29T14:00:00",
+     "location": "Home",
+     "color": "#3E9B5F",
+     "row": "Discharged",
+     "level": 1,
+     "shading": null
+    }
+   ],
+   "pathway": [
+    {
+     "dayOffset": 0.0,
+     "row": "Procedure",
+     "level": 5
+    },
+    {
+     "dayOffset": 0.2,
+     "row": "ACCU",
+     "level": 2
+    },
+    {
+     "dayOffset": 1.0,
+     "row": "Discharged",
+     "level": 1
+    }
+   ],
+   "events": [
+    {
+     "id": "SC04-E01",
+     "at": "2026-10-28T07:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "procedure",
+     "title": "Cardiac catheterization",
+     "shorthand": "CoA stent 10x26, gradient 32 -> 4 mmHg",
+     "familyText": "Opened a narrow part of the main artery with a small tube (stent)."
+    },
+    {
+     "id": "SC04-E02",
+     "at": "2026-10-28T11:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "location",
+     "title": "To ACCU",
+     "shorthand": "Post-cath, groin site ok",
+     "familyText": "Moved to the step-down heart unit to rest."
+    },
+    {
+     "id": "SC04-E03",
+     "at": "2026-10-29T14:00:00",
+     "day": 2,
+     "pod": 1,
+     "kind": "location",
+     "title": "Discharged home",
+     "shorthand": "BP 104/62 arm/leg equal",
+     "familyText": "Went home the next day."
+    }
+   ],
+   "ratings": [
+    {
+     "phase": "Cath lab",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    },
+    {
+     "phase": "ACCU",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "green"
+    }
+   ],
+   "conferences": [
+    {
+     "date": "2026-10-29",
+     "groupedAs": "Direct Flight"
+    },
+    {
+     "date": "2026-11-05",
+     "groupedAs": "Direct Flight"
+    }
+   ],
+   "compressed": [],
+   "careTeam": [
+    {
+     "role": "ACCU attending",
+     "name": "Dr. L. Benoit"
+    },
+    {
+     "role": "Anesthesia",
+     "name": "Dr. C. Moss"
+    },
+    {
+     "role": "Bedside nurse",
+     "name": "S. Ward, RN"
+    },
+    {
+     "role": "CICU attending",
+     "name": "Dr. F. Ramos"
+    },
+    {
+     "role": "Cardiology fellow",
+     "name": "Dr. T. Lindqvist"
+    },
+    {
+     "role": "Interventional cardiologist",
+     "name": "Dr. Y. Tanaka"
+    },
+    {
+     "role": "Nurse practitioner",
+     "name": "J. Patel, NP"
+    },
+    {
+     "role": "Pharmacist",
+     "name": "H. Ito, PharmD"
+    },
+    {
+     "role": "Primary cardiologist",
+     "name": "Dr. E. Nwosu"
+    }
+   ]
+  },
+  {
+   "id": "C05",
+   "stayId": "SC05",
+   "label": "Patient C05",
+   "age": "2 years",
+   "status": "inpatient",
+   "admit": "2026-10-29T06:00:00",
+   "discharge": null,
+   "admitReason": "Single ventricle - stage 2 (Glenn) surgery",
+   "directFlight": false,
+   "dayOfStay": 9,
+   "pod": 8,
+   "threshold": "Escalate if CT output > 20 mL/kg/d or sats < 75%",
+   "onTrack": "behind",
+   "diagnoses": [
+    "Tricuspid atresia",
+    "s/p bidirectional Glenn",
+    "Chylothorax"
+   ],
+   "procedures": [
+    {
+     "at": "2026-10-29T06:00:00",
+     "procedure": "Bidirectional Glenn",
+     "location": "OR"
+    }
+   ],
+   "segments": [
+    {
+     "start": "2026-10-29T06:00:00",
+     "end": "2026-10-29T13:00:00",
+     "location": "OR",
+     "color": "#7B4FA0",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-10-29T13:00:00",
+     "end": "2026-10-30T09:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": null
+    },
+    {
+     "start": "2026-10-30T09:00:00",
+     "end": "2026-11-02T12:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-11-02T12:00:00",
+     "end": "2026-11-06T07:30:00",
+     "location": "ACCU",
+     "color": "#3B7DD8",
+     "row": "ACCU",
+     "level": 2,
+     "shading": null
+    }
+   ],
+   "pathway": [
+    {
+     "dayOffset": 0.0,
+     "row": "Procedure",
+     "level": 5
+    },
+    {
+     "dayOffset": 0.5,
+     "row": "Intubated",
+     "level": 4
+    },
+    {
+     "dayOffset": 1.0,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 3.0,
+     "row": "ACCU",
+     "level": 2
+    },
+    {
+     "dayOffset": 7.0,
+     "row": "Discharged",
+     "level": 1
+    }
+   ],
+   "events": [
+    {
+     "id": "SC05-E01",
+     "at": "2026-10-29T06:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "procedure",
+     "title": "Glenn operation",
+     "shorthand": "BDG, CPB 98, no XC",
+     "familyText": "Second-stage heart surgery to reroute blood flow."
+    },
+    {
+     "id": "SC05-E02",
+     "at": "2026-10-30T09:00:00",
+     "day": 2,
+     "pod": 1,
+     "kind": "milestone",
+     "title": "Breathing tube removed",
+     "shorthand": "Extubated to 1L NC, sats 82%",
+     "familyText": "Breathing tube taken out."
+    },
+    {
+     "id": "SC05-E03",
+     "at": "2026-10-31T10:00:00",
+     "day": 3,
+     "pod": 2,
+     "kind": "milestone",
+     "title": "Inotropes stopped",
+     "shorthand": "Milrinone off",
+     "familyText": "Heart-support medicine stopped."
+    },
+    {
+     "id": "SC05-E04",
+     "at": "2026-11-01T08:00:00",
+     "day": 4,
+     "pod": 3,
+     "kind": "setback",
+     "title": "Chest tube drainage high (chylothorax)",
+     "shorthand": "CT out 25 mL/kg/d milky, TG 340",
+     "familyText": "Fluid from the chest tube is a special type that needs a diet change."
+    },
+    {
+     "id": "SC05-E05",
+     "at": "2026-11-01T12:00:00",
+     "day": 4,
+     "pod": 3,
+     "kind": "decision",
+     "title": "Started low-fat (MCT) diet",
+     "shorthand": "Enfaport, octreotide if no improvement 72h",
+     "familyText": "Switched to a special low-fat formula."
+    },
+    {
+     "id": "SC05-E06",
+     "at": "2026-11-02T12:00:00",
+     "day": 5,
+     "pod": 4,
+     "kind": "location",
+     "title": "To ACCU",
+     "shorthand": "Transfer with CT in place",
+     "familyText": "Moved to the step-down heart unit with the chest tube still in."
+    },
+    {
+     "id": "SC05-E07",
+     "at": "2026-11-05T06:00:00",
+     "day": 8,
+     "pod": 7,
+     "kind": "result",
+     "title": "Chest tube output falling",
+     "shorthand": "CT 8 mL/kg/d",
+     "familyText": "Chest tube drainage is going down."
+    }
+   ],
+   "ratings": [
+    {
+     "phase": "Operating room",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    },
+    {
+     "phase": "CICU",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "yellow"
+    },
+    {
+     "phase": "ACCU",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    }
+   ],
+   "conferences": [
+    {
+     "date": "2026-11-05",
+     "groupedAs": "Discussed case"
+    }
+   ],
+   "compressed": [],
+   "careTeam": [
+    {
+     "role": "ACCU attending",
+     "name": "Dr. S. Varga"
+    },
+    {
+     "role": "Anesthesia",
+     "name": "Dr. C. Moss"
+    },
+    {
+     "role": "Bedside nurse",
+     "name": "S. Ward, RN"
+    },
+    {
+     "role": "CICU attending",
+     "name": "Dr. F. Ramos"
+    },
+    {
+     "role": "Cardiology fellow",
+     "name": "Dr. A. Haddad"
+    },
+    {
+     "role": "Cardiothoracic surgeon",
+     "name": "Dr. G. Achebe"
+    },
+    {
+     "role": "Nurse practitioner",
+     "name": "J. Patel, NP"
+    },
+    {
+     "role": "Pharmacist",
+     "name": "H. Ito, PharmD"
+    },
+    {
+     "role": "Primary cardiologist",
+     "name": "Dr. E. Nwosu"
+    }
+   ]
+  },
+  {
+   "id": "C06",
+   "stayId": "SC06",
+   "label": "Patient C06",
+   "age": "16 years",
+   "status": "inpatient",
+   "admit": "2026-11-03T14:00:00",
+   "discharge": null,
+   "admitReason": "Heart transplant rejection - missed doses",
+   "directFlight": false,
+   "dayOfStay": 4,
+   "pod": 2,
+   "threshold": "Escalate if EF < 35%, HR > 150, or new arrhythmia",
+   "onTrack": "yes",
+   "diagnoses": [
+    "Acute cellular rejection (ISHLT 2R)",
+    "Heart transplant 3 years ago (dilated cardiomyopathy)"
+   ],
+   "procedures": [
+    {
+     "at": "2026-11-04T08:00:00",
+     "procedure": "Right heart cath + endomyocardial biopsy",
+     "location": "Cath lab"
+    }
+   ],
+   "segments": [
+    {
+     "start": "2026-11-03T14:00:00",
+     "end": "2026-11-04T08:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-11-04T08:00:00",
+     "end": "2026-11-04T11:00:00",
+     "location": "Cath lab",
+     "color": "#D9608F",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-11-04T11:00:00",
+     "end": "2026-11-05T15:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-11-05T15:00:00",
+     "end": "2026-11-06T07:30:00",
+     "location": "ACCU",
+     "color": "#3B7DD8",
+     "row": "ACCU",
+     "level": 2,
+     "shading": null
+    }
+   ],
+   "pathway": [
+    {
+     "dayOffset": 0.0,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 1.0,
+     "row": "Procedure",
+     "level": 5
+    },
+    {
+     "dayOffset": 1.1,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 2.0,
+     "row": "ACCU",
+     "level": 2
+    },
+    {
+     "dayOffset": 6.0,
+     "row": "Discharged",
+     "level": 1
+    }
+   ],
+   "events": [
+    {
+     "id": "SC06-E01",
+     "at": "2026-11-03T14:00:00",
+     "day": 1,
+     "pod": null,
+     "kind": "admit",
+     "title": "Admitted to CICU",
+     "shorthand": "Tachycardia 140, BNP 1,450, tac trough 1.9 (goal 6-8)",
+     "familyText": "Came in with a fast heartbeat. The anti-rejection medicine level was low."
+    },
+    {
+     "id": "SC06-E02",
+     "at": "2026-11-03T18:00:00",
+     "day": 1,
+     "pod": null,
+     "kind": "echo",
+     "title": "Echo",
+     "shorthand": "LVEF 42% (prior 60%), new pericardial effusion sm",
+     "familyText": "Heart ultrasound shows the heart is pumping weaker than usual."
+    },
+    {
+     "id": "SC06-E03",
+     "at": "2026-11-04T08:00:00",
+     "day": 2,
+     "pod": 0,
+     "kind": "procedure",
+     "title": "Heart biopsy (cath)",
+     "shorthand": "EMBx x5, RA 9, PCWP 16, CI 2.6",
+     "familyText": "Took tiny samples of the heart through a vein."
+    },
+    {
+     "id": "SC06-E04",
+     "at": "2026-11-04T16:00:00",
+     "day": 2,
+     "pod": 0,
+     "kind": "therapy",
+     "title": "IV steroid pulse + milrinone",
+     "shorthand": "Methylpred 10 mg/kg x3, milrinone 0.5",
+     "familyText": "Strong IV medicine to calm the immune reaction, plus heart support."
+    },
+    {
+     "id": "SC06-E05",
+     "at": "2026-11-05T10:00:00",
+     "day": 3,
+     "pod": 1,
+     "kind": "result",
+     "title": "Biopsy result: rejection",
+     "shorthand": "ACR 2R, AMR 0",
+     "familyText": "The immune system is reacting to the heart. This is treatable."
+    },
+    {
+     "id": "SC06-E06",
+     "at": "2026-11-05T15:00:00",
+     "day": 3,
+     "pod": 1,
+     "kind": "consult",
+     "title": "Psychology consult",
+     "shorthand": "Missed PM doses since school started; no one at home at 8pm",
+     "familyText": "Met with the team psychologist about routines."
+    }
+   ],
+   "ratings": [
+    {
+     "phase": "CICU",
+     "score": 3,
+     "meaning": "good",
+     "dot": "yellow"
+    },
+    {
+     "phase": "Cath lab",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "green"
+    },
+    {
+     "phase": "ACCU",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "green"
+    }
+   ],
+   "conferences": [
+    {
+     "date": "2026-11-05",
+     "groupedAs": "Discussed case"
+    }
+   ],
+   "compressed": [],
+   "careTeam": [
+    {
+     "role": "ACCU attending",
+     "name": "Dr. L. Benoit"
+    },
+    {
+     "role": "Anesthesia",
+     "name": "Dr. C. Moss"
+    },
+    {
+     "role": "Bedside nurse",
+     "name": "S. Ward, RN"
+    },
+    {
+     "role": "CICU attending",
+     "name": "Dr. O. Whitfield"
+    },
+    {
+     "role": "Cardiology fellow",
+     "name": "Dr. T. Lindqvist"
+    },
+    {
+     "role": "Heart transplant coordinator",
+     "name": "M. Sloan, RN"
+    },
+    {
+     "role": "Interventional cardiologist",
+     "name": "Dr. Y. Tanaka"
+    },
+    {
+     "role": "Nurse practitioner",
+     "name": "K. Meyers, NP"
+    },
+    {
+     "role": "Pharmacist",
+     "name": "H. Ito, PharmD"
+    },
+    {
+     "role": "Primary cardiologist",
+     "name": "Dr. D. Castellano"
+    },
+    {
+     "role": "Psychologist",
+     "name": "Dr. V. Moreau"
+    },
+    {
+     "role": "Social worker",
+     "name": "P. Greene, MSW"
+    }
+   ]
+  },
+  {
+   "id": "C07",
+   "stayId": "SC07",
+   "label": "Patient C07",
+   "age": "10 years",
+   "status": "discharged",
+   "admit": "2026-10-14T06:00:00",
+   "discharge": "2026-10-26T13:00:00",
+   "admitReason": "Single ventricle - stage 3 (Fontan) surgery",
+   "directFlight": false,
+   "dayOfStay": null,
+   "pod": null,
+   "threshold": null,
+   "onTrack": null,
+   "diagnoses": [
+    "Double inlet left ventricle",
+    "s/p extracardiac Fontan"
+   ],
+   "procedures": [
+    {
+     "at": "2026-10-14T06:00:00",
+     "procedure": "Extracardiac Fontan with fenestration",
+     "location": "OR"
+    },
+    {
+     "at": "2026-10-15T02:00:00",
+     "procedure": "Re-exploration for bleeding",
+     "location": "OR"
+    }
+   ],
+   "segments": [
+    {
+     "start": "2026-10-14T06:00:00",
+     "end": "2026-10-14T14:00:00",
+     "location": "OR",
+     "color": "#7B4FA0",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-10-14T14:00:00",
+     "end": "2026-10-14T20:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": null
+    },
+    {
+     "start": "2026-10-14T20:00:00",
+     "end": "2026-10-15T02:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-10-15T02:00:00",
+     "end": "2026-10-15T06:00:00",
+     "location": "OR",
+     "color": "#7B4FA0",
+     "row": "Procedure",
+     "level": 5,
+     "shading": null
+    },
+    {
+     "start": "2026-10-15T06:00:00",
+     "end": "2026-10-16T10:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Intubated",
+     "level": 4,
+     "shading": null
+    },
+    {
+     "start": "2026-10-16T10:00:00",
+     "end": "2026-10-18T09:00:00",
+     "location": "CICU",
+     "color": "#E8833A",
+     "row": "Extubated",
+     "level": 3,
+     "shading": null
+    },
+    {
+     "start": "2026-10-18T09:00:00",
+     "end": "2026-10-26T13:00:00",
+     "location": "ACCU",
+     "color": "#3B7DD8",
+     "row": "ACCU",
+     "level": 2,
+     "shading": null
+    },
+    {
+     "start": "2026-10-26T13:00:00",
+     "end": "2026-10-26T13:00:00",
+     "location": "Home",
+     "color": "#3E9B5F",
+     "row": "Discharged",
+     "level": 1,
+     "shading": null
+    }
+   ],
+   "pathway": [
+    {
+     "dayOffset": 0.0,
+     "row": "Procedure",
+     "level": 5
+    },
+    {
+     "dayOffset": 0.5,
+     "row": "Intubated",
+     "level": 4
+    },
+    {
+     "dayOffset": 0.8,
+     "row": "Extubated",
+     "level": 3
+    },
+    {
+     "dayOffset": 3.0,
+     "row": "ACCU",
+     "level": 2
+    },
+    {
+     "dayOffset": 9.0,
+     "row": "Discharged",
+     "level": 1
+    }
+   ],
+   "events": [
+    {
+     "id": "SC07-E01",
+     "at": "2026-10-14T06:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "procedure",
+     "title": "Fontan operation",
+     "shorthand": "ECF 20mm, 4mm fen, CPB 142",
+     "familyText": "Third-stage heart surgery."
+    },
+    {
+     "id": "SC07-E02",
+     "at": "2026-10-14T20:00:00",
+     "day": 1,
+     "pod": 0,
+     "kind": "milestone",
+     "title": "Breathing tube removed",
+     "shorthand": "Extubated POD0",
+     "familyText": "Breathing tube taken out."
+    },
+    {
+     "id": "SC07-E03",
+     "at": "2026-10-15T02:00:00",
+     "day": 2,
+     "pod": 1,
+     "kind": "setback",
+     "title": "Unplanned return to OR (bleeding)",
+     "shorthand": "CT 12 mL/kg/h x2h, re-explored, suture line bleed",
+     "familyText": "Went back to surgery to stop bleeding."
+    },
+    {
+     "id": "SC07-E04",
+     "at": "2026-10-16T10:00:00",
+     "day": 3,
+     "pod": 2,
+     "kind": "milestone",
+     "title": "Breathing tube removed",
+     "shorthand": "Extubated",
+     "familyText": "Breathing tube taken out again."
+    },
+    {
+     "id": "SC07-E05",
+     "at": "2026-10-17T10:00:00",
+     "day": 4,
+     "pod": 3,
+     "kind": "milestone",
+     "title": "Inotropes stopped",
+     "shorthand": "Milrinone off",
+     "familyText": "Heart-support medicine stopped."
+    },
+    {
+     "id": "SC07-E06",
+     "at": "2026-10-23T09:00:00",
+     "day": 10,
+     "pod": 9,
+     "kind": "milestone",
+     "title": "Chest tubes removed",
+     "shorthand": "Pleural drainage resolved",
+     "familyText": "Chest drainage tubes removed."
+    },
+    {
+     "id": "SC07-E07",
+     "at": "2026-10-26T13:00:00",
+     "day": 13,
+     "pod": 12,
+     "kind": "location",
+     "title": "Discharged home",
+     "shorthand": "Sats 90%, on aspirin + enalapril",
+     "familyText": "Went home."
+    }
+   ],
+   "ratings": [
+    {
+     "phase": "Operating room",
+     "score": 2,
+     "meaning": "sub-optimal",
+     "dot": "red"
+    },
+    {
+     "phase": "CICU",
+     "score": 4,
+     "meaning": "outstanding",
+     "dot": "green"
+    },
+    {
+     "phase": "ACCU",
+     "score": 3,
+     "meaning": "good",
+     "dot": "green"
+    }
+   ],
+   "conferences": [
+    {
+     "date": "2026-10-15",
+     "groupedAs": "Discussed case"
+    },
+    {
+     "date": "2026-10-22",
+     "groupedAs": "Discussed case"
+    },
+    {
+     "date": "2026-10-29",
+     "groupedAs": "Discussed case"
+    }
+   ],
+   "compressed": [
+    {
+     "from": 6,
+     "to": 9
+    }
+   ],
+   "careTeam": [
+    {
+     "role": "ACCU attending",
+     "name": "Dr. S. Varga"
+    },
+    {
+     "role": "Anesthesia",
+     "name": "Dr. C. Moss"
+    },
+    {
+     "role": "Bedside nurse",
+     "name": "L. Brooks, RN"
+    },
+    {
+     "role": "CICU attending",
+     "name": "Dr. F. Ramos"
+    },
+    {
+     "role": "Cardiology fellow",
+     "name": "Dr. T. Lindqvist"
+    },
+    {
+     "role": "Cardiothoracic surgeon",
+     "name": "Dr. G. Achebe"
+    },
+    {
+     "role": "Nurse practitioner",
+     "name": "K. Meyers, NP"
+    },
+    {
+     "role": "Pharmacist",
+     "name": "H. Ito, PharmD"
+    },
+    {
+     "role": "Primary cardiologist",
+     "name": "Dr. D. Castellano"
+    }
+   ]
+  }
  ]
 };

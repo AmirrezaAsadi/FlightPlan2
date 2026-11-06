@@ -8,12 +8,14 @@ A guiding journey for one hospital stay, admission to home. This is **not an EHR
 
 ## The demo
 
-One app, two views of the same stay, in a calm dark "sci-fi" style:
+One app, four views of the same data, in a calm dark "sci-fi" style:
 
 | View | Who | What it shows |
 |---|---|---|
 | **Family room screen** | Family, in the room | **The journey map is the main view**: a glowing path from surgery to home with "you are here", plus the day of the stay. Around it are widgets for going home (estimate, why it moved, checklist), today's plan, your care team (nurse and doctor by name) and recent updates. On the right is **Skye**, a smiling hologram guide you can talk to. |
 | **Care team** | Rounding team, on a tablet | Bedside snapshot, what changed, the stay timeline vs. pathway, the discharge estimate with its inputs, a review queue for family updates, items captured on rounds, and questions the family saved. A **Family present** switch hides sensitive details. |
+| **Handoff** | Sending and receiving clinician (shift change) | The **Handoff Flight Plan** (Widget 4). FlightPlan *suggests* a highlight reel (setbacks, procedures, medicine changes, new results, what changed, open loops, questions the family saved with Skye). The sender removes or adds items from the timeline. Safety-critical items are always pinned, and missing ones (allergies, code status) are flagged to confirm out loud. The sender must say what the family was told. The receiver **replays** the reel and **acknowledges** each item. **Hard stop:** the handoff can't close until every item is checked. |
+| **Conference** | Weekly FlightPlan conference (Performance Rounds), big screen | All 7 stays. An agenda with **Direct Flights grouped**, and the **Pathway Variance Plot** (actual vs. dashed pathway, ECMO shading, compressed quiet stretches, numbered markers that open callouts on tap so nothing overlaps). The **Outcome & Ratings Heatmap** (scores 1–4 and outcome dots, review only, never in family views). **Decisions & actions** are captured with an owner and a linked event. **After the meeting**, a family summary is drafted that needs clinician approval. |
 
 Three patients from the dataset: **Room 4 · Leo** (smooth stay), **Room 7 · Sam** (behind pathway, the date moved), **Room 12 · Ava** (teen, no date stated yet). First names are made up for the demo.
 

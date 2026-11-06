@@ -17,7 +17,7 @@
   window.FP_SETTINGS = { get: () => settings };
 
   const STATE_DEFAULT = { patientId: PATIENT_IDS[0], view: "family", familyPresent: false, showIds: false,
-    drafts: {}, approved: {}, rejected: {}, confirmed: {}, questions: {}, chats: {}, selectedEvent: null };
+    drafts: {}, approved: {}, rejected: {}, confirmed: {}, questions: {}, chats: {}, selectedEvent: null, handoff: {}, conf: { stay: null, event: null, decisions: {}, summaries: {} } };
   let state = load("fp-state", STATE_DEFAULT);
   if (!D.patients[state.patientId]) state.patientId = PATIENT_IDS[0];
   function commit(rerender = true) { save("fp-state", state); if (rerender) render(); }
@@ -572,12 +572,14 @@
     const p = D.patients[state.patientId];
     $("#bar").innerHTML = `
       <div class="brand">${icon("plane")}<b>FlightPlan</b><span>Journey · demo</span></div>
-      <div class="rooms" role="tablist" aria-label="Demo: choose a room">
+      <div class="rooms" role="tablist" aria-label="Demo: choose a room" ${state.view === "conference" ? "hidden" : ""}>
         ${PATIENT_IDS.map(id => { const q = D.patients[id]; return `<button role="tab" aria-selected="${id === p.id}" data-act="patient" data-id="${id}">${esc(q.room)} · ${esc(settings.showName ? q.firstName : q.displayLabel)}</button>`; }).join("")}
       </div>
       <div class="views" role="tablist" aria-label="Choose view">
         <button role="tab" aria-selected="${state.view === "family"}" data-act="view" data-v="family">${icon("home")} Family room screen</button>
         <button role="tab" aria-selected="${state.view === "team"}" data-act="view" data-v="team">${icon("clipboard")} Care team</button>
+        <button role="tab" aria-selected="${state.view === "handoff"}" data-act="view" data-v="handoff">${icon("people")} Handoff</button>
+        <button role="tab" aria-selected="${state.view === "conference"}" data-act="view" data-v="conference">${icon("calendar")} Conference</button>
       </div>
       <button class="icon-btn" data-act="settings" aria-label="Settings">${icon("gear")}</button>`;
   }
@@ -586,7 +588,8 @@
     const p = D.patients[state.patientId];
     document.body.dataset.view = state.view;
     renderBar();
-    $("#view").innerHTML = state.view === "family" ? renderFamily(p) : renderTeam(p);
+    const extra = (window.FP_VIEWS || {})[state.view];
+    $("#view").innerHTML = state.view === "family" ? renderFamily(p) : state.view === "team" ? renderTeam(p) : extra ? extra(p) : renderFamily(p);
     if (state.view === "family") { skye.fresh = false; window.SkyeFace.attach($("#holo")); window.SkyeFace.setState(skye.phase); }
   }
 
@@ -702,7 +705,7 @@
       }
       case "reset": {
         e.preventDefault();
-        state = Object.assign({}, STATE_DEFAULT, { patientId: state.patientId, view: state.view, drafts: {}, approved: {}, rejected: {}, confirmed: {}, questions: {}, chats: {} });
+        state = Object.assign({}, STATE_DEFAULT, { patientId: state.patientId, view: state.view, drafts: {}, approved: {}, rejected: {}, confirmed: {}, questions: {}, chats: {}, handoff: {}, conf: { stay: null, event: null, decisions: {}, summaries: {} } });
         commit(); $("#settings").close(); toast("Demo reset."); return;
       }
     }
@@ -731,5 +734,11 @@
     if ($("#settings").returnValue === "save") { readSettingsForm(); render(); }
   });
 
+  // Shared helpers for the handoff and conference views (handoff.js, conference.js).
+  window.FP_APP = {
+    D, NOW, DAY, LOC, esc, icon: window.icon, fmtDate, fmtShort, fmtTime, relTime, cap, midnight, toast, commit, render,
+    childName, personalize, careTeamMember, homeEstimate,
+    get state() { return state; }
+  };
   render();
 })();
