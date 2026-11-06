@@ -218,6 +218,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .team-head { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
 .team-head h1 { font-size: 1.5rem; margin: 0; font-weight: 300; }
 .head-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.team-glance { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; margin-bottom: 16px; }
+.team-glance > div { min-width: 0; padding: 12px 14px; border-radius: 14px; background: var(--glass); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .55), 0 6px 18px rgba(var(--ink-rgb), .04); }
+.team-glance .k { display: block; margin-bottom: 6px; }
+.team-glance strong, .team-glance small { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.team-glance strong { font-size: 1rem; font-weight: 500; }
+.team-glance small { margin-top: 3px; color: var(--muted); font-size: .76rem; }
+.team-glance .good { color: var(--done); }
+.team-glance .warn { color: var(--warm); }
 .switch { display: inline-flex; align-items: center; gap: 10px; cursor: pointer; border: 1px solid var(--line); padding: 6px 14px 6px 8px; border-radius: 999px; font-size: .9rem; }
 .switch input { position: absolute; opacity: 0; }
 .track { width: 42px; height: 24px; background: rgba(var(--ink-rgb), .12); border-radius: 999px; position: relative; transition: background .3s; }
@@ -327,6 +335,7 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
   .brand span { display: none; }
   .rooms, .views { overflow-x: auto; max-width: 100%; }
   .team-grid { grid-template-columns: minmax(0, 1fr); }
+  .team-glance { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team.fp .stack { grid-template-columns: 1fr; }
   .snap-cols { grid-template-columns: 1fr; gap: 12px; }
   .team { padding: 16px; }

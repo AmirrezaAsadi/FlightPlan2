@@ -324,6 +324,8 @@
     const ch = est && est.changes[0];
     const qs = state.questions[p.id] || [];
     const openActions = p.actions.filter(a => !fp || a.familyVisible);
+    const openLoops = openActions.filter(a => a.status === "open").length + qs.filter(q => !q.answered).length;
+    const currentLocation = LOC[p.location] || { label: p.location };
 
     const ids = fp ? `<span class="chip">${icon("lock")} Identifiers hidden</span>` :
       state.showIds ? `<button class="chip" data-act="toggle-ids">${icon("lock")} MRN ${esc(p.mrn)} · DOB ${esc(p.dob)} · ${esc(p.weightKg)} kg — hide</button>`
@@ -372,6 +374,15 @@
           <label class="switch"><input type="checkbox" data-act="family-present" ${fp ? "checked" : ""}><span class="track"><span class="knob"></span></span><span>Family present</span></label>
         </div>
       </header>
+
+      <section class="team-glance" aria-label="15-second patient summary">
+        <div><span class="k">Where now</span><strong>${esc(currentLocation.label)}</strong><small>${esc(p.row)}</small></div>
+        <div><span class="k">Stay</span><strong>Day ${esc(p.dayOfStay)}</strong><small>${p.pod != null ? "POD " + esc(p.pod) : "No procedure"}</small></div>
+        <div><span class="k">Compared with plan</span><strong class="${behind ? "warn" : "good"}">${behind ? "Behind pathway" : "On track"}</strong><small>${behind ? "Review course correction" : "Matches expected course"}</small></div>
+        <div><span class="k">Home expected</span><strong>${est ? esc(dateRangeText(est.dates)) : "Not stated"}</strong><small>${est && ch ? "Changed · review reason" : est ? "System estimate" : "Awaiting team estimate"}</small></div>
+        <div><span class="k">Flags</span><strong class="${sn.threshold || p.crosscheck ? "warn" : "good"}">${sn.threshold || p.crosscheck ? "Review" : "None"}</strong><small>${sn.threshold ? "Course correction" : p.crosscheck ? "CrossCheck" : "No active flags"}</small></div>
+        <div><span class="k">Open loops</span><strong class="${openLoops ? "warn" : "good"}">${openLoops}</strong><small>${openLoops ? "Action or family note" + (openLoops === 1 ? "" : "s") : "Nothing outstanding"}</small></div>
+      </section>
 
       <div class="team-grid">
         <section class="card snap" aria-label="Bedside snapshot">
