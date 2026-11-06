@@ -1,0 +1,15 @@
+stay_id,rank,diagnosis
+SC01,1,d-Transposition of the great arteries (d-TGA)
+SC01,2,Atrial septal defect
+SC02,1,Hypoplastic left heart syndrome (HLHS)
+SC02,2,s/p Norwood with Sano shunt
+SC03,1,Large perimembranous VSD
+SC03,2,Failure to thrive
+SC04,1,Recurrent coarctation of the aorta
+SC05,1,Tricuspid atresia
+SC05,2,s/p bidirectional Glenn
+SC05,3,Chylothorax
+SC06,1,Acute cellular rejection (ISHLT 2R)
+SC06,2,Heart transplant 3 years ago (dilated cardiomyopathy)
+SC07,1,Double inlet left ventricle
+SC07,2,s/p extracardiac Fontan

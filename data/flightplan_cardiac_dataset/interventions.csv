@@ -1,0 +1,11 @@
+stay_id,datetime,procedure,location,weight_kg,team
+SC01,2026-10-28T07:00:00,Arterial switch operation + ASD closure,OR,3.4,Cardiothoracic surgeon: Dr. G. Achebe | Anesthesia: Dr. C. Moss
+SC02,2026-10-11T07:00:00,Norwood procedure with RV-PA (Sano) shunt,OR,3.1,Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. I. Petrov
+SC02,2026-10-11T16:00:00,ECMO cannulation (chest),CICU,3.1,"Cardiothoracic surgeon: Dr. N. Halvorsen | Perfusion / ECMO specialist: R. Fischer, CCP"
+SC02,2026-10-16T09:00:00,"ECMO decannulation, chest closure",OR,3.1,Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. I. Petrov
+SC03,2026-11-02T06:00:00,VSD patch closure,OR,5.6,Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. C. Moss
+SC04,2026-10-28T07:00:00,Balloon angioplasty + stent of aortic arch,Cath lab,21.0,Interventional cardiologist: Dr. Y. Tanaka | Anesthesia: Dr. C. Moss
+SC05,2026-10-29T06:00:00,Bidirectional Glenn,OR,11.8,Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. I. Petrov
+SC06,2026-11-04T08:00:00,Right heart cath + endomyocardial biopsy,Cath lab,54.0,Interventional cardiologist: Dr. Y. Tanaka | Anesthesia: Dr. C. Moss
+SC07,2026-10-14T06:00:00,Extracardiac Fontan with fenestration,OR,29.5,Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. C. Moss
+SC07,2026-10-15T02:00:00,Re-exploration for bleeding,OR,29.5,Cardiothoracic surgeon: Dr. N. Halvorsen | Anesthesia: Dr. I. Petrov

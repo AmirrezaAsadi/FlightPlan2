@@ -1,0 +1,13 @@
+action_id,stay_id,captured_at,type,text,owner_role,due,status,family_visible
+A001,SC01,2026-11-06T07:30:00,task,Car-seat test before discharge,Bedside nurse,2026-11-06T15:30:00,open,no
+A002,SC01,2026-11-06T07:30:00,family_update,Reviewed discharge timeline with parents,Nurse practitioner,,done,yes
+A003,SC02,2026-11-06T07:30:00,decision,Place G-tube before discharge,CICU attending,,recorded,no
+A004,SC02,2026-11-06T07:30:00,consult,Surgery consult for G-tube timing,Cardiothoracic surgeon,2026-11-07T07:30:00,open,no
+A005,SC02,2026-11-06T07:30:00,follow_up,Interstage clinic visit within 1 week of discharge,Primary cardiologist,2026-11-16T07:30:00,open,yes
+A006,SC03,2026-11-06T07:30:00,task,Pre-discharge echo,Cardiology fellow,2026-11-06T13:30:00,open,no
+A007,SC05,2026-11-06T07:30:00,contingency,"If CT output > 10 mL/kg tonight -> start octreotide, call fellow",Cardiology fellow,,open,no
+A008,SC05,2026-11-06T07:30:00,question,Can chest tube come out tomorrow?,Cardiothoracic surgeon,2026-11-07T07:30:00,open,no
+A009,SC06,2026-11-06T07:30:00,decision,Switch to once-daily extended-release tacrolimus,Primary cardiologist,,recorded,no
+A010,SC06,2026-11-06T07:30:00,task,Set up smart pill-bottle reminders + school nurse letter,Heart transplant coordinator,2026-11-07T13:30:00,open,no
+A011,SC06,2026-11-06T07:30:00,follow_up,Repeat tacrolimus level 5 days after switch,Nurse practitioner,2026-11-12T07:30:00,open,yes
+A012,SC06,2026-11-06T07:30:00,family_update,Explained biopsy result in plain words; asked about returning to dance,Cardiology fellow,,done,yes

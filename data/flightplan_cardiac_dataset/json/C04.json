@@ -1,0 +1,318 @@
+{
+ "patient": {
+  "patient_id": "C04",
+  "display_label": "Patient C04",
+  "age": "6 years",
+  "age_group": "Child",
+  "sex": "M",
+  "current_weight_kg": 21.0,
+  "crosscheck_flag": "no",
+  "mrn": "HIDDEN-DEMO",
+  "dob": "HIDDEN-DEMO",
+  "caregiver_contact": "Parent/guardian on file (hidden at bedside)"
+ },
+ "stay": {
+  "stay_id": "SC04",
+  "patient_id": "C04",
+  "admit_datetime": "2026-10-28T07:00:00",
+  "discharge_datetime": "2026-10-29T14:00:00",
+  "status": "discharged",
+  "admit_reason": "Coarctation of the aorta - catheter treatment",
+  "current_location": "Home",
+  "current_row": "Discharged",
+  "day_of_stay": "",
+  "post_op_day": "",
+  "direct_flight": "yes"
+ },
+ "snapshot": null,
+ "diagnoses": [
+  {
+   "stay_id": "SC04",
+   "rank": 1,
+   "diagnosis": "Recurrent coarctation of the aorta"
+  }
+ ],
+ "interventions": [
+  {
+   "stay_id": "SC04",
+   "datetime": "2026-10-28T07:00:00",
+   "procedure": "Balloon angioplasty + stent of aortic arch",
+   "location": "Cath lab",
+   "weight_kg": 21.0,
+   "team": "Interventional cardiologist: Dr. Y. Tanaka | Anesthesia: Dr. C. Moss"
+  }
+ ],
+ "care_team": [
+  {
+   "stay_id": "SC04",
+   "role": "ACCU attending",
+   "name": "Dr. L. Benoit"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "Anesthesia",
+   "name": "Dr. C. Moss"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "Bedside nurse",
+   "name": "S. Ward, RN"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "CICU attending",
+   "name": "Dr. F. Ramos"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "Cardiology fellow",
+   "name": "Dr. T. Lindqvist"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "Interventional cardiologist",
+   "name": "Dr. Y. Tanaka"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "Nurse practitioner",
+   "name": "J. Patel, NP"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "Pharmacist",
+   "name": "H. Ito, PharmD"
+  },
+  {
+   "stay_id": "SC04",
+   "role": "Primary cardiologist",
+   "name": "Dr. E. Nwosu"
+  }
+ ],
+ "timeline": {
+  "segments": [
+   {
+    "stay_id": "SC04",
+    "seq": 1,
+    "start": "2026-10-28T07:00:00",
+    "end": "2026-10-28T11:00:00",
+    "location": "Cath lab",
+    "color_hex": "#D9608F",
+    "color_name": "pink",
+    "row": "Procedure",
+    "row_level": 5,
+    "shading": "",
+    "day_of_stay": 1,
+    "post_op_day": 0
+   },
+   {
+    "stay_id": "SC04",
+    "seq": 2,
+    "start": "2026-10-28T11:00:00",
+    "end": "2026-10-29T14:00:00",
+    "location": "ACCU",
+    "color_hex": "#3B7DD8",
+    "color_name": "blue",
+    "row": "ACCU",
+    "row_level": 2,
+    "shading": "",
+    "day_of_stay": 1,
+    "post_op_day": 0
+   },
+   {
+    "stay_id": "SC04",
+    "seq": 3,
+    "start": "2026-10-29T14:00:00",
+    "end": "2026-10-29T14:00:00",
+    "location": "Home",
+    "color_hex": "#3E9B5F",
+    "color_name": "green",
+    "row": "Discharged",
+    "row_level": 1,
+    "shading": "",
+    "day_of_stay": 2,
+    "post_op_day": 1
+   }
+  ],
+  "expected_pathway": [
+   {
+    "stay_id": "SC04",
+    "day_offset": 0,
+    "expected_row": "Procedure",
+    "expected_level": 5
+   },
+   {
+    "stay_id": "SC04",
+    "day_offset": 0.2,
+    "expected_row": "ACCU",
+    "expected_level": 2
+   },
+   {
+    "stay_id": "SC04",
+    "day_offset": 1,
+    "expected_row": "Discharged",
+    "expected_level": 1
+   }
+  ],
+  "milestones": [
+   {
+    "stay_id": "SC04",
+    "event_id": "SC04-E01",
+    "datetime": "2026-10-28T07:00:00",
+    "milestone": "Cardiac catheterization",
+    "symbol": "diamond"
+   },
+   {
+    "stay_id": "SC04",
+    "event_id": "SC04-E02",
+    "datetime": "2026-10-28T11:00:00",
+    "milestone": "To ACCU",
+    "symbol": "flag"
+   },
+   {
+    "stay_id": "SC04",
+    "event_id": "SC04-E03",
+    "datetime": "2026-10-29T14:00:00",
+    "milestone": "Discharged home",
+    "symbol": "flag"
+   }
+  ],
+  "events": [
+   {
+    "event_id": "SC04-E01",
+    "stay_id": "SC04",
+    "datetime": "2026-10-28T07:00:00",
+    "day_of_stay": 1,
+    "post_op_day": 0,
+    "kind": "procedure",
+    "title": "Cardiac catheterization",
+    "clinical_shorthand": "CoA stent 10x26, gradient 32 -> 4 mmHg",
+    "family_text": "Opened a narrow part of the main artery with a small tube (stent).",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC04-E02",
+    "stay_id": "SC04",
+    "datetime": "2026-10-28T11:00:00",
+    "day_of_stay": 1,
+    "post_op_day": 0,
+    "kind": "location",
+    "title": "To ACCU",
+    "clinical_shorthand": "Post-cath, groin site ok",
+    "family_text": "Moved to the step-down heart unit to rest.",
+    "new_in_last_24h": "no"
+   },
+   {
+    "event_id": "SC04-E03",
+    "stay_id": "SC04",
+    "datetime": "2026-10-29T14:00:00",
+    "day_of_stay": 2,
+    "post_op_day": 1,
+    "kind": "location",
+    "title": "Discharged home",
+    "clinical_shorthand": "BP 104/62 arm/leg equal",
+    "family_text": "Went home the next day.",
+    "new_in_last_24h": "no"
+   }
+  ],
+  "compressed": [],
+  "ratings_review_only": [
+   {
+    "stay_id": "SC04",
+    "phase": "Cath lab",
+    "team_score": 3,
+    "score_meaning": "good",
+    "outcome_dot": "green",
+    "review_only": "yes"
+   },
+   {
+    "stay_id": "SC04",
+    "phase": "ACCU",
+    "team_score": 4,
+    "score_meaning": "outstanding",
+    "outcome_dot": "green",
+    "review_only": "yes"
+   }
+  ],
+  "conferences": [
+   {
+    "stay_id": "SC04",
+    "date": "2026-10-29",
+    "conference": "FlightPlan conference (Performance Rounds)",
+    "grouped_as": "Direct Flight"
+   },
+   {
+    "stay_id": "SC04",
+    "date": "2026-11-05",
+    "conference": "FlightPlan conference (Performance Rounds)",
+    "grouped_as": "Direct Flight"
+   }
+  ]
+ },
+ "what_changed": [],
+ "daily": [
+  {
+   "stay_id": "SC04",
+   "datetime": "2026-10-28T06:00:00",
+   "day_of_stay": 1,
+   "post_op_day": "",
+   "respiratory_support": "Ventilator",
+   "vasoactive_inotropic_score": 0,
+   "lactate": 1.5,
+   "spo2_pct": 95,
+   "hemoglobin": 12.4,
+   "creatinine": 0.8,
+   "chest_tube_output_ml_kg": 0,
+   "tacrolimus_trough": ""
+  },
+  {
+   "stay_id": "SC04",
+   "datetime": "2026-10-29T06:00:00",
+   "day_of_stay": 2,
+   "post_op_day": 0,
+   "respiratory_support": "Room air / low-flow",
+   "vasoactive_inotropic_score": 11,
+   "lactate": 1.3,
+   "spo2_pct": 99,
+   "hemoglobin": 13.4,
+   "creatinine": 0.78,
+   "chest_tube_output_ml_kg": 3.5,
+   "tacrolimus_trough": ""
+  }
+ ],
+ "notes": [
+  {
+   "note_id": "N024",
+   "stay_id": "SC04",
+   "linked_event_id": "SC04-E01",
+   "datetime": "2026-10-28T09:24:00",
+   "note_type": "Operative / procedure note",
+   "author_role": "Cardiology fellow",
+   "text": "Cardiac catheterization. CoA stent 10x26, gradient 32 -> 4 mmHg. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N025",
+   "stay_id": "SC04",
+   "linked_event_id": "SC04-E02",
+   "datetime": "2026-10-28T12:15:00",
+   "note_type": "Progress note",
+   "author_role": "Cardiology fellow",
+   "text": "To ACCU. Post-cath, groin site ok. (Placeholder note text - made up.)"
+  },
+  {
+   "note_id": "N026",
+   "stay_id": "SC04",
+   "linked_event_id": "SC04-E03",
+   "datetime": "2026-10-29T16:09:00",
+   "note_type": "Progress note",
+   "author_role": "Cardiology fellow",
+   "text": "Discharged home. BP 104/62 arm/leg equal. (Placeholder note text - made up.)"
+  }
+ ],
+ "rounds_actions": [],
+ "family_mode": null,
+ "adherence": {
+  "home_doses_90d": [],
+  "outpatient_tac_levels": []
+ }
+}

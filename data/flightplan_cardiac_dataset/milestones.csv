@@ -1,0 +1,36 @@
+stay_id,event_id,datetime,milestone,symbol
+SC01,SC01-E02,2026-10-28T07:00:00,Arterial switch operation,diamond
+SC01,SC01-E04,2026-10-29T10:00:00,Inotropes stopped,triangle
+SC01,SC01-E05,2026-10-30T10:00:00,Breathing tube removed,circle
+SC01,SC01-E06,2026-10-31T09:00:00,Chest tubes removed,square
+SC01,SC01-E07,2026-11-02T13:00:00,To ACCU,flag
+SC01,SC01-E08,2026-11-04T08:00:00,Full oral feeds,circle
+SC02,SC02-E01,2026-10-11T07:00:00,Norwood operation,diamond
+SC02,SC02-E02,2026-10-11T16:00:00,Placed on ECMO,diamond
+SC02,SC02-E04,2026-10-16T09:00:00,Off ECMO,triangle
+SC02,SC02-E05,2026-10-22T09:00:00,Breathing tube removed,circle
+SC02,SC02-E07,2026-10-28T10:00:00,Breathing tube removed again,circle
+SC02,SC02-E08,2026-10-30T09:00:00,Inotropes stopped,triangle
+SC02,SC02-E09,2026-11-03T11:00:00,To ACCU,flag
+SC03,SC03-E01,2026-11-02T07:00:00,VSD repair,diamond
+SC03,SC03-E03,2026-11-02T21:00:00,Breathing tube removed,circle
+SC03,SC03-E04,2026-11-03T10:00:00,Inotropes stopped,triangle
+SC03,SC03-E05,2026-11-04T09:00:00,Chest tube removed,square
+SC03,SC03-E06,2026-11-04T11:00:00,To ACCU,flag
+SC04,SC04-E01,2026-10-28T07:00:00,Cardiac catheterization,diamond
+SC04,SC04-E02,2026-10-28T11:00:00,To ACCU,flag
+SC04,SC04-E03,2026-10-29T14:00:00,Discharged home,flag
+SC05,SC05-E01,2026-10-29T06:00:00,Glenn operation,diamond
+SC05,SC05-E02,2026-10-30T09:00:00,Breathing tube removed,circle
+SC05,SC05-E03,2026-10-31T10:00:00,Inotropes stopped,triangle
+SC05,SC05-E05,2026-11-01T12:00:00,Started low-fat (MCT) diet,square
+SC05,SC05-E06,2026-11-02T12:00:00,To ACCU,flag
+SC06,SC06-E03,2026-11-04T08:00:00,Heart biopsy (cath),diamond
+SC06,SC06-E04,2026-11-04T16:00:00,IV steroid pulse + milrinone,triangle
+SC07,SC07-E01,2026-10-14T06:00:00,Fontan operation,diamond
+SC07,SC07-E02,2026-10-14T20:00:00,Breathing tube removed,circle
+SC07,SC07-E03,2026-10-15T02:00:00,Unplanned return to OR (bleeding),diamond
+SC07,SC07-E04,2026-10-16T10:00:00,Breathing tube removed,circle
+SC07,SC07-E05,2026-10-17T10:00:00,Inotropes stopped,triangle
+SC07,SC07-E06,2026-10-23T09:00:00,Chest tubes removed,square
+SC07,SC07-E07,2026-10-26T13:00:00,Discharged home,flag

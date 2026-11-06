@@ -1,0 +1,8 @@
+stay_id,patient_id,admit_datetime,discharge_datetime,status,admit_reason,current_location,current_row,day_of_stay,post_op_day,direct_flight
+SC01,C01,2026-10-26T06:00:00,,inpatient,Transposition of the great arteries - planned repair,ACCU,ACCU,12,9,yes
+SC02,C02,2026-10-08T08:00:00,,inpatient,Hypoplastic left heart - stage 1 surgery,ACCU,ACCU,30,26,no
+SC03,C03,2026-11-02T06:00:00,,inpatient,Ventricular septal defect repair,ACCU,ACCU,5,4,yes
+SC04,C04,2026-10-28T07:00:00,2026-10-29T14:00:00,discharged,Coarctation of the aorta - catheter treatment,Home,Discharged,,,yes
+SC05,C05,2026-10-29T06:00:00,,inpatient,Single ventricle - stage 2 (Glenn) surgery,ACCU,ACCU,9,8,no
+SC06,C06,2026-11-03T14:00:00,,inpatient,Heart transplant rejection - missed doses,ACCU,ACCU,4,2,no
+SC07,C07,2026-10-14T06:00:00,2026-10-26T13:00:00,discharged,Single ventricle - stage 3 (Fontan) surgery,Home,Discharged,,,no

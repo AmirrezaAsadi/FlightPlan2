@@ -1,0 +1,47 @@
+event_id,stay_id,datetime,day_of_stay,post_op_day,kind,title,clinical_shorthand,family_text,new_in_last_24h
+SC01-E01,SC01,2026-10-26T09:00:00,1,,result,Pre-op echo,"d-TGA, IVS, restrictive PFO s/p BAS, nl coronaries",Heart ultrasound before surgery confirmed the plan.,no
+SC01-E02,SC01,2026-10-28T07:00:00,3,0,procedure,Arterial switch operation,"ASO + ASD closure, CPB 186/XC 112, DHCA 0",Heart surgery to switch the two main arteries.,no
+SC01-E03,SC01,2026-10-28T15:00:00,3,0,echo,Post-op echo,"Nl biV fxn, no neo-AI, coronaries flow nl",Heart ultrasound after surgery looks good.,no
+SC01-E04,SC01,2026-10-29T10:00:00,4,1,milestone,Inotropes stopped,"Milrinone off, VIS 0",Heart-support medicine stopped.,no
+SC01-E05,SC01,2026-10-30T10:00:00,5,2,milestone,Breathing tube removed,Extubated to 1L NC,Breathing tube taken out.,no
+SC01-E06,SC01,2026-10-31T09:00:00,6,3,milestone,Chest tubes removed,"CT x2 out, CXR no PTX",Chest drainage tubes removed.,no
+SC01-E07,SC01,2026-11-02T13:00:00,8,5,location,To ACCU,Transfer to step-down,Moved to the step-down heart unit.,no
+SC01-E08,SC01,2026-11-04T08:00:00,10,7,milestone,Full oral feeds,"PO ad lib 150 mL/kg/d, gaining wt",Taking full feeds by bottle.,no
+SC02-E01,SC02,2026-10-11T07:00:00,4,0,procedure,Norwood operation,"Norwood/Sano 5mm, CPB 306/XC 68, open chest","Major heart surgery, first of three stages.",no
+SC02-E02,SC02,2026-10-11T16:00:00,4,0,setback,Placed on ECMO,"Low CO, lactate 9.2, unable to wean CPB",Put on a heart-lung machine to let the heart rest.,no
+SC02-E03,SC02,2026-10-14T10:00:00,7,3,echo,Echo on ECMO,"Mod RV dysfn, mild TR, Sano flow nl",Heart ultrasound shows the heart is recovering.,no
+SC02-E04,SC02,2026-10-16T09:00:00,9,5,milestone,Off ECMO,"Decannulated, chest closed POD5",Off the heart-lung machine.,no
+SC02-E05,SC02,2026-10-22T09:00:00,15,11,milestone,Breathing tube removed,Extubated to HFNC 6L,Breathing tube taken out.,no
+SC02-E06,SC02,2026-10-24T03:00:00,17,13,setback,Breathing tube put back in,"Reintubated - resp failure, ?VAP, RSV neg",Needed the breathing tube again for extra support.,no
+SC02-E07,SC02,2026-10-28T10:00:00,21,17,milestone,Breathing tube removed again,Extubated to 2L NC,Breathing tube out again.,no
+SC02-E08,SC02,2026-10-30T09:00:00,23,19,milestone,Inotropes stopped,"Epi off, milrinone off",Heart-support medicines stopped.,no
+SC02-E09,SC02,2026-11-03T11:00:00,27,23,location,To ACCU,Transfer to step-down,Moved to the step-down heart unit.,no
+SC03-E01,SC03,2026-11-02T07:00:00,1,0,procedure,VSD repair,"Patch closure pmVSD, CPB 92/XC 54",Heart surgery to close the hole between pumping chambers.,no
+SC03-E02,SC03,2026-11-02T15:00:00,1,0,echo,Post-op echo,"sm residual LV -> RA shunt (PG=39), nl fxn","Heart ultrasound: the patch is working, tiny leak is expected.",no
+SC03-E03,SC03,2026-11-02T21:00:00,1,0,milestone,Breathing tube removed,Extubated POD0 to RA,Breathing tube taken out the same day.,no
+SC03-E04,SC03,2026-11-03T10:00:00,2,1,milestone,Inotropes stopped,Milrinone off,Heart-support medicine stopped.,no
+SC03-E05,SC03,2026-11-04T09:00:00,3,2,milestone,Chest tube removed,"CT out, CXR clear",Chest drainage tube removed.,no
+SC03-E06,SC03,2026-11-04T11:00:00,3,2,location,To ACCU,Transfer to step-down,Moved to the step-down heart unit.,no
+SC04-E01,SC04,2026-10-28T07:00:00,1,0,procedure,Cardiac catheterization,"CoA stent 10x26, gradient 32 -> 4 mmHg",Opened a narrow part of the main artery with a small tube (stent).,no
+SC04-E02,SC04,2026-10-28T11:00:00,1,0,location,To ACCU,"Post-cath, groin site ok",Moved to the step-down heart unit to rest.,no
+SC04-E03,SC04,2026-10-29T14:00:00,2,1,location,Discharged home,BP 104/62 arm/leg equal,Went home the next day.,no
+SC05-E01,SC05,2026-10-29T06:00:00,1,0,procedure,Glenn operation,"BDG, CPB 98, no XC",Second-stage heart surgery to reroute blood flow.,no
+SC05-E02,SC05,2026-10-30T09:00:00,2,1,milestone,Breathing tube removed,"Extubated to 1L NC, sats 82%",Breathing tube taken out.,no
+SC05-E03,SC05,2026-10-31T10:00:00,3,2,milestone,Inotropes stopped,Milrinone off,Heart-support medicine stopped.,no
+SC05-E04,SC05,2026-11-01T08:00:00,4,3,setback,Chest tube drainage high (chylothorax),"CT out 25 mL/kg/d milky, TG 340",Fluid from the chest tube is a special type that needs a diet change.,no
+SC05-E05,SC05,2026-11-01T12:00:00,4,3,decision,Started low-fat (MCT) diet,"Enfaport, octreotide if no improvement 72h",Switched to a special low-fat formula.,no
+SC05-E06,SC05,2026-11-02T12:00:00,5,4,location,To ACCU,Transfer with CT in place,Moved to the step-down heart unit with the chest tube still in.,no
+SC05-E07,SC05,2026-11-05T06:00:00,8,7,result,Chest tube output falling,CT 8 mL/kg/d,Chest tube drainage is going down.,no
+SC06-E01,SC06,2026-11-03T14:00:00,1,,admit,Admitted to CICU,"Tachycardia 140, BNP 1,450, tac trough 1.9 (goal 6-8)",Came in with a fast heartbeat. The anti-rejection medicine level was low.,no
+SC06-E02,SC06,2026-11-03T18:00:00,1,,echo,Echo,"LVEF 42% (prior 60%), new pericardial effusion sm",Heart ultrasound shows the heart is pumping weaker than usual.,no
+SC06-E03,SC06,2026-11-04T08:00:00,2,0,procedure,Heart biopsy (cath),"EMBx x5, RA 9, PCWP 16, CI 2.6",Took tiny samples of the heart through a vein.,no
+SC06-E04,SC06,2026-11-04T16:00:00,2,0,therapy,IV steroid pulse + milrinone,"Methylpred 10 mg/kg x3, milrinone 0.5","Strong IV medicine to calm the immune reaction, plus heart support.",no
+SC06-E05,SC06,2026-11-05T10:00:00,3,1,result,Biopsy result: rejection,"ACR 2R, AMR 0",The immune system is reacting to the heart. This is treatable.,yes
+SC06-E06,SC06,2026-11-05T15:00:00,3,1,consult,Psychology consult,Missed PM doses since school started; no one at home at 8pm,Met with the team psychologist about routines.,yes
+SC07-E01,SC07,2026-10-14T06:00:00,1,0,procedure,Fontan operation,"ECF 20mm, 4mm fen, CPB 142",Third-stage heart surgery.,no
+SC07-E02,SC07,2026-10-14T20:00:00,1,0,milestone,Breathing tube removed,Extubated POD0,Breathing tube taken out.,no
+SC07-E03,SC07,2026-10-15T02:00:00,2,1,setback,Unplanned return to OR (bleeding),"CT 12 mL/kg/h x2h, re-explored, suture line bleed",Went back to surgery to stop bleeding.,no
+SC07-E04,SC07,2026-10-16T10:00:00,3,2,milestone,Breathing tube removed,Extubated,Breathing tube taken out again.,no
+SC07-E05,SC07,2026-10-17T10:00:00,4,3,milestone,Inotropes stopped,Milrinone off,Heart-support medicine stopped.,no
+SC07-E06,SC07,2026-10-23T09:00:00,10,9,milestone,Chest tubes removed,Pleural drainage resolved,Chest drainage tubes removed.,no
+SC07-E07,SC07,2026-10-26T13:00:00,13,12,location,Discharged home,"Sats 90%, on aspirin + enalapril",Went home.,no
