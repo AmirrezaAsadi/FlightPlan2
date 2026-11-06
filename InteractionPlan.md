@@ -1,9 +1,46 @@
 # Care Journey Plan: Product & Design Guidelines
 
-> **Status:** Draft v0.4
-> **Data scope:** one hospital stay, **from admission to discharge**. We do not go through years of patient history.
+> **Status:** Draft v0.5 (validated against the Hackathon Brief, the One-Pager and the clinician kickoff meeting; see §16)
+> **Data scope:** one hospital stay, **from admission to discharge**. We do not go through years of patient history. Prior FlightPlans may be linked for staged or repeat patients (§5.1).
 > **Element reference:** states of care, locations, milestones and the expected-course pathway follow the FlightPlan Hackathon Brief (Cincinnati Children's).
+> **Sources:** FlightPlan Hackathon Brief (5 pp.), FlightPlan Hackathon One-Pager (2026), clinician kickoff meeting (AI-generated notes + auto-transcript).
 > Items marked **[DECISION]** need a call from the team.
+
+## 0. Purpose, Scope & What We Deliver
+
+### 0.1 The one question
+From the brief: **"What should a clinician see, touch, hide, capture, or hand off during bedside rounds?"**
+We are rethinking one moment of care. We are **not** redesigning the whole application.
+
+### 0.2 Phasing (so the whole team works toward the same target)
+
+| Phase | Audience and setting | What it is | Status |
+|---|---|---|---|
+| **1. Hackathon (the deliverable)** | Rounding team at the bedside, family often present. Tablet or small screen, 1–2 minutes per patient. | A **bedside rounds view** of FlightPlan, with a **family-present mode** and a way to **capture actions** | **In scope now** |
+| **2. Family-facing bedside** | Patient and family. Phone, tablet, in-room monitor (replacing handwritten whiteboards). | Plain-language journey, today's goals, what must happen before discharge, projected discharge with visible changes | Vision; design for it, do not build it first |
+| **3. Beyond cardiac** | Neonatology, neurosurgery, adult care; minutes-to-days time scales | One configurable platform; each specialty defines its own targets and milestones | Vision |
+
+Sections of this document marked **[Phase 1]** are the hackathon core. Everything else is the longer-term direction, kept so Phase 1 does not paint us into a corner.
+
+### 0.3 Hard constraints (from the brief)
+- The **data behind FlightPlan and how it is collected do not change.** The bedside view is a new way of showing the same information, most likely a subset, plus a way to capture what happens on rounds.
+- **Not a clinical decision support tool.** No suggested diagnoses or treatments (see §13 for the wording question).
+- **Made-up or de-identified data only.** No MRNs, names, dates of birth, real screenshots or anything identifying.
+- Spend effort on **what to show and how**, not on the data underneath.
+
+### 0.4 Deliverables checklist (from the brief)
+- [ ] Interview findings (with the clinicians provided)
+- [ ] Bedside information hierarchy: first screen / secondary / kept out
+- [ ] Wireframe showing at least the five parts in §9.0
+- [ ] Short design rationale tied to what clinicians said
+- [ ] Recommendation for what to prototype first
+
+### 0.5 Questions to ask clinicians (from the brief and One-Pager)
+1. What do you need to know in the **first 30 seconds** at the bedside?
+2. Which parts of the conference version are **essential, optional or distracting** during rounds?
+3. What is **safe to show when a family is present**?
+4. What should be **captured** during rounds: decisions, questions, tasks, contingencies, consult needs, family updates, follow-up?
+5. What would make you **trust** this view during live care?
 
 ## 1. Vision
 
@@ -12,6 +49,9 @@ A **flight plan for a child's hospital stay**. A pilot, a crew and a passenger c
 - **Parents and guardians come first.** They carry the stay alongside the care team.
 - **Built child-first, used by adults later.** We design for children and their parents first. The same structure will later serve adult patients.
 - **Providers come and go.** Shifts change, units change and teams change during a single stay. Each handoff is a point where information is usually lost. We design to prevent that loss.
+- **Useful data, not more data.** The data already exists in the record. The problem is getting useful data to the right place at the right time, in a form people can talk about. We add no search-and-assemble work for clinicians.
+- **See the whole course, not just the task list.** FlightPlan is a 30,000-foot view of cause and effect over time. It does not replace task tools such as the medication schedule.
+- **Sequencing note [DECISION]:** the brief's bedside view is built first for the rounding team, with the family in the room. The family-first vision above is the direction of travel (Phase 2, §0.2). Confirm this order with the team.
 
 ### The flight-plan metaphor
 
@@ -19,7 +59,8 @@ A **flight plan for a child's hospital stay**. A pilot, a crew and a passenger c
 |---|---|
 | Origin | Admission |
 | Destination | Discharge home |
-| Altitude | Level of care: how much support the child needs right now (see §2) |
+| Altitude | Level of care / level of risk: the timeline row the child is on right now (see §2) |
+| Estimated arrival | **Projected discharge date**, clinician-set, shown with when and why it changed (§2.3) |
 | Route and waypoints | Planned steps: OR or cath lab, intensive care, step-down unit, home |
 | Planned route | **Pathway:** the expected course for this kind of stay |
 | Current position | Where the child is now, and the day after surgery (POD) |
@@ -29,8 +70,10 @@ A **flight plan for a child's hospital stay**. A pilot, a crew and a passenger c
 | Course correction | **Course Correction:** patient-specific thresholds for escalating care quickly |
 | Crew | The care team and family, with roles |
 | ATC handoff | Provider-to-provider transfer of responsibility |
-| Direct Flight | A stay that goes exactly as expected |
+| Direct Flight | A stay that goes exactly as expected: no unplanned events, all-green ratings. Grouped together at the weekly conference. |
 | Post-flight debrief | Visit or conference summary in plain language |
+
+**Why the flight tracker works for families (from the kickoff):** a passenger sees takeoff, landing, key conditions and re-routes without anyone typing them in, and without seeing everything the pilot sees. We aim for the same: automated, clear milestones and visible changes, with the detailed cockpit view kept for clinicians. Too little information causes anxiety. Too much does too. The right amount is **unknown**, so test it with families (§15).
 
 Use the metaphor as an organizing idea for the product. In the UI it should stay light. Do not use pilot jargon with families.
 
@@ -42,12 +85,14 @@ These are the core elements every view is built from. They come from the FlightP
 
 ### 2.1 Levels of care (highest to lowest)
 
+The brief calls these rows **levels of risk**: the line's height shows how sick the patient is. Family wording is in the draft column below.
+
 | State | Clinical meaning | Family label (draft) | Visual guidance |
 |---|---|---|---|
 | **Procedure** | In the OR or cath lab, or on ECMO (machine doing the work of the heart and lungs) | "Having surgery / a procedure" or "On a heart-lung machine" | Top level; distinct icon per procedure type |
 | **Intubated** | On a breathing machine through a tube, intensive care | "On a breathing machine" | High level |
 | **Extubated** | Breathing tube out, still in intensive care | "Breathing on their own, still in intensive care" | Middle level |
-| **ACCU (step-down)** | One level below intensive care | "Moved to the step-down unit" | Low level |
+| **ACCU (step-down)** | Acute care cardiology unit, one level below intensive care | "Moved to the step-down unit" | Low level |
 | **Discharged** | Home | "Going home" | The destination |
 
 The ideal stay is a **stepwise drop** from admission to discharge. A climb back up is a setback. In family views, show this as a path down toward home rather than a chart of how sick the child is. **[DECISION]** final family wording, tested with parents.
@@ -71,6 +116,10 @@ Location must never be shown by color alone.
 - **Compressed stretches:** long uneventful periods are collapsed so "today" stays in view
 - **Callouts:** findings (echo, cath) attached to a point in time. Clinical shorthand is shown to clinicians only. Families see a reviewed plain-language version (§5.3).
 - **CrossCheck and Course Correction flags:** clinician views only
+- **Projected discharge:** the team's current estimate of the discharge date, plus the discharge criteria ("what needs to happen before going home"). **Every change is logged with when and why.** The estimate is allowed to be wrong and to move, as long as the change and reason are visible. It is **set by the clinical team, never generated by AI** (§5.4).
+- **Ratings and conference markers:** team performance scores (1–4) and outcome dots are quality-review tools, entered by each team for its own phase. Clinician/conference only; whether they belong at the bedside is an open question (§15).
+- **Decisions:** formal decisions made at structured conferences (e.g., close the chest, return to the OR) sit on the timeline next to the everyday events. Today these decisions are not captured together anywhere else in the record.
+- **Time scale:** the default is days, but the same structure can run in hours or minutes for time-critical protocols (see §12).
 
 ---
 
@@ -83,6 +132,7 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 | **Parent / guardian** | What's happening, what to do next, who to call, how worried to be | Warm, illustrated journey map; large type; progress and "what's next" cards; friendly icons; generous whitespace | Phone, tablet, large display |
 | **Young child (approx. 4–10)** | Know what will happen, feel safe, have some control | Story-style path with a character or companion, stickers or rewards, minimal text, read-aloud | Tablet |
 | **Teen / future adult** | Privacy, autonomy, real information, no talking down | Cleaner, more adult layout; timeline view; own-your-data controls; transition checklist | Phone |
+| **Bedside rounding team** (attending, fellow, resident, nurse, APP, consultant) **[Phase 1]** | The first-30-seconds view, what changed, today's priorities, and a fast way to capture decisions and tasks. Different roles need different depth. | Bedside snapshot, compressed stay, "what changed", action capture, family-present mode (§9.0) | Tablet, small screen |
 | **Treating clinician** | Fast, dense, accurate, actionable | Compact timeline plus structured summary; clinical terms; flags and deltas | Workstation, tablet |
 | **Receiving provider (handoff)** | What do I need to know *now* to take over safely? | Briefing-first layout: critical items at the top, then the story, then the detail | Workstation, tablet |
 | **Care coordinator / nurse navigator** | Gaps, open loops, scheduling, family contact | Operational board: tasks, owners, due dates, blockers | Workstation |
@@ -107,6 +157,10 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 7. **Tell us once.** Families should never have to repeat their story to a new provider during the stay.
 8. **Age-fit.** Language and visuals fit the child's age, and the structure carries over to adult patients later.
 9. **Clinician-verified.** AI helps translate. It does not become a source of clinical truth, and the system never suggests diagnoses or treatments.
+10. **No extra work for clinicians.** Clinicians are already stretched by the EHR. Anything that needs manual digging or re-entry will not be adopted. Pull from the record automatically, and keep capture to a tap or two.
+11. **One system, many views.** Different audiences and access levels on one underlying system, like a bank's website and app. Do not build separate products.
+12. **Configurable, not customized.** Each specialty sets its own variables, targets and milestones through configuration. Heavy custom builds make upgrades painful (the hospital's heavily customized Epic is the cautionary example).
+13. **Show the team's thinking.** Families currently have no visibility into what the clinical team is thinking or planning. Visible goals, priorities and projected discharge are core value, not extras.
 
 ---
 
@@ -114,7 +168,10 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 
 ### 5.1 Scope
 - **Time window:** admission → today → expected discharge, for one stay.
-- **No multi-year history.** Earlier admissions and outpatient history are not loaded or shown. **[DECISION]** whether a one-line "relevant history" field (e.g., prior surgery) is allowed.
+- **No multi-year history.** Earlier admissions and outpatient history are not loaded or shown.
+- **Meeting input on history:** the unit of analysis is admission to discharge. But for staged procedures or repeat admissions, clinicians review the **prior FlightPlans** to see how the child responded and what complications occurred. Events that predisposed the child to this admission are included.
+  - **[DECISION]** Proposed: allow a **link to the prior FlightPlan(s)** (clinician views only) and a one-line "relevant history" field, instead of loading old data into this stay.
+- **Hackathon note:** the brief says the underlying data and its collection do not change. The layers and entities below describe the longer-term direction. Phase 1 only needs a new way to show existing data plus a capture layer (§5.3: Decision, Action item).
 
 ### 5.2 Layers
 
@@ -145,6 +202,10 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 - **Handoff:** transfer of responsibility between providers, with required items and acknowledgments
 - **Translation:** an AI-generated rendering of a source item for a given audience, language and reading level
 - **Preference / Context:** what the family has told us (comfort items, fears, language, communication needs, cultural or religious considerations)
+- **Projection:** the team's projected discharge date and discharge criteria, with a change log (when, why, who). Clinician-authored.
+- **Decision:** something decided on rounds or at a conference (e.g., close the chest, return to the OR), with date, who decided and rationale. *New in Phase 1 (capture).*
+- **Action item:** a task, follow-up or contingency from rounds, with an **owner** and due time, linked to the timeline event it refers to. *New in Phase 1 (capture).*
+- **Conference:** a structured review (weekly FlightPlan conference, care conference), with attendees and the decisions it produced
 
 ### 5.4 Rules for AI translation
 
@@ -157,6 +218,7 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 - Keep a **vetted glossary** of approved plain-language terms, covering every state, location and milestone in §2. Prefer glossary terms over free generation.
 - Translations expire or re-generate when the source changes.
 - Translate and summarize only. **Never interpret, predict or recommend.**
+- The **projected discharge date** is entered and changed by the clinical team. AI may format and explain it, but never produces or adjusts the estimate.
 
 ---
 
@@ -191,6 +253,9 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 - False reassurance ("everything's fine!") or catastrophizing
 - AI-generated text that is unmarked, unreviewed or unattributed
 - Any suggested diagnosis, treatment or prediction
+- Specific organism names (e.g., a gut bacterium behind a chest-wound infection). Say "an infection of the breastbone" and let the clinician explain more. A search engine will otherwise do it badly and families look for someone to blame.
+- Procedure durations that invite comparison between families (e.g., days on ECMO). Parents talk to each other and walk past other rooms.
+- Persistent reminders of traumatic events (e.g., an ECMO run) on a screen the family stares at all day
 
 **Visual and interaction**
 - Identifiers (record number, date of birth, caregiver phone) as the first thing on screen
@@ -207,6 +272,9 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 - Unexplained empty states, spinners or dead ends
 - Anything that makes a parent hunt for the next step
 - Information hidden in tooltips or hover states (touch-first)
+- A projected discharge date that moves with no visible reason, or that is shown as a promise
+- Anything on a room display that visitors or people walking past the door can read (hallway visibility)
+- Extra data entry for clinicians, or forcing them to search the EHR to build the view
 
 **Data and safety**
 - Surprise results: a family seeing a serious result with no support or context, unless release rules allow it (§10)
@@ -218,7 +286,9 @@ Each stakeholder gets a **distinct visualization style** built from one shared d
 
 ## 8. Handoff: Rules for Provider-to-Provider Transfer
 
-Handoffs are where information is lost, and providers must "remember key things." We treat this as a **system rule**, not a suggestion. Within one stay, handoffs include shift changes, unit transfers (e.g., CICU → step-down) and discharge to the outpatient team.
+Handoffs are where information is lost, and providers must "remember key things." We treat this as a **system rule**, not a suggestion. Within one stay, handoffs include shift changes, unit transfers (e.g., CICU → step-down) and discharge to the outpatient team. The kickoff added one more: the **weekly attending-to-attending handoff** at the end of a service week. The value there is the course of the whole admission, not just "right now."
+
+> **Validation note:** the brief and One-Pager confirm that physicians and nurses already use FlightPlan at shift change. The rules R1–R8 below are **our proposals**, not requirements from the brief. Treat them as Phase 2 unless clinicians say a handoff step belongs in the bedside view.
 
 ### 8.1 Principles
 
@@ -254,6 +324,31 @@ Use a structured format (e.g., I-PASS or SBAR as a base):
 
 ## 9. Surfaces
 
+### 9.0 Bedside rounds view **[Phase 1: hackathon core]**
+
+The rounding team has a minute or two per patient, probably on a tablet, with the family listening. A strong wireframe shows at least these five things (from the brief):
+
+| # | Part | What it contains | Replaces / fixes in the conference version |
+|---|---|---|---|
+| 1 | **Bedside snapshot** | Current location, status (level of care), key diagnoses, active concerns, today's priorities. **Identifiers are not the first thing on screen.** | Identifiers lead the page; there is no "now" |
+| 2 | **Compressed stay** | A short version of the timeline that tells the story without taking over the conversation. "Today" stays in view and nothing covers the right-hand end. | Long desktop page; legend covers the latest days |
+| 3 | **What changed** | Overnight events, new results, procedures, therapies, changes in location or status, open questions | Nothing today pulls this out |
+| 4 | **Capture actions** | Decisions, tasks, follow-ups and contingency plans, each with an **owner**, linked to the timeline event it concerns | Generic "Add a Note" / "+ Add"; no decision, owner or follow-up |
+| 5 | **Family-present mode** | One clear switch that changes what is shown when the patient or family is in the room (§10.2 data classes) | One view for everyone |
+
+**Information hierarchy to test (draft):**
+- *First screen (first 30 seconds):* snapshot, what changed, today's priorities, open actions
+- *Secondary (one tap):* the compressed stay, pathway vs. actual, milestones, care team, recent notes
+- *Kept out of rounds by default:* team ratings and outcome dots, conference markers, full note lists, the nine-symbol legend and display toggles, callouts in clinical shorthand (clinician detail on request only)
+
+**Design rules for this view:**
+- Show location with label + icon, not color alone
+- Separate "where the child is" from "how sick the child is" or label both clearly
+- Callouts never overlap; link each to its event
+- Role-aware depth: attendings, fellows, residents, nurses, APPs and consultants see different detail on the same data
+- No clinical recommendations; workflow and communication only
+- Trust: every item shows its source and when it was last updated
+
 ### 9.1 Tablet (bedside / clinic / waiting room)
 - Touch-first, large targets, glanceable; usable one-handed and by a child
 - Shared-device safe: quick lock, no PHI lingering on screen, role-aware
@@ -265,6 +360,9 @@ Use a structured format (e.g., I-PASS or SBAR as a base):
 - Shows: where the child is on the path home, today's plan, milestones done and to go, who's coming, who to ask, comfort and routine reminders
 - **Privacy rules:** show only what the family has approved for a shared screen. Hide identifiers, results, diagnoses and sensitive notes by default.
 - Calm ambient design that doesn't demand attention. Updates must feel gentle.
+- **Where it fits today:** rooms already have large monitors, but teams still use **handwritten whiteboards** (care team names, goals, "get up, eat, walk"). This display could replace or sit beside them and add the bigger picture: where the child is in the stay, what must happen before discharge, and the projected discharge with any changes and reasons.
+- Continuous education: show teaching goals along the stay so families are not taught everything in the last two days before discharge.
+- Hallway test: nothing on the display may identify the child or reveal clinical detail to someone passing the door.
 
 ### 9.3 Handoff UI
 - Briefing-first layout, with the safety-critical block pinned (see §8)
@@ -274,6 +372,8 @@ Use a structured format (e.g., I-PASS or SBAR as a base):
 
 ### 9.4 Automated Conference Interaction
 For care conferences and multidisciplinary meetings (including the weekly FlightPlan conference):
+
+> **Context from the brief and kickoff:** the weekly FlightPlan conference (also called Performance Rounds) reviews recent patients with cardiology and intensive care physicians, surgeons, anesthesia and OR staff, nurse practitioners, fellows and nursing leaders. Its stated aim is "blameless but accountable" learning. The kickoff described a roughly two-hour session. The decisions made there are not captured together anywhere else, which is why §2.3 treats Decisions as a first-class item. The conference is not a daily bedside tool and families do not see it today.
 
 - **Before:** auto-generated agenda and pre-read from the stay; family gets a plain-language prep sheet and can add questions or concerns
 - **During:** optional capture of notes, decisions and action items, with explicit consent to any recording or transcription, and a visible indicator when active
@@ -304,6 +404,8 @@ Define rules per **data class**, not per screen:
 | Milestones and progress toward home | Yes | Age-appropriate | Yes | |
 | Schedule and logistics | Yes | Age-appropriate | Yes | |
 | Medications and instructions | Yes | Simplified | Yes | |
+| Projected discharge and discharge criteria | Yes, with changes and reasons shown | Age-appropriate | Yes | Clinician-set. Framed as an estimate, not a promise. |
+| Organism names, detailed procedure durations (e.g., ECMO days) | Clinician-led conversation only; not on shared displays | No | Per policy | See §7: causes fear, blame and comparison between families |
 | Routine results | Yes, with context | No / simplified | Per policy | |
 | Callouts (echo, cath findings) | Reviewed plain-language only | No | Reviewed plain-language | |
 | Serious or sensitive results, setbacks | Release rules: clinician-controlled timing and support | No | Per policy | Avoid surprise delivery |
@@ -347,6 +449,14 @@ Write in a tone that is **warm, calm, honest and plain**, like a trusted nurse w
 - The states of care, journey model and handoff rules are age-neutral, so they carry over to adult patients.
 - What changes for adults: the visual style (closer to the teen view), the patient as primary reader, and no guardian layer by default.
 - Scope stays the same: one stay, admission to discharge.
+- **Adoption warning from the kickoff:** adult services may say "we don't need that" because they have not asked what patients and families think. Plan to show the value (the flight-tracker effect: once offered, people expect it), not argue it.
+
+### 12.1 Other specialties and time scales
+- Today's implementation is **cardiac**. The aim is neonatology, neurosurgery and adult care.
+- Every use case has **beginnings, ends and steps**. Cardiology, neonatology and neurosurgery differ in what they track, but each fits the same shape. Each service defines its own variables, targets and milestones, and a patient with several consulting services can have each lens on one timeline.
+- Build the **general platform first**, then configure it per specialty. Avoid specialty-specific code (§4, principle 12).
+- Time scale is configurable: **days to weeks** for complex admissions, **hours or minutes** for time-critical protocols. Example from the kickoff: a **sepsis** timeline plotting antibiotic and fluid-resuscitation times against targets, with patient data layered on top to see where targets were met or missed. This is review of a protocol, not a recommendation engine.
+- Even short or simple stays benefit from a visible expectation. A stay shorter than expected is as worth explaining as a longer one.
 
 ---
 
@@ -358,6 +468,7 @@ Write in a tone that is **warm, calm, honest and plain**, like a trusted nurse w
 - Clear disclosure wherever AI helped produce content
 - Clinical safety review process for the translation layer, rules engine and generated UI
 - Not a clinical decision support tool: no suggested diagnoses or treatments
+  - **Wording conflict [DECISION]:** the brief says FlightPlan is not clinical decision support. In the kickoff, speakers called it a "decision support tool" in the sense of helping teams see cause and effect and record decisions. Use "shared awareness and communication tool" in all materials unless regulatory counsel says otherwise.
 - Accessibility: WCAG AA at minimum, plus read-aloud, dyslexia-friendly options and high contrast
 - Use only made-up or de-identified data in demos and design work
 
@@ -373,6 +484,13 @@ Write in a tone that is **warm, calm, honest and plain**, like a trusted nurse w
 - Family-reported confidence and stress
 - Clinician trust: low rate of edits needed on AI translations over time
 
+**Phase 1 (bedside rounds) measures**
+- Clinicians can state the patient's status, what changed and today's priorities within 30 seconds of opening the view
+- Every decision and task captured on rounds has an owner and a linked timeline event
+- Added clinician time per patient: target zero or negative (no new searching or re-entry)
+- Families can name the projected discharge, why it moved, and what must happen before going home
+- No identifiers, organism names or other family-sensitive content on the first screen or in family-present mode
+
 ---
 
 ## 15. Open Questions
@@ -386,3 +504,83 @@ Write in a tone that is **warm, calm, honest and plain**, like a trusted nurse w
 7. Which jurisdictions launch first (drives confidentiality rules)?
 8. What is the child-facing character and brand, and who tests it with kids?
 9. Final tone-of-voice statement (§11) **[DECISION]**
+
+**Added from the kickoff meeting (none were answered there):**
+10. What exactly should patients and families see, and what stays clinician-facing? (Too little causes anxiety; too much causes anxiety or confusion.)
+11. How do we communicate a projected discharge and its changes without it feeling like a promise?
+12. How do we stay useful across specialties without heavy customization that makes upgrades hard?
+13. What level of detail fits different conditions, needs and lengths of stay?
+14. Do team ratings and conference markers belong at the bedside at all, especially with family present? (open in the brief too)
+15. Which of the five bedside parts (§9.0) do clinicians rate essential, and what do they say is missing?
+16. Phase order: bedside rounds team first, family-facing second (§0.2). Confirm.
+17. Decision-support wording (§13). Confirm "shared awareness and communication tool."
+
+## 16. Source Validation (v0.5)
+
+Cross-check of the v0.4 draft against the Hackathon Brief, the One-Pager and the kickoff meeting.
+
+### 16.1 Confirmed correct
+- Five levels/rows (Procedure, Intubated, Extubated, ACCU, Discharged), ECMO under Procedure, and the stepwise-drop ideal
+- Location colors: OR purple, cath lab pink, CICU orange, step-down blue, ECMO shading
+- Pathway (dashed), Course Correction (dotted), milestones (inotropes off, chest tubes out), POD counter, compressed stretches, callouts in clinical shorthand
+- CrossCheck (flags vulnerable patients before major procedures) and Course Correction (patient-specific escalation thresholds)
+- Problems with the conference version: identifiers first, no "now", color-only meaning, collisions, shorthand, ratings aimed at review
+- Not a decision-support tool, made-up data only, handoffs and Direct Flights exist today
+
+### 16.2 Gaps found and where they are fixed
+| Gap in v0.4 | Source | Fixed in |
+|---|---|---|
+| No statement of the actual hackathon question or deliverables | Brief §4, One-Pager | §0 |
+| No bedside rounds view (snapshot, compressed stay, what changed, capture, family-present mode) | Brief §4 | §9.0 |
+| No concept of decisions, tasks and owners on rounds | Brief §3–4, kickoff | §2.3, §5.3 |
+| Rounding-team roles (attending, fellow, resident, nurse, APP, consultant) missing | One-Pager | §3 |
+| Projected discharge with visible changes and reasons missing | Kickoff | §1, §2.3, §5.3, §10.2 |
+| Hackathon says data does not change; draft proposes new layers | Brief §4 | §5.1 note, §0.3 |
+| "Direct Flight" defined loosely | Brief §2 | §1 |
+| Ratings and conference markers not described | Brief §2 | §2.3 |
+| ACCU not expanded; "level of care" vs. brief's "level of risk" | Brief §2 | §2.1 |
+| Draft assumed no prior-admission info at all | Kickoff | §5.1 |
+| Specialty configuration, time scales, anti-customization lesson | Kickoff | §4, §12.1 |
+| Organism names, ECMO comparisons, hallway visibility, whiteboards | Kickoff | §7, §9.2, §10.2 |
+| Continuous education vs. discharge-day teaching | Kickoff | §9.2 |
+| Weekly attending-to-attending handoff | Kickoff | §8 |
+| "Decision support" wording conflict | Brief vs. kickoff | §13 |
+
+### 16.3 Discrepancies to be aware of
+- **Conference attendance:** the kickoff described "four cardiologists and four surgeons"; the brief lists a wider group (cardiology and intensive care physicians, surgeons, anesthesia, OR staff, nurse practitioners, fellows, nursing leaders). Use the brief. The kickoff figure is a speaker's description.
+- **"30% chance of error"** was a speaker's estimate in the kickoff, not a validated statistic. **Do not cite it** in any deliverable without a source.
+- **"Decision support"** was used loosely in the kickoff and conflicts with the brief (§13).
+- **Automation vs. verification:** speakers described the flight tracker as fully automated with nobody typing. The brief says key events are compiled from the EHR and **checked with clinicians**, and ratings are entered by each team. Treat "no extra clinician work" as the goal, and keep clinician verification for anything families see.
+- **The transcript is auto-generated** and garbled in places, including speaker names. Do not attribute quotes to named people. The AI-generated notes matched the transcript on the points we used; they omitted the clinician-distraction question and the "decision support" framing.
+- A clinician's family medical story was shared as motivation. We use only its lesson (a visible expectation of stay length would have helped) and keep personal details out of this repository.
+
+## 17. Kickoff Insights → Requirements
+
+| Insight from the kickoff | Requirement |
+|---|---|
+| "Having data isn't the problem; it's useful data at the right place and time." | Curate and compress. Bedside view is a subset (§9.0). |
+| EHR splits care by system (heart, lungs, gut, brain) in tabs | One chronological story (§2, §9.0 part 2) |
+| Handoffs run on memory | Briefing-first handoff view (§8); stay story in §9.0 |
+| Weekly conference decisions are captured nowhere else | Decision capture, linked to the timeline (§2.3, §9.0 part 4) |
+| Cause-and-effect and near-miss learning across patients | Keep patterns reviewable, clinician/conference side only (§2.3, §9.4) |
+| Families don't know when they'll go home | Projected discharge with change log (§2.3, §10.2) |
+| Education is crammed into the last days | Continuous education along the stay (§9.2) |
+| Too little information causes anxiety; too much does too | Test the right amount with families; start conservative (§15 Q10) |
+| Families compare rooms and Google terms | Hide organisms and comparable durations (§7) |
+| One system, filtered views (like MyChart or a bank app) | Role- and audience-based views on a single data model (§3, §4) |
+| Avoid Epic-style over-customization | Configurable general platform (§4 p.12, §12.1) |
+| Clinicians cannot take on extra EHR work | Principle 10; Phase 1 measures (§14) |
+| Whiteboards are handwritten; room monitors exist | Room display (§9.2) |
+| Works for hours/minutes too (sepsis) | Configurable time scale (§12.1) |
+
+## 18. Next Steps (proposed; the kickoff set no owners or deadlines)
+
+Owners are **TBD**. Assign them in the next team sync.
+
+1. Confirm the phase order and decision-support wording (§0.2, §13)
+2. Interview the clinicians provided, using the questions in §0.5. Record findings against §9.0.
+3. Draft the bedside information hierarchy (first screen / secondary / kept out)
+4. Wireframe the five parts of §9.0, including family-present mode
+5. Write the short design rationale tied to what clinicians said
+6. Recommend what to prototype first
+7. Park for Phase 2: handoff rules R1–R8, translation layer, generated UI, family and child views
