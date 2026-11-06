@@ -296,16 +296,16 @@
 
           <section class="w w-upd" aria-label="Updates">${updatesCard(p)}</section>
 
-          <div class="w-side">
-            <section class="w w-tm" aria-label="Care team today">${teamRow(p)}</section>
-            <section class="w w-qq" aria-label="Questions for the care team">${questionsCard(p)}</section>
-          </div>
         </div>
       </div>
 
-      <aside class="p-skye ${dockOpen ? "open" : ""}" aria-label="Skye, your stay guide">
-        <button class="dock-close icon-btn" data-act="dock" aria-label="Close Skye">${icon("x")}</button>
-        ${skyeHTML(p)}
+      <aside class="p-side" aria-label="Family support">
+        <section class="w w-tm" aria-label="Care team today">${teamRow(p)}</section>
+        <section class="p-skye ${dockOpen ? "open" : ""}" aria-label="Skye, your stay guide">
+          <button class="dock-close icon-btn" data-act="dock" aria-label="Close Skye">${icon("x")}</button>
+          ${skyeHTML(p)}
+        </section>
+        <section class="w w-qq" aria-label="Questions for the care team">${questionsCard(p)}</section>
       </aside>
     </main>`;
   }
