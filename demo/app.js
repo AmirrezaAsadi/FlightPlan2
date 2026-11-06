@@ -241,7 +241,7 @@
     return `<p class="w-title qq">${icon("chat")} Notes for the team</p>
       ${qs.length ? `<ul class="q-list" data-fit>${qs.map((q, i) => `<li class="${q.answered ? "answered" : ""}"><span>${esc(q.text)}</span>${q.answered ? `<small>${icon("check")} Answered</small>` : `<button class="q-x" data-act="q-del" data-i="${i}" aria-label="Remove question">${icon("x")}</button>`}</li>`).join("")}</ul>`
         : ""}
-      <form class="q-add" data-act="q-add"><input id="q-new" placeholder="${qs.length ? "Add a question\u2026" : "Add a question for rounds\u2026"}" autocomplete="off" aria-label="Add a question for the care team"><button aria-label="Add">${icon("send")}</button></form>`;
+      <form class="q-add" data-act="q-add"><input id="q-new" placeholder="Type a note" autocomplete="off" aria-label="Type a note for the care team"><button aria-label="Add">${icon("send")}</button></form>`;
   }
 
   function renderFamily(p) {
