@@ -767,10 +767,50 @@ File: https://www.figma.com/design/lh4im8DQXbfsy7szWCsHBf/Untitled (Page 1). Mad
 
 | # | Frame | Audience | Interaction |
 |---|---|---|---|
-| 1 | Family room display (1920×1080) | Patient and family | **Display-only** |
+| 1 | Family room display v2 (1920×1080): days here, expected date with discharge checklist, **full path from arrival to going home**, what's new, today | Patient and family | **Display-only** |
 | 2 | Doctor detail view (tablet 1280×800): snapshot, milestones, discharge estimate with calculation and change log, updates with clinical vs. family wording and review status | Clinicians | Interactive |
 | 3 | Doctor bedside rounds view (tablet), family-present mode on: snapshot, what changed, compressed stay, action capture | Rounding team | Interactive |
 | 4 | Passive bedside tablet (portrait) | Patient and family | **Display-only** |
+| 6 | **Clinician patient overview (desktop 1440×980): the 15-second view (§20)** | Clinicians | Interactive, drill-down |
 | 5 | Clinic dashboard (desktop 1440×900): KPIs, patient census with expandable rows, incidents and near misses, practitioner activity by role | Clinicians, unit managers | Interactive, drill-down |
 
 Notes: the mockups are a first pass for review, not final design. Fonts are Nunito (family frames) and Inter (clinician frames). Colors are Figma variables in the `FlightPlan/Color` collection. Location is always shown with a label and icon as well as color.
+
+## 20. The 15-Second Test: What the Dashboard Must Show
+
+**Requirement (from the Hackathon Brief and One-Pager):** FlightPlan is an *informative* dashboard. In about 15 seconds a clinician must understand the patient's whole stay, from admission to today to the projected discharge, plus what changed and what is open. A snapshot of today alone fails this test. The v1 mockups failed it; v2 (§19.9 frames 1 and 6) is built to pass it.
+
+### 20.1 Brief elements the clinician timeline must carry
+| Brief element | How the clinician overview (frame 6) shows it |
+|---|---|
+| Rows = levels of risk: Procedure, Intubated, Extubated, ACCU, Discharged | Five labelled rows with icons, top to bottom |
+| One line moves between rows; its color = location (OR purple, cath lab pink, CICU orange, ACCU blue) | Stepped line, colored by location **and** labelled by row, so color is never the only cue |
+| Ideal stay = stepwise drop; a climb = setback | Visible at a glance in the line's shape |
+| Pathway (dashed) | Dashed line for the expected course, with "Behind Pathway by ~2 days" called out |
+| Course Correction (dotted) | Dotted escalation-threshold line, labelled directly |
+| Milestone symbols (inotropes off, chest tubes out) | Numbered markers on the line, with a key-events strip below (semantic zoom: tap a number for detail) |
+| Callouts in clinical shorthand collide and hide data | Replaced by numbered markers and a list. No overlapping boxes. |
+| Ratings (1–4) and outcome dots | Clinician-only strip under the chart; never in family views |
+| Conference markers | Thin vertical marker, labelled |
+| Date row and POD row; compressed uneventful stretches | Date and post-op-day rows under the chart; compressed pre-op days marked with a zigzag |
+| "Now" is missing in the conference version | **Today** line and tag, plus the projected remainder to discharge drawn dotted, so history and future sit on one axis |
+| Patient information, diagnoses and interventions, care team | Patient line, interventions table, care-team card by role |
+| Identifiers must not lead the page | Identifiers hidden behind a control; the page leads with bed, status and course |
+
+### 20.2 The 15-second summary strip (top of the clinician overview)
+1. **Where now** (level of care and location, since when)
+2. **Day / POD**
+3. **Vs. Pathway** (ahead / on track / behind, and why)
+4. **Projected discharge** (date, previous date, system estimate)
+5. **Flags** (Course Correction active, CrossCheck status)
+6. **Open loops** (count and overdue)
+
+Then the full-stay trajectory, **What changed (last 24 h)**, **Open loops and actions**, and **Care team**. Every row is clickable for detail.
+
+### 20.3 Family display equivalent (display-only)
+The room display shows the same journey in plain language: a stepped path from **Arrived** through **Heart procedure**, **Intensive care** and **Step-down unit** to **Going home**, with a **You are here** marker, the day axis, the **expected date** and a **"before we go home" checklist**. It never shows the risk-level axis, ratings, flags, results or organism names (§7, §19.8).
+
+### 20.4 Still to do
+- Update the passive bedside tablet (frame 4) and the rounds view (frame 3) to match the richer v2 path and trajectory.
+- Validate row order, labels and the escalation-threshold logic with the clinicians.
+- Confirm which brief elements are essential, optional or distracting on rounds (§0.5).
