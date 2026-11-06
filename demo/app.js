@@ -237,7 +237,7 @@
   }
   function questionsCard(p) {
     const qs = state.questions[p.id] || [];
-    return `<p class="w-title qq">${icon("chat")} Questions for the team</p>
+    return `<p class="w-title qq">${icon("chat")} Notes for the team</p>
       ${qs.length ? `<ul class="q-list" data-fit>${qs.map((q, i) => `<li class="${q.answered ? "answered" : ""}"><span>${esc(q.text)}</span>${q.answered ? `<small>${icon("check")} Answered</small>` : `<button class="q-x" data-act="q-del" data-i="${i}" aria-label="Remove question">${icon("x")}</button>`}</li>`).join("")}</ul>`
         : ""}
       <form class="q-add" data-act="q-add"><input id="q-new" placeholder="${qs.length ? "Add a question\u2026" : "Add a question for rounds\u2026"}" autocomplete="off" aria-label="Add a question for the care team"><button aria-label="Add">${icon("send")}</button></form>`;
@@ -305,7 +305,7 @@
           <button class="dock-close icon-btn" data-act="dock" aria-label="Close Skye">${icon("x")}</button>
           ${skyeHTML(p)}
         </section>
-        <section class="w w-qq" aria-label="Questions for the care team">${questionsCard(p)}</section>
+        <section class="w w-qq" aria-label="Notes for the care team">${questionsCard(p)}</section>
       </aside>
     </main>`;
   }
@@ -396,6 +396,12 @@
           </div>`}
         </section>
 
+        <section class="card stay timeline-card" aria-label="Compressed stay">
+          <p class="eyebrow">The stay so far <span class="src">solid = actual · dashed = pathway · tap a dot</span></p>
+          <div class="timeline-stage">${timelineSVG(p, fp)}</div>
+          ${eventDetail(p, fp)}
+        </section>
+
         <section class="card changed" aria-label="What changed">
           <p class="eyebrow">What changed <span class="src">overnight + last 24h</span></p>
           ${changedRows ? `<ul class="wc ${fp ? "plain" : ""}">${changedRows}</ul>` : '<p class="muted">Nothing new.</p>'}
@@ -405,12 +411,6 @@
         <section class="card est" aria-label="Expected discharge">
           <p class="eyebrow">${icon("home")} Expected discharge</p>
           ${estCard}
-        </section>
-
-        <section class="card stay" aria-label="Compressed stay">
-          <p class="eyebrow">The stay so far <span class="src">solid = actual · dashed = pathway · tap a dot</span></p>
-          ${timelineSVG(p, fp)}
-          ${eventDetail(p, fp)}
         </section>
 
         ${fp ? "" : `<section class="card queue" aria-label="Room screen review">
@@ -465,7 +465,7 @@
     const rowH = (H - T - B) / 4;
     const y = lvl => T + (5 - lvl) * rowH;
     const nDays = Math.round((t1 - t0) / DAY);
-    let s = `<svg class="tl" viewBox="0 0 ${W} ${H}" role="img" aria-label="Timeline of the stay, actual course against the expected pathway">`;
+    let s = `<svg class="tl" viewBox="0 0 ${W} ${H}" role="img" aria-label="Timeline of the stay, actual course against the expected pathway"><defs><linearGradient id="tlActual" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#45d2d7"/><stop offset="1" stop-color="#087f91"/></linearGradient><filter id="tlDepth" x="-20%" y="-30%" width="140%" height="170%"><feDropShadow dx="0" dy="4" stdDeviation="2" flood-color="#075b70" flood-opacity=".22"/></filter></defs>`;
     ROWS.forEach(([lab, lvl]) => { s += `<line class="grid" x1="${L}" x2="${W - R}" y1="${y(lvl)}" y2="${y(lvl)}"/><text class="rowlab" x="${L - 10}" y="${y(lvl) + 4}" text-anchor="end">${lab}</text>`; });
     const step = nDays > 16 ? 2 : 1;
     for (let i = 0; i < nDays; i += step) { s += `<text class="tick" x="${x(t0 + i * DAY + DAY / 2)}" y="${H - 10}" text-anchor="middle">D${i + 1}</text>`; }
@@ -483,7 +483,7 @@
     p.segments.forEach((sg, i) => {
       const xs = x(sg.start), xe = x(Math.min(new Date(sg.end).getTime(), NOW.getTime()));
       if (i > 0) s += `<line class="conn" x1="${xs}" x2="${xs}" y1="${y(p.segments[i - 1].level)}" y2="${y(sg.level)}"/>`;
-      s += `<line class="seg" x1="${xs}" x2="${Math.max(xe, xs + 4)}" y1="${y(sg.level)}" y2="${y(sg.level)}" stroke="${sg.color}"/>`;
+      s += `<line class="seg" x1="${xs}" x2="${Math.max(xe, xs + 4)}" y1="${y(sg.level)}" y2="${y(sg.level)}" stroke="url(#tlActual)"/>`;
       if (xe - xs > 46) s += `<text class="seglab" x="${(xs + xe) / 2}" y="${y(sg.level) - 10}" text-anchor="middle" fill="${sg.color}">${esc((LOC[sg.location] || {}).short || sg.location)}</text>`;
     });
     // expected-home markers

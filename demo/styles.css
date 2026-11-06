@@ -249,13 +249,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .wc.plain li { grid-template-columns: auto 1fr; }
 .wc.plain .ic { color: var(--cy); }
 
-.tl { width: 100%; height: auto; display: block; }
+.timeline-stage { position: relative; perspective: 900px; padding: 8px 0 2px; border-radius: 16px; background: linear-gradient(180deg, rgba(var(--cy-rgb), .08), rgba(var(--ink-rgb), .025)); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), inset 0 -12px 24px rgba(var(--ink-rgb), .035); overflow: hidden; }
+.tl { width: 100%; height: auto; display: block; transform: rotateX(7deg); transform-origin: center top; filter: drop-shadow(0 8px 8px rgba(var(--ink-rgb), .08)); }
 .tl .grid { stroke: var(--line); stroke-width: 1; }
 .tl .rowlab { fill: var(--muted); font-size: 13px; font-family: var(--mono); }
 .tl .tick { fill: var(--faint); font-size: 11px; font-family: var(--mono); }
 .tl .tick.strong { fill: var(--cy); }
 .tl .pathway { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 5 6; opacity: .7; }
-.tl .seg { stroke-width: 7; stroke-linecap: round; }
+.tl .seg { stroke-width: 9; stroke-linecap: round; filter: url(#tlDepth); }
 .tl .conn { stroke: var(--muted); stroke-width: 1.5; opacity: .5; }
 .tl .seglab { font-size: 12px; font-weight: 600; letter-spacing: .08em; font-family: var(--mono); }
 .tl .now { stroke: var(--cy); stroke-width: 1.5; stroke-dasharray: 3 4; }
