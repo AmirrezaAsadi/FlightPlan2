@@ -516,9 +516,10 @@
   }
   function eventDetail(p, fp) {
     const e = p.events.find(x => x.id === state.selectedEvent);
-    if (!e) return `<p class="muted small ev-hint">Tap a dot to see what happened. ${fp ? "Plain-language wording shown." : "Clinical shorthand shown."}</p>`;
-    return `<div class="ev-detail"><p><b>${esc(e.title)}</b> <span class="muted">· ${esc(fmtShort(e.at))} ${esc(fmtTime(e.at))} · Day ${e.day}${e.pod != null ? " · POD " + e.pod : ""}</span></p>
-      <p>${esc(fp ? e.familyText : e.shorthand)}</p>${fp ? "" : `<p class="muted small">Family wording: ${esc(e.familyText)}</p>`}</div>`;
+    if (!e) return `<p class="muted small ev-hint">Tap a milestone dot to zoom into its details. ${fp ? "Plain-language wording shown." : "Clinical shorthand shown."}</p>`;
+    return `<div class="ev-detail" aria-live="polite"><div class="ev-detail-head"><span class="ev-kind">${icon(e.icon || "star")} ${esc(cap(e.kind || "event"))}</span><button class="icon-btn sm" data-act="event" data-id="${e.id}" aria-label="Close event details">${icon("x")}</button></div>
+      <p><b>${esc(e.title)}</b> <span class="muted">· ${esc(fmtShort(e.at))} ${esc(fmtTime(e.at))} · Day ${e.day}${e.pod != null ? " · POD " + e.pod : ""}</span></p>
+      <p>${esc(fp ? e.familyText : e.shorthand)}</p>${fp ? "" : `<p class="muted small">Family wording: ${esc(e.familyText)}</p>`}<p class="muted small">Source: FlightPlan timeline · ${e.new24h ? "within the last 24 hours" : "historical event"}</p></div>`;
   }
 
   /* ================================================================
