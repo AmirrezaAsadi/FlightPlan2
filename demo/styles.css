@@ -129,11 +129,34 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 .w-row { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); gap: clamp(14px, 1.4vw, 22px); }
 .home-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(14px, 1.6vw, 26px); }
-.p-date { white-space: nowrap; font-weight: 200; font-size: clamp(2rem, 2.5vw, 3rem); line-height: 1.05; letter-spacing: -.02em; color: var(--ink); }
-.p-date .wd { display: block; font-family: var(--mono); font-size: .76rem; letter-spacing: .2em; color: var(--cy); margin-bottom: 6px; font-weight: 400; }
+.home-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.home-head h2 { display: flex; align-items: center; gap: 8px; margin: 0; color: var(--done); font-size: 1.06rem; font-weight: 500; }
+.home-head .ic { width: 18px; height: 18px; }
+.home-head > span { border: 1px solid var(--line); border-radius: 999px; padding: 3px 9px; color: var(--muted); font-family: var(--mono); font-size: .58rem; letter-spacing: .1em; }
+.home-summary { display: grid; grid-template-columns: minmax(96px, .42fr) minmax(0, 1fr); align-items: center; gap: clamp(12px, 1.2vw, 20px); margin: 10px 0 14px; }
+.home-progress { position: relative; width: min(100%, 104px); aspect-ratio: 1; display: grid; place-items: center; }
+.home-progress .ring { width: 100%; height: 100%; transform: rotate(-90deg); }
+.home-progress .ring circle { stroke-width: 5; }
+.home-progress .r-bg { stroke: rgba(var(--done-rgb), .14); }
+.home-progress .r-fg { stroke: var(--done); filter: none; }
+.home-progress > span { position: absolute; display: grid; justify-items: center; line-height: 1; }
+.home-progress b { font-size: 1.4rem; font-weight: 500; color: var(--done); }
+.home-progress small { margin-top: 3px; font-size: .68rem; color: var(--muted); }
+.home-estimate { min-width: 0; }
+.home-around { color: var(--muted); font-size: .9rem; line-height: 1.2; margin-bottom: 3px; }
+.p-date { white-space: nowrap; font-weight: 500; font-size: clamp(1.7rem, 2.3vw, 2.2rem); line-height: 1.05; letter-spacing: -.03em; color: var(--ink); }
+.p-date .wd { display: block; font-family: var(--mono); font-size: .62rem; letter-spacing: .16em; color: var(--cy); margin-bottom: 3px; font-weight: 400; }
 .p-date.soft { color: var(--muted); }
-.p-change { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-weight: 300; }
-.p-change .mono { display: block; color: var(--warm); margin-bottom: 4px; }
+.home-confirmed { margin-top: 4px; color: var(--done); font-size: .72rem; }
+.home-steps-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin: 2px 0 5px; font-weight: 500; }
+.home-steps-head > span:last-child { color: var(--muted); font-size: .7rem; font-weight: 400; white-space: nowrap; }
+.w-home .p-list li { align-items: center; gap: 9px; padding: 4px 0; line-height: 1.3; }
+.w-home .mk { width: 16px; height: 16px; border-radius: 50%; transform: none; }
+.w-home .mk.todo { border-color: rgba(var(--ink-rgb), .28); }
+.w-home .mk.ok { position: relative; box-shadow: none; }
+.w-home .mk.ok::after { content: ""; position: absolute; width: 5px; height: 8px; left: 4px; top: 1px; border: solid #fff; border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+.p-change { margin-top: 10px; padding: 9px 11px; border: 0; border-radius: 12px; background: rgba(var(--indigo-rgb), .07); font-size: .76rem; font-weight: 300; line-height: 1.4; }
+.p-change .mono { display: block; color: var(--warm); margin-bottom: 3px; font-size: .58rem; }
 .p-list li { display: flex; gap: 12px; align-items: baseline; padding: 5px 0; font-weight: 300; }
 .mk { width: 9px; height: 9px; flex: none; transform: rotate(45deg) translateY(-1px); border: 1.5px solid var(--cy); }
 .mk.todo { border-color: var(--warm); }
@@ -380,8 +403,7 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
 .ov-list.rec time { display: block; font-family: var(--mono); font-size: .64rem; letter-spacing: .14em; color: var(--faint); text-transform: uppercase; margin-top: 2px; }
 .ov-list.rec .ov-ic { color: var(--cy); }
 .ov-list.rec li.fresh .ov-ic { color: var(--warm); }
-.w-home .p-change { margin-top: 10px; padding-top: 8px; font-size: .92em; }
-.w-home .ring-row { margin-top: 12px; }
+.w-home .p-change { margin-top: 10px; padding: 9px 11px; font-size: .76rem; }
 
 @media (min-width: 600px) {
   .portal {
@@ -412,6 +434,15 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
   .sched { flex: 1; }
   .w-today { gap: 0; }
   .p-date { font-size: clamp(1.5rem, 4.4vh, 3rem); margin-top: 0; }
+  .home-summary { grid-template-columns: minmax(84px, .4fr) minmax(0, 1fr); gap: clamp(10px, 1vw, 16px); margin: 8px 0 10px; }
+  .home-progress { width: min(100%, 96px); }
+  .w-home .p-date { font-size: clamp(1.55rem, 3.6vh, 2rem); }
+  .home-around { font-size: .78rem; }
+  .w-home .p-sub { font-size: .68rem; }
+  .w-home .p-change { margin-top: 7px; padding: 7px 9px; font-size: .68rem; }
+  .w-home .p-change .mono { font-size: .54rem; }
+  .home-steps-head { margin: 0 0 3px; }
+  .w-home .p-list li { padding: clamp(2px, .4vh, 4px) 0; }
   .p-list li { padding: clamp(2px, .45vh, 5px) 0; }
   .up-next .s-row { padding: clamp(8px, 1.3vh, 14px) 14px clamp(8px, 1.3vh, 14px) 26px; }
   .un-title { font-size: clamp(1.1rem, 2.6vh, 1.6rem); }
@@ -476,6 +507,15 @@ dialog::backdrop { background: rgba(var(--ink-rgb), .25); backdrop-filter: blur(
   .w-days .mono { width: 100%; }
   .p-day { font-size: 4.5rem; }
   .w-row { grid-template-columns: 1fr; }
+  .home-summary { grid-template-columns: 88px minmax(0, 1fr); gap: 14px; margin: 12px 0 16px; }
+  .home-progress { width: 88px; }
+  .home-progress b { font-size: 1.2rem; }
+  .home-progress small { font-size: .62rem; }
+  .w-home .p-date { font-size: clamp(1.55rem, 7vw, 2rem); }
+  .home-around { font-size: .86rem; }
+  .w-home .p-change { margin-top: 12px; padding: 10px 12px; font-size: .82rem; }
+  .w-home .p-change .mono { font-size: .58rem; }
+  .home-steps-head { margin-top: 4px; }
   .p-skye { flex: none; overflow: visible; padding: 16px; }
   .p-skye .skye { gap: 0; }
   .p-skye .holo { width: clamp(112px, 30vw, 144px); }

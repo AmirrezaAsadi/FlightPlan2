@@ -861,7 +861,7 @@ window.FP_DATA = {
      {
       "fromSource": "pathway",
       "reasonCode": "MILESTONE_LATE",
-      "reasonFamily": "The chest tube is still draining, so Sam needs a little more time before going home.",
+      "reasonFamily": "The date moved because Sam\u2019s chest tube is still draining. Sam needs a little more time before going home.",
       "reasonClinical": "Chylothorax: CT still in, output 6 mL/kg overnight (falling). Pathway expected home on day 8.",
       "triggerEventId": "SC05-E04",
       "changedAt": "2026-11-06T07:30:00",

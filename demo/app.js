@@ -285,16 +285,24 @@
 
         <div class="w-row">
           <section class="w w-home" aria-label="Going home">
-            <p class="mono">GOING HOME · ESTIMATE</p>
-            ${est ? `<p class="p-date">${bigDate(est.dates)}</p><p class="p-sub small">Best estimate, not a promise.</p>`
-                  : `<p class="p-date soft">Soon</p><p class="p-sub small">Your team will share a date when it’s clearer.</p>`}
-            ${ch ? `<p class="p-change" data-act="why" title="Tap to read all"><span class="mono">MOVED FROM ${esc(fmtDate(p.discharge.pathwayDate, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())}</span>${esc(personalize(p, ch.reasonFamily))}</p>` : ""}
-            ${est && est.by === "confirmed" ? `<p class="p-sub small">Shared by your care team today.</p>` : ""}
-            <div class="ring-row"><svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="r-bg" cx="22" cy="22" r="18"/><circle class="r-fg" cx="22" cy="22" r="18" stroke-dasharray="${(C * done / crit.length).toFixed(1)} ${C.toFixed(1)}"/></svg>
-              <p class="mono">BEFORE HOME <b>${done}/${crit.length}</b></p></div>
+            <header class="home-head"><h2>${icon("home")}<span>Going home</span></h2><span>ESTIMATE</span></header>
+            <div class="home-summary">
+              <div class="home-progress" role="img" aria-label="${done} of ${crit.length} steps complete">
+                <svg class="ring" viewBox="0 0 44 44" aria-hidden="true"><circle class="r-bg" cx="22" cy="22" r="18"/><circle class="r-fg" cx="22" cy="22" r="18" stroke-dasharray="${(C * done / crit.length).toFixed(1)} ${C.toFixed(1)}"/></svg>
+                <span aria-hidden="true"><b>${done}</b><small>of ${crit.length}</small></span>
+              </div>
+              <div class="home-estimate">
+                <p class="home-around">${est ? "Around" : "When it’s clearer"}</p>
+                ${est ? `<p class="p-date">${bigDate(est.dates)}</p><p class="p-sub small">Best estimate, not a promise.</p>`
+                      : `<p class="p-date soft">Soon</p><p class="p-sub small">Your team will share a date when it’s clearer.</p>`}
+                ${est && est.by === "confirmed" ? `<p class="home-confirmed">Shared by your care team today.</p>` : ""}
+              </div>
+            </div>
+            <div class="home-steps-head"><span>Before home</span><span>${done} of ${crit.length} complete</span></div>
             <ul class="p-list steps" data-steps="todo" data-fit>${crit.filter(c => !c.done).map(c => `<li><span class="mk todo"></span>${esc(personalize(p, c.text))}<span class="sr"> (to do)</span></li>`).join("") || `<li><span class="mk ok"></span>All set for home</li>`}</ul>
             <ul class="p-list steps" data-steps="done" hidden>${crit.filter(c => c.done).map(c => `<li class="done"><span class="mk ok"></span>${esc(personalize(p, c.text))}<span class="sr"> (done)</span></li>`).join("")}</ul>
             ${done ? `<button class="done-chip" data-act="steps-toggle" aria-pressed="false">${icon("check")} <span>${done} done</span></button>` : ""}
+            ${ch ? `<p class="p-change" data-act="why" title="Tap to read all"><span class="mono">MOVED FROM ${esc(fmtDate(p.discharge.pathwayDate, { weekday: "short", month: "short", day: "numeric" }).toUpperCase())}</span>${esc(personalize(p, ch.reasonFamily))}</p>` : ""}
           </section>
 
           <section class="w w-today" aria-label="Today">${todayWidget(p)}</section>
