@@ -1,6 +1,6 @@
 # Care Journey Plan: Product & Design Guidelines
 
-> **Status:** Draft v0.5 (validated against the Hackathon Brief, the One-Pager and the clinician kickoff meeting; see §16)
+> **Status:** Draft v0.6 (adds widget build spec §19; v0.5 was validated against the Hackathon Brief, the One-Pager and the clinician kickoff meeting; see §16)
 > **Data scope:** one hospital stay, **from admission to discharge**. We do not go through years of patient history. Prior FlightPlans may be linked for staged or repeat patients (§5.1).
 > **Element reference:** states of care, locations, milestones and the expected-course pathway follow the FlightPlan Hackathon Brief (Cincinnati Children's).
 > **Sources:** FlightPlan Hackathon Brief (5 pp.), FlightPlan Hackathon One-Pager (2026), clinician kickoff meeting (AI-generated notes + auto-transcript).
@@ -361,6 +361,7 @@ The rounding team has a minute or two per patient, probably on a tablet, with th
 - **Where it fits today:** rooms already have large monitors, but teams still use **handwritten whiteboards** (care team names, goals, "get up, eat, walk"). This display could replace or sit beside them and add the bigger picture: where the child is in the stay, what must happen before discharge, and the projected discharge with any changes and reasons.
 - Continuous education: show teaching goals along the stay so families are not taught everything in the last two days before discharge.
 - Hallway test: nothing on the display may identify the child or reveal clinical detail to someone passing the door.
+- **Build spec for the first widget:** see §19.
 
 ### 9.3 Handoff UI
 - Briefing-first layout, with the safety-critical block pinned (see §8)
@@ -552,6 +553,19 @@ Cross-check of the v0.4 draft against the Hackathon Brief, the One-Pager and the
 - **The transcript is auto-generated** and garbled in places, including speaker names. Do not attribute quotes to named people. The AI-generated notes matched the transcript on the points we used; they omitted the clinician-distraction question and the "decision support" framing.
 - A clinician's family medical story was shared as motivation. We use only its lesson (a visible expectation of stay length would have helped) and keep personal details out of this repository.
 
+### 16.4 Data sufficiency check (v0.6)
+
+Is what we have enough to start the work?
+
+| Work item | Enough to start? | What was missing → added |
+|---|---|---|
+| Wireframe the bedside rounds view | **Yes** | Brief's five parts and questions are in §0 and §9.0. Still needs clinician interviews to set the hierarchy. |
+| Information hierarchy (first screen / secondary / out) | **Partly** | Draft hierarchy in §9.0 is our hypothesis. Needs clinician validation. |
+| Large-screen widget | **No, until now** | The team note only listed three items. Added layout, data contract, example data, AI rules, states, build plan and open items (§19). |
+| Family wording for states and events | **Partly** | Draft labels (§2.1) and starter templates (§19.4). Need parent and clinician review. |
+| Example data for building | **No** | Added a made-up JSON example (§19.3). No real data exists or is allowed. |
+| Tech stack, screen size, who enters the projected date | **No** | Not in any source. Listed as decisions (§19.7). |
+
 ## 17. Kickoff Insights → Requirements
 
 | Insight from the kickoff | Requirement |
@@ -581,4 +595,114 @@ Owners are **TBD**. Assign them in the next team sync.
 4. Wireframe the five parts of §9.0, including family-present mode
 5. Write the short design rationale tied to what clinicians said
 6. Recommend what to prototype first
-7. Park for Phase 2: handoff rules R1–R8, translation layer, generated UI, family and child views
+7. Build the large-screen widget from §19 using made-up data, after the open items in §19.7 are answered
+8. Park for Phase 2: handoff rules R1–R8, translation layer, generated UI, family and child views
+
+## 19. Large-Screen Widget: System Description and Build Spec
+
+**Source:** `Widget-UI-Element.md` (team note): *"Describe the widget overall system, then we start building it. We need a large screen widget: patient days here, expected date to leave, recent updates in words and icons (AI can generate)."*
+This section is the description that note asks for. It is a **draft for the team to confirm** before building.
+
+### 19.1 What it is
+A calm, read-from-across-the-room display for a patient room or family lounge (§9.2). It answers three family questions at a glance: **How long have we been here? When might we go home? What's new?** It shows the same facts as every other view, in a family style (§3).
+
+### 19.2 Screen layout (landscape, large display)
+
+| Zone | Content | Notes |
+|---|---|---|
+| **A. Days here** | "Day 6" (days since admission, counted from the admission date). Optional second line for days after surgery, e.g. "Day 3 after surgery". | Very large type. Always visible. |
+| **B. Expected to go home** | Projected discharge date, plus the last change: "Moved from Thursday to Saturday. Reason: needs a little more time on breathing support." | Framed as an estimate, never a promise (§2.3, §7). Hidden until a clinician sets it. |
+| **C. Where we are on the path home** | Simple path (current step marked, steps done and to go) using the glossary labels from §2.1 | Not a "how sick" chart. Label + icon, never color alone (§2.2). |
+| **D. Recent updates** | 3–5 newest items, each = icon + one plain sentence + time ("This morning") | AI-assisted wording under the review rules in §19.4 |
+| **E. Today** | Today's goals and who's coming (optional, Phase 1.5) | Replaces the handwritten whiteboard (§9.2) |
+| **Footer** | Last updated time, "Questions? Ask your nurse", language | Quiet; no identifiers |
+
+### 19.3 Data the widget needs (contract)
+
+All fields come from existing FlightPlan data or from clinician entry. The widget reads; it does not change underlying data (§0.3).
+
+| Field | Type | Source | Required | Notes |
+|---|---|---|---|---|
+| `admissionDate` | date | existing record | yes | Days here = today − admissionDate + 1. **[DECISION]** count admission day as Day 1? |
+| `postOpDay` | integer or null | existing record | no | Only shown after a procedure |
+| `currentState` | enum (§2.1) | existing record | yes | Mapped to the glossary label |
+| `currentLocation` | enum (§2.2) | existing record | yes | Shown with label + icon |
+| `projectedDischarge` | date or null | **clinician entry** | no | Not AI-generated (§5.4) |
+| `projectionHistory[]` | `{from, to, changedAt, reasonCode, reasonText}` | clinician entry | with projection | Reason from an approved list plus optional free text |
+| `milestones[]` | `{type, status: done/due/upcoming, date}` | existing record | no | From the §2.3 list |
+| `updates[]` | `{id, type, occurredAt, sourceRef, familyText, icon, reviewStatus, reviewedBy}` | derived (§19.4) | yes | Only `published` items are shown |
+| `goalsToday[]` | `{text, owner}` | clinician entry | no | Phase 1.5 |
+| `displayConsent` | `{approvedFields[], approvedBy, approvedAt}` | family + clinician | yes | Nothing outside `approvedFields` is displayed (§9.2) |
+| `language` | code | existing record | no | Default English |
+
+**Never sent to the widget:** name, MRN, date of birth, caregiver phone, diagnoses, lab or imaging results, organism names, ECMO durations, ratings, CrossCheck/Course Correction flags, clinician-only notes (§7, §10.2).
+
+**Example (made-up data):**
+```json
+{
+  "admissionDate": "2026-03-02",
+  "postOpDay": 3,
+  "currentState": "ACCU",
+  "currentLocation": "Step-down unit",
+  "projectedDischarge": "2026-03-09",
+  "projectionHistory": [
+    {"from": "2026-03-07", "to": "2026-03-09", "changedAt": "2026-03-06T08:10",
+     "reasonCode": "RECOVERY_PACE", "reasonText": "A little more time to build strength"}
+  ],
+  "updates": [
+    {"id": "u1", "type": "LOCATION_CHANGE", "occurredAt": "2026-03-05T14:00",
+     "familyText": "Moved to the step-down unit.", "icon": "bed-arrow-down",
+     "reviewStatus": "published"}
+  ]
+}
+```
+
+### 19.4 "Recent updates in words and icons (AI can generate)"
+
+AI may draft the sentence and pick an icon. It must stay inside the rules of §5.4:
+
+1. **Event type → icon is a fixed map** from an approved icon set. The model selects from it and never creates new icons.
+2. **Auto-publish tier (no clinician review):** location changes, state changes from the vetted glossary, schedule and logistics, milestone reached (from the §2.3 list).
+3. **Clinician review required before display:** anything about a result, setback, medication change, procedure risk, a new diagnosis, or a change to the projected discharge reason.
+4. Wording uses glossary terms first, 6th-grade reading level, tone from §11. No jargon, no blame, no prediction.
+5. Each update stores source reference, model and version, generated time, review status and reviewer. If the source changes, the update regenerates or expires.
+6. If the model has low confidence or the sources conflict, **nothing is shown** and a clinician is asked.
+7. If AI is unavailable, fall back to template sentences from the glossary (below). The widget must work without AI.
+
+**Starter map (draft, needs clinician and parent review):**
+
+| Event type | Icon (suggested) | Family sentence (template) | Tier |
+|---|---|---|---|
+| `LOCATION_CHANGE` | bed / arrow | "Moved to the {unit}." | Auto |
+| `STATE_STEP_DOWN` | arrow down | "{Name} is breathing on their own now." (from glossary) | Auto |
+| `MILESTONE_DONE` | check / star | "{Milestone in plain words} is done." | Auto |
+| `PROCEDURE_PLANNED` | calendar | "{Procedure in plain words} is planned for {day}." | Review |
+| `PROCEDURE_DONE` | heart / hands | "{Procedure} finished. The team will update you." | Review |
+| `PROJECTION_CHANGED` | calendar arrow | "Expected to go home {date}. Changed from {old}. {Reason}." | Review |
+| `FAMILY_MEETING` | people | "Care team meeting today at {time}." | Auto |
+| `EDUCATION_GOAL` | book | "Today we practice {skill} together." | Auto |
+| Any setback, result or medication change | none | **Not shown on the widget.** Clinician talks to family first (§10.2). | Never auto |
+
+### 19.5 States and behavior
+- **Empty states:** no projection yet → "Your team will share an expected date soon." No updates → "Nothing new since {time}." Never a blank or a spinner.
+- **Stale data:** if the last update is older than a set limit, show "Last updated {time}" and dim the display. Never show stale data as current.
+- **Gentle updates:** new items fade in, with no sound, flashing or red alarms.
+- **Privacy:** idle screen shows only the room's greeting. A clinician or family unlock wakes the full view. Hallway test (§9.2) must pass.
+- **Accessibility:** WCAG AA, readable at 3 m, location by label + icon, optional read-aloud, text scales, non-English support.
+- **Offline-tolerant:** keeps the last good state with the "last updated" label.
+
+### 19.6 Build plan (proposed)
+1. Confirm this spec and the §19.7 items
+2. Build with **made-up JSON only** (example above), fixed templates first, AI wording second
+3. Pieces: data adapter (reads the contract), glossary + icon map, render zones A–D, review-status gate, privacy/idle mode
+4. Test: hallway test, reading-level check, stale and empty states, a reviewer rejects an AI sentence and it never appears
+5. Show to clinicians and parents, then adjust
+
+### 19.7 Open items before building
+1. **"Patient days here"**: confirmed as *days since admission*? Or also days in the current unit? **[DECISION]**
+2. Is the display shown to the family only, or also to the rounding team at the bedside? (Changes how much detail is allowed.)
+3. Which technology and screen size do we build for? Nothing is chosen in the notes. **[DECISION]**
+4. Who enters the projected discharge date and reason, and in what screen? (The brief says the data and its collection do not change, so this may need a mock capture screen in Phase 1.)
+5. Who approves the icon set and the wording templates (clinicians and parents)?
+6. Language support needed on day one?
+7. Who sets and approves `displayConsent` for a room?
