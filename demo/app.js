@@ -19,6 +19,16 @@
   const STATE_DEFAULT = { patientId: PATIENT_IDS[0], view: "family", familyPresent: false, showIds: false,
     drafts: {}, approved: {}, rejected: {}, confirmed: {}, questions: {}, chats: {}, selectedEvent: null, handoff: {}, conf: { stay: null, event: null, decisions: {}, summaries: {} } };
   let state = load("fp-state", STATE_DEFAULT);
+  // Demo: the night nurse already reviewed the template overnight sentences at 06:45 (§19.4 review tier).
+  // Raw numbers, results and private items are never seeded. Undo is available in the care-team review queue.
+  function seedOvernight(st) {
+    if (st.seeded === 1) return;
+    Object.values(D.patients).forEach(p => p.whatChanged.forEach(w => {
+      if (w.rule === "review" && w.draft && !st.approved[w.id]) st.approved[w.id] = { text: w.draft, icon: w.icon || "star", at: D.now.slice(0, 10) + "T06:45:00", by: "Night nurse" };
+    }));
+    st.seeded = 1;
+  }
+  seedOvernight(state);
   if (!D.patients[state.patientId]) state.patientId = PATIENT_IDS[0];
   function commit(rerender = true) { save("fp-state", state); if (rerender) render(); }
 
@@ -103,7 +113,7 @@
     });
     p.whatChanged.forEach(w => {
       const ap = state.approved[w.id];
-      if (ap) items.push({ at: ap.at, text: ap.text, icon: ap.icon, fresh: true });
+      if (ap && w.window !== "overnight") items.push({ at: ap.at, text: ap.text, icon: ap.icon, fresh: true });
     });
     return items.sort((a, b) => new Date(b.at) - new Date(a.at)).slice(0, 4);
   }
@@ -209,14 +219,25 @@
     return s + `</svg>`;
   }
 
-  function teamCard(p) {
-    const people = [
-      ["Your nurse today", careTeamMember(p, "Bedside nurse")],
-      ["Your doctor", careTeamMember(p, "ACCU attending")],
-      ["Nurse practitioner", careTeamMember(p, "Nurse practitioner")]
-    ].filter(x => x[1]);
-    const initials = n => n.replace(/^Dr\.\s*/, "").replace(/,.*$/, "").split(/[\s.]+/).filter(Boolean).map(w => w[0]).join("").slice(0, 2).toUpperCase();
-    return people.map(([role, name]) => `<li><span class="av">${esc(initials(name))}</span><span><b>${esc(name.replace(/,.*$/, ""))}</b><small>${esc(role)}</small></span></li>`).join("");
+  function overnightCard(p) {
+    const items = p.whatChanged.filter(w => w.window === "overnight" && state.approved[w.id]).map(w => state.approved[w.id]);
+    return `<p class="w-title ov">${icon("moon")} Overnight</p>
+      ${items.length ? `<ul class="ov-list">${items.map(a => `<li><span class="ov-ic">${icon(a.icon)}</span><span>${esc(personalize(p, a.text))}</span></li>`).join("")}</ul>`
+        : `<p class="p-sub">Your nurse will share how the night went soon.</p>`}`;
+  }
+  function teamRow(p) {
+    const people = [["Nurse", careTeamMember(p, "Bedside nurse"), "a"], ["Doctor", careTeamMember(p, "ACCU attending"), "b"], ["Nurse practitioner", careTeamMember(p, "Nurse practitioner"), "c"]].filter(x => x[1]);
+    const short = n => n.replace(/,.*$/, "").replace(/^Dr\.\s*([A-Z])\.\s*/, "Dr. ");
+    const initial = n => short(n).replace(/^Dr\.\s*/, "").trim()[0];
+    return `<p class="w-title tm">${icon("people")} Care team today</p>
+      <ul class="tm-row">${people.map(([role, n, tone]) => `<li><span class="tm-av ${tone}">${esc(initial(n))}</span><b>${esc(short(n))}</b><small>${esc(role)}</small></li>`).join("")}</ul>`;
+  }
+  function questionsCard(p) {
+    const qs = state.questions[p.id] || [];
+    return `<p class="w-title qq">${icon("chat")} Questions for the team</p>
+      ${qs.length ? `<ul class="q-list">${qs.map((q, i) => `<li class="${q.answered ? "answered" : ""}"><span>${esc(q.text)}</span>${q.answered ? `<small>${icon("check")} Answered</small>` : `<button class="q-x" data-act="q-del" data-i="${i}" aria-label="Remove question">${icon("x")}</button>`}</li>`).join("")}</ul>`
+        : `<p class="p-sub small">Write questions down when you think of them. The team sees them on rounds.</p>`}
+      <form class="q-add" data-act="q-add"><input id="q-new" placeholder="Add a question\u2026" autocomplete="off" aria-label="Add a question for the care team"><button aria-label="Add">${icon("send")}</button></form>`;
   }
 
   function renderFamily(p) {
@@ -272,10 +293,11 @@
 
           <section class="w w-today" aria-label="Today">${todayWidget(p)}</section>
 
-          <section class="w w-team" aria-label="Your care team">
-            <p class="mono">YOUR CARE TEAM</p>
-            <ul class="team-list">${teamCard(p)}</ul>
-          </section>
+          <div class="w-side">
+            <section class="w w-ov" aria-label="Overnight">${overnightCard(p)}</section>
+            <section class="w w-tm" aria-label="Care team today">${teamRow(p)}</section>
+            <section class="w w-qq" aria-label="Questions for the care team">${questionsCard(p)}</section>
+          </div>
         </div>
 
         <section class="w w-feed" aria-label="Recent updates">
@@ -716,6 +738,7 @@
         });
         return;
       }
+      case "q-del": { (state.questions[p.id] || []).splice(+el.dataset.i, 1); return commit(); }
       case "sched": {
         const it = el.closest("[data-sched]"); const open = !it.classList.contains("open");
         document.querySelectorAll("[data-sched].open").forEach(x => { x.classList.remove("open"); x.querySelector(".s-row").setAttribute("aria-expanded", "false"); });
@@ -740,7 +763,9 @@
         if (!skye.q) return;
         (state.questions[p.id] = state.questions[p.id] || []).push({ text: skye.q, at: new Date().toISOString() });
         Object.assign(skye, { qSaved: true, a: "Saved. Your care team will see your question on rounds.", fresh: true });
-        commit(false); setPhase("idle"); say(skye.a); return;
+        commit(false); setPhase("idle"); say(skye.a);
+        { const qq = $(".w-qq"); if (qq) qq.innerHTML = questionsCard(p); }
+        return;
       }
       case "settings": openSettings(); return;
       case "test-ai": {
@@ -751,7 +776,8 @@
       }
       case "reset": {
         e.preventDefault();
-        state = Object.assign({}, STATE_DEFAULT, { patientId: state.patientId, view: state.view, drafts: {}, approved: {}, rejected: {}, confirmed: {}, questions: {}, chats: {}, handoff: {}, conf: { stay: null, event: null, decisions: {}, summaries: {} } });
+        state = Object.assign({}, STATE_DEFAULT, { patientId: state.patientId, view: state.view, drafts: {}, approved: {}, rejected: {}, confirmed: {}, questions: {}, chats: {}, handoff: {}, conf: { stay: null, event: null, decisions: {}, summaries: {} }, seeded: 0 });
+        seedOvernight(state);
         commit(); $("#settings").close(); toast("Demo reset."); return;
       }
     }
@@ -770,6 +796,14 @@
   });
   document.addEventListener("submit", e => {
     const f = e.target;
+    if (f.dataset.act === "q-add") {
+      e.preventDefault();
+      const v = f.querySelector("input").value.trim(); if (!v) return;
+      const pid = state.patientId;
+      (state.questions[pid] = state.questions[pid] || []).push({ text: v, at: new Date().toISOString() });
+      commit(); toast("Saved. Your care team will see it on rounds."); setTimeout(() => { const i = $("#q-new"); if (i) i.focus(); }, 30);
+      return;
+    }
     if (f.dataset.act === "ask") { e.preventDefault(); const i = $("#skye-text"); const v = i.value; i.value = ""; ask(D.patients[state.patientId], v); }
   });
   document.addEventListener("keydown", e => {
